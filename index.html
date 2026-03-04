@@ -1,4 +1,4 @@
-Here is the updated HTML code for your Cyclistic case study website. It now includes your name in a signature font at the top, functional social media icons in the footer, and a new "Overview" page section with a brief summary of the project.
+Here is the updated HTML code. The navigation bar is now a collapsible "hamburger" menu for better mobile flexibility, and your signature has been repositioned as a small logo on the left, with the project title centered in bold.
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -10,18 +10,17 @@ Here is the updated HTML code for your Cyclistic case study website. It now incl
     <meta name="description" content="A comprehensive data analysis case study for Cyclistic, a bike-share company in Chicago. Follow the six phases of data analysis: Ask, Prepare, Process, Analyze, Share, and Act.">
     <meta name="author" content="Nibal Sharrouf">
     
-    <!-- Open Graph / social preview (optional, add your image when live) -->
     <meta property="og:title" content="Cyclistic Bike-Share Case Study by Nibal Sharrouf">
     <meta property="og:description" content="Data analysis capstone project exploring Cyclistic bike-share usage.">
     <meta property="og:type" content="website">
 
-    <!-- Font Awesome 5 (free) for icons – widely used and reliable -->
+    <!-- Font Awesome 5 for icons (including hamburger & social) -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 
-    <!-- Google Fonts for signature style (Satisfy & Pacifico are two playful script fonts) -->
+    <!-- Google Fonts: signature style and clean sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* === RESET & VARIABLES === */
@@ -36,116 +35,234 @@ Here is the updated HTML code for your Cyclistic case study website. It now incl
         }
 
         :root {
-            --color-primary-dark: #111;
-            --color-secondary-dark: #222;
+            --color-primary-dark: #0a0a0a;
+            --color-secondary-dark: #1e1e1e;
             --color-text-dark: #333;
             --color-text-light: #ffffff;
             --color-background-light: #ffffff;
             --color-footer-bg: #f5f5f5;
-            --color-border: #eee;
-            --font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            --font-signature: 'Pacifico', 'Satisfy', cursive; /* fallback chain */
+            --color-border: #eaeaea;
+            --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-signature: 'Pacifico', cursive;
             --max-content-width: 1000px;
-            --spacing-section: 40px 20px;
+            --header-height: 70px;
+            --transition: 0.25s ease-in-out;
         }
 
         body {
             font-family: var(--font-family-base);
-            line-height: 1.7;
+            line-height: 1.6;
             background-color: var(--color-background-light);
             color: var(--color-text-dark);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* === SIGNATURE HEADER (dual line) === */
-        .signature-header {
+        /* === FLEXIBLE HEADER with logo left, title centered === */
+        .main-header {
             background: var(--color-primary-dark);
-            padding: 20px 15px 10px 15px;
-            text-align: center;
-            border-bottom: 1px solid #333;
-        }
-
-        .project-title {
-            color: #ddd;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            font-weight: 300;
-        }
-
-        .signature-name {
-            font-family: var(--font-signature);
-            font-size: 2.8rem;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
             color: white;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            word-break: break-word;
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-        /* smaller adjustment on mobile */
-        @media (max-width: 500px) {
-            .signature-name {
-                font-size: 2.2rem;
+
+        /* left logo area: signature as small logo */
+        .header-logo {
+            font-family: var(--font-signature);
+            font-size: 1.6rem;
+            color: white;
+            white-space: nowrap;
+            text-decoration: none;
+            line-height: 1;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        .header-logo:hover {
+            opacity: 0.9;
+        }
+
+        /* centered bold title – exactly in the middle with absolute centering trick */
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: white;
+            white-space: nowrap;
+        }
+        /* on small screens maybe adjust font */
+        @media (max-width: 600px) {
+            .header-title {
+                font-size: 1rem;
+                max-width: 140px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .header-logo {
+                font-size: 1.3rem;
             }
         }
 
-        /* navigation unchanged but with active support */
-        nav {
+        /* spacer to keep flex spacing even (same width as logo) */
+        .header-spacer {
+            width: 80px; /* roughly same as logo width, flexible */
+            flex-shrink: 0;
+        }
+        /* on narrow screens reduce spacer */
+        @media (max-width: 480px) {
+            .header-spacer {
+                width: 50px;
+            }
+        }
+
+        /* === HAMBURGER MENU (sidebar approach) === */
+        .nav-toggle {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: none; /* hidden on desktop, shown on mobile */
+            transition: transform 0.2s;
+            line-height: 1;
+            padding: 0 5px;
+        }
+        .nav-toggle:hover {
+            transform: scale(1.1);
+            color: #ddd;
+        }
+
+        /* main navigation (desktop: inline row; mobile: hidden by default) */
+        .main-nav {
             background: var(--color-secondary-dark);
+            transition: transform var(--transition), opacity var(--transition);
+        }
+
+        .nav-menu {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 12px 10px;
-            gap: 5px 15px;
+            list-style: none;
+            padding: 12px 20px;
+            margin: 0;
+            gap: 5px 20px;
         }
 
-        nav a {
+        .nav-menu a {
             color: var(--color-text-light);
             text-decoration: none;
             font-size: 1rem;
-            padding: 6px 8px;
-            border-radius: 4px;
-            transition: background-color 0.2s, text-decoration 0.2s;
+            font-weight: 500;
+            padding: 8px 10px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            display: inline-block;
         }
 
-        nav a:hover {
+        .nav-menu a:hover {
             background-color: rgba(255,255,255,0.15);
             text-decoration: underline;
             text-underline-offset: 4px;
         }
 
-        nav a.active {
-            font-weight: bold;
+        .nav-menu a.active {
+            background-color: rgba(255,255,255,0.2);
+            font-weight: 600;
             text-decoration: underline;
-            text-underline-offset: 4px;
-            background-color: rgba(255,255,255,0.1);
         }
 
-        /* main and sections */
+        /* mobile styles: nav becomes a fixed sidebar from left */
+        @media (max-width: 700px) {
+            .nav-toggle {
+                display: block; /* show hamburger */
+            }
+
+            .main-nav {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 260px;
+                height: 100vh;
+                background: var(--color-secondary-dark);
+                transform: translateX(-100%);
+                opacity: 0;
+                transition: transform 0.3s ease, opacity 0.2s;
+                box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+                z-index: 1050;
+                overflow-y: auto;
+            }
+
+            .main-nav.open {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px 20px;
+                gap: 10px;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                width: 100%;
+                padding: 12px 15px;
+                font-size: 1.1rem;
+                border-radius: 8px;
+            }
+
+            /* overlay when menu is open */
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.4);
+                z-index: 1040;
+            }
+            .nav-overlay.open {
+                display: block;
+            }
+        }
+
+        /* main content */
         main {
             max-width: var(--max-content-width);
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 25px;
         }
 
         section {
-            scroll-margin-top: 30px;
-            padding: var(--spacing-section);
-            padding-left: 0;
-            padding-right: 0;
-            border-bottom: 1px dashed #e0e0e0;
+            scroll-margin-top: calc(var(--header-height) + 20px);
+            padding: 50px 0;
+            border-bottom: 1px solid var(--color-border);
         }
-        section:last-of-type {
+        section:last-child {
             border-bottom: none;
         }
 
         h2 {
             border-bottom: 2px solid var(--color-border);
-            padding-bottom: 8px;
-            margin-bottom: 25px;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
             font-size: 2rem;
-            font-weight: 400;
+            font-weight: 600;
         }
 
         p, li {
@@ -153,14 +270,13 @@ Here is the updated HTML code for your Cyclistic case study website. It now incl
         }
 
         ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
+            margin-left: 1.8rem;
         }
 
-        /* footer with social icons */
+        /* footer unchanged except minor spacing */
         footer {
             background: var(--color-footer-bg);
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
             border-top: 2px solid #ccc;
         }
@@ -168,7 +284,7 @@ Here is the updated HTML code for your Cyclistic case study website. It now incl
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 2.5rem;
+            gap: 2.8rem;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
@@ -177,18 +293,15 @@ Here is the updated HTML code for your Cyclistic case study website. It now incl
             color: #222;
             font-size: 2.2rem;
             transition: transform 0.2s, color 0.2s;
-            display: inline-block;
         }
 
         .social-links a:hover {
-            color: #0077b5; /* linkedin blue */
-            transform: scale(1.1);
+            color: #0077b5;
+            transform: scale(1.15);
         }
-        /* whatsapp green on hover */
         .social-links a[href*="whatsapp"]:hover {
             color: #25D366;
         }
-        /* email hover */
         .social-links a[href*="mailto"]:hover {
             color: #c71610;
         }
@@ -196,62 +309,53 @@ Here is the updated HTML code for your Cyclistic case study website. It now incl
         .copyright {
             font-size: 0.9rem;
             color: #555;
-            margin-top: 10px;
         }
 
-        /* mobile */
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-                align-items: center;
-            }
-            nav a {
-                width: 100%;
-                text-align: center;
-            }
-            .social-links {
-                gap: 1.8rem;
-            }
-            .social-links a {
-                font-size: 2rem;
-            }
-        }
-
-        /* print helper */
+        /* print */
         @media print {
-            nav, .social-links {
+            .main-nav, .nav-toggle, .social-links {
                 display: none;
             }
-        }
-
-        /* focus outline */
-        :focus-visible {
-            outline: 3px solid #007bff;
-            outline-offset: 3px;
         }
     </style>
 </head>
 <body>
 
-    <!-- new signature header: small label + name in script font -->
-    <div class="signature-header">
-        <div class="project-title">CYCLISTIC CASE STUDY</div>
-        <div class="signature-name">Nibal Sharrouf</div>
-    </div>
+    <!-- new header: logo left, bold title centered, hamburger right -->
+    <header class="main-header">
+        <!-- left: signature logo (small) -->
+        <a href="#overview" class="header-logo" aria-label="Nibal Sharrouf home">Nibal</a>
 
-    <!-- navigation (same structure) -->
-    <nav aria-label="Main navigation - Data analysis phases">
-        <a href="#overview" class="active">Overview</a>
-        <a href="#ask">Ask</a>
-        <a href="#prepare">Prepare</a>
-        <a href="#process">Process</a>
-        <a href="#analyze">Analyze</a>
-        <a href="#share">Share</a>
-        <a href="#act">Act</a>
+        <!-- centered bold title -->
+        <div class="header-title">CYCLISTIC CASE STUDY</div>
+
+        <!-- right side: menu toggle button (hamburger) and invisible spacer for balance -->
+        <div style="display: flex; align-items: center;">
+            <button class="nav-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- invisible spacer to balance the logo on the left (only visible on desktop) -->
+            <span class="header-spacer" aria-hidden="true"></span>
+        </div>
+    </header>
+
+    <!-- overlay for mobile menu -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- navigation menu (becomes sidebar on mobile) -->
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <ul class="nav-menu">
+            <li><a href="#overview" class="active">Overview</a></li>
+            <li><a href="#ask">Ask</a></li>
+            <li><a href="#prepare">Prepare</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#analyze">Analyze</a></li>
+            <li><a href="#share">Share</a></li>
+            <li><a href="#act">Act</a></li>
+        </ul>
     </nav>
 
     <main>
-        <!-- NEW OVERVIEW SECTION (first) -->
         <section id="overview" tabindex="-1" aria-labelledby="overview-heading">
             <h2 id="overview-heading">📋 Project Overview</h2>
             <p><strong>Cyclistic</strong> is a fictional bike‑share company based in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand how casual riders and annual members use Cyclistic bikes differently.</p>
@@ -268,114 +372,156 @@ Here is the updated HTML code for your Cyclistic case study website. It now incl
         <section id="prepare" tabindex="-1" aria-labelledby="prepare-heading">
             <h2 id="prepare-heading">2. Prepare</h2>
             <p><strong>Data Source:</strong> Cyclistic’s historical trip data from the past 12 months (provided by Motivate International Inc. under license).</p>
-            <p><strong>Credibility & Integrity:</strong> The data is stored in a secure, internal database and is considered reliable (ROCCC: Reliable, Original, Comprehensive, Current, Cited). It includes anonymous trip details such as start/end time, station names, and rider type (casual vs. member).</p>
+            <p><strong>Credibility & Integrity:</strong> The data is stored in a secure, internal database and is considered reliable (ROCCC). It includes anonymous trip details such as start/end time, station names, and rider type.</p>
         </section>
 
         <section id="process" tabindex="-1" aria-labelledby="process-heading">
             <h2 id="process-heading">3. Process</h2>
-            <p><strong>Data Cleaning & Transformation:</strong> Using R (with tidyverse) to combine 12 CSV files, remove duplicates, filter out null values, and create new calculated fields such as ride length, day of week, and month for deeper analysis. Data was also checked for outliers and inconsistencies.</p>
-            <p><strong>Tools Used:</strong> R, RStudio, and the `dplyr`, `tidyr`, and `lubridate` packages.</p>
+            <p><strong>Data Cleaning & Transformation:</strong> Using R (tidyverse) to combine 12 CSV files, remove duplicates, filter nulls, and create ride length, day of week, month. Checked for outliers.</p>
+            <p><strong>Tools:</strong> R, RStudio, dplyr, tidyr, lubridate.</p>
         </section>
 
         <section id="analyze" tabindex="-1" aria-labelledby="analyze-heading">
             <h2 id="analyze-heading">4. Analyze</h2>
-            <p><strong>Key Findings:</strong> Analysis revealed that casual riders tend to take longer rides and are more active on weekends, suggesting leisure use. Annual members, on the other hand, have shorter, more consistent rides throughout the workweek, indicating commuting or utilitarian use. Peak hours also differ significantly.</p>
+            <p><strong>Key Findings:</strong> Casual riders take longer rides and are more active on weekends (leisure). Members have shorter, consistent rides on weekdays (commuting). Peak hours differ.</p>
         </section>
 
         <section id="share" tabindex="-1" aria-labelledby="share-heading">
             <h2 id="share-heading">5. Share</h2>
-            <p><strong>Visualizations & Communication:</strong> Created interactive dashboards using Tableau Public to clearly illustrate usage patterns. Key visualizations include bar charts comparing ride counts by day of week and histograms of ride lengths. These findings will be presented to stakeholders via a slide deck and a written report.</p>
+            <p><strong>Visualizations:</strong> Tableau dashboards showing ride counts by day, ride length histograms. Presented via slide deck and report.</p>
         </section>
 
         <section id="act" tabindex="-1" aria-labelledby="act-heading">
             <h2 id="act-heading">6. Act</h2>
             <p><strong>Recommendations:</strong></p>
             <ul>
-                <li>Launch a targeted weekend marketing campaign for casual riders, highlighting the cost-saving benefits of membership for regular leisure use.</li>
-                <li>Introduce a new "weekend-only" or "off-peak" annual pass tier.</li>
-                <li>Develop a mobile app feature that allows casual riders to easily compare their trip costs against membership options after each ride.</li>
+                <li>Weekend marketing campaign for casual riders highlighting membership savings.</li>
+                <li>Introduce "weekend-only" or off-peak annual pass.</li>
+                <li>App feature comparing trip costs vs. membership.</li>
             </ul>
         </section>
     </main>
 
-    <!-- FOOTER WITH SOCIAL ICONS (WhatsApp, LinkedIn, Email) -->
     <footer>
         <div class="social-links">
-            <!-- WhatsApp icon – using Font Awesome's what's app brand. replace "phone number" with your actual profile link or number link -->
             <a href="https://wa.me/1234567890?text=Hi%20Nibal" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <!-- LinkedIn – replace with your profile URL -->
             <a href="https://linkedin.com/in/nibal-sharrouf" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <i class="fab fa-linkedin-in"></i>
             </a>
-            <!-- Email – using mailto link. replace with your actual email -->
             <a href="mailto:nibal.sharrouf@example.com" aria-label="Email">
                 <i class="far fa-envelope"></i>
             </a>
         </div>
         <div class="copyright">
-            <p><small>© 2026 Nibal Sharrouf · Google Data Analytics Capstone Project</small></p>
+            <p><small>© 2026 Nibal Sharrouf · Google Data Analytics Capstone</small></p>
         </div>
     </footer>
 
-    <!-- SCRIPT: active nav + smooth scroll (updated to include new overview link) -->
     <script>
         (function() {
-            const navLinks = document.querySelectorAll('nav a');
+            const nav = document.getElementById('mainNav');
+            const toggleBtn = document.getElementById('menuToggle');
+            const overlay = document.getElementById('navOverlay');
+            const navLinks = document.querySelectorAll('.nav-menu a');
             const sections = document.querySelectorAll('section');
 
+            // --- mobile menu toggle ---
+            function openMenu() {
+                nav.classList.add('open');
+                overlay.classList.add('open');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                // optional: change icon to times
+                toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+            }
+            function closeMenu() {
+                nav.classList.remove('open');
+                overlay.classList.remove('open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (nav.classList.contains('open')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            // close on overlay click
+            overlay.addEventListener('click', closeMenu);
+
+            // close on link click (for mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 700) closeMenu();
+                });
+            });
+
+            // resize listener: if screen becomes >700px, ensure menu is visible and overlay hidden
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 700) {
+                    nav.classList.remove('open'); // remove sidebar state
+                    overlay.classList.remove('open');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                    toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                } else {
+                    // if already closed, keep closed; else if open we preserve? fine.
+                }
+            });
+
+            // --- active nav spy + smooth scroll (updated for all links)---
             function removeActiveClasses() {
                 navLinks.forEach(link => link.classList.remove('active'));
             }
 
             function setActiveLink(id) {
                 removeActiveClasses();
-                const activeLink = document.querySelector(`nav a[href="#${id}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
+                const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
+                if (activeLink) activeLink.classList.add('active');
             }
 
-            // scroll spy
             window.addEventListener('scroll', () => {
                 let current = '';
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 120; // offset
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    const sectionTop = section.offsetTop - 100; // offset
+                    const sectionBottom = sectionTop + section.clientHeight;
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
                         current = section.getAttribute('id');
                     }
                 });
                 if (current) {
                     setActiveLink(current);
-                } else if (window.pageYOffset < 100) {
-                    // if near top, highlight overview
+                } else if (window.scrollY < 200) {
                     setActiveLink('overview');
                 }
             });
 
-            // smooth click
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetId = link.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
                         history.pushState(null, null, `#${targetId}`);
                         setActiveLink(targetId);
                     }
                 });
             });
 
-            // initial active from hash or default to overview
+            // initial active from hash or default overview
             if (window.location.hash) {
                 const id = window.location.hash.substring(1);
                 setActiveLink(id);
             } else {
                 setActiveLink('overview');
             }
+
+            // close menu if clicking outside (optional, but overlay already does)
         })();
     </script>
 </body>
