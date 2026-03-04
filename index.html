@@ -1,92 +1,85 @@
+Here is the updated HTML code. The "Overview" menu now contains the detailed authorship and case study brief you provided, presented in a clean, humanized, and easy-to-read format.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Cyclistic Case Study | Nibal Sharrouf</title>
-    <meta name="description" content="A comprehensive data analysis case study for Cyclistic, a bike-share company in Chicago. Follow the six phases of data analysis: Ask, Prepare, Process, Analyze, Share, and Act.">
+    <title>Cyclistic case study · Nibal Sharrouf</title>
+    <meta name="description" content="Cyclistic bike‑share case study by Nibal Sharrouf — Google Data Analytics capstone. Python analysis, casual vs member insights.">
     <meta name="author" content="Nibal Sharrouf">
     
-    <meta property="og:title" content="Cyclistic Bike-Share Case Study by Nibal Sharrouf">
-    <meta property="og:description" content="Data analysis capstone project exploring Cyclistic bike-share usage.">
+    <meta property="og:title" content="Cyclistic Bike‑Share Case Study · Nibal Sharrouf">
+    <meta property="og:description" content="Data analysis capstone exploring how casual riders and annual members use Cyclistic bikes differently.">
     <meta property="og:type" content="website">
 
-    <!-- Font Awesome 5 for icons (including hamburger & social) -->
+    <!-- Font Awesome 5 (icons) -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 
-    <!-- Google Fonts: signature style and clean sans -->
+    <!-- Google Fonts: signature & clean humanist sans (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 
     <style>
-        /* === RESET & VARIABLES === */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
+        /* === friendly reset + variables === */
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         :root {
-            --color-primary-dark: #0a0a0a;
-            --color-secondary-dark: #1e1e1e;
-            --color-text-dark: #333;
-            --color-text-light: #ffffff;
-            --color-background-light: #ffffff;
-            --color-footer-bg: #f5f5f5;
-            --color-border: #eaeaea;
-            --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+            --color-bg: #ffffff;
+            --color-surface: #f8fafc;
+            --color-text: #1e293b;
+            --color-text-light: #334155;
+            --color-primary-dark: #0f172a;      /* deep navy */
+            --color-secondary-dark: #1e293b;
+            --color-accent-soft: #dbeafe;
+            --color-border: #e2e8f0;
+            --color-footer-bg: #f1f5f9;
+            --font-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             --font-signature: 'Pacifico', cursive;
-            --max-content-width: 1000px;
+            --max-width: 1000px;
             --header-height: 70px;
-            --transition: 0.25s ease-in-out;
+            --space-unit: 1.5rem;
         }
 
         body {
-            font-family: var(--font-family-base);
+            font-family: var(--font-base);
+            background-color: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.6;
-            background-color: var(--color-background-light);
-            color: var(--color-text-dark);
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* === FLEXIBLE HEADER with logo left, title centered === */
+        /* === HEADER: logo left / title centered / hamburger right === */
         .main-header {
             background: var(--color-primary-dark);
             height: var(--header-height);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 25px;
+            padding: 0 1.5rem;
             color: white;
             position: sticky;
             top: 0;
             z-index: 1100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        /* left logo area: signature as small logo */
         .header-logo {
             font-family: var(--font-signature);
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             color: white;
-            white-space: nowrap;
             text-decoration: none;
-            line-height: 1;
-            letter-spacing: 0.5px;
-            flex-shrink: 0;
+            white-space: nowrap;
+            transition: opacity 0.2s;
         }
-        .header-logo:hover {
-            opacity: 0.9;
-        }
+        .header-logo:hover { opacity: 0.85; }
 
-        /* centered bold title – exactly in the middle with absolute centering trick */
         .header-title {
             position: absolute;
             left: 50%;
@@ -94,56 +87,31 @@
             font-weight: 700;
             font-size: 1.3rem;
             letter-spacing: 0.5px;
-            text-transform: uppercase;
             color: white;
             white-space: nowrap;
-        }
-        /* on small screens maybe adjust font */
-        @media (max-width: 600px) {
-            .header-title {
-                font-size: 1rem;
-                max-width: 140px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .header-logo {
-                font-size: 1.3rem;
-            }
+            text-transform: uppercase;
         }
 
-        /* spacer to keep flex spacing even (same width as logo) */
         .header-spacer {
-            width: 80px; /* roughly same as logo width, flexible */
+            width: 75px; /* matches approximate logo width */
             flex-shrink: 0;
         }
-        /* on narrow screens reduce spacer */
-        @media (max-width: 480px) {
-            .header-spacer {
-                width: 50px;
-            }
-        }
 
-        /* === HAMBURGER MENU (sidebar approach) === */
         .nav-toggle {
             background: transparent;
             border: none;
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             cursor: pointer;
-            display: none; /* hidden on desktop, shown on mobile */
-            transition: transform 0.2s;
+            display: none;
             line-height: 1;
-            padding: 0 5px;
-        }
-        .nav-toggle:hover {
-            transform: scale(1.1);
-            color: #ddd;
+            padding: 0 4px;
         }
 
-        /* main navigation (desktop: inline row; mobile: hidden by default) */
+        /* === NAVIGATION (desktop row / mobile sidebar) === */
         .main-nav {
             background: var(--color-secondary-dark);
-            transition: transform var(--transition), opacity var(--transition);
+            transition: transform 0.3s ease, opacity 0.2s;
         }
 
         .nav-menu {
@@ -151,38 +119,33 @@
             flex-wrap: wrap;
             justify-content: center;
             list-style: none;
-            padding: 12px 20px;
-            margin: 0;
-            gap: 5px 20px;
+            padding: 0.75rem 1.5rem;
+            gap: 0.5rem 1.8rem;
         }
 
         .nav-menu a {
-            color: var(--color-text-light);
+            color: white;
             text-decoration: none;
-            font-size: 1rem;
             font-weight: 500;
-            padding: 8px 10px;
-            border-radius: 6px;
-            transition: background-color 0.2s;
-            display: inline-block;
+            font-size: 1rem;
+            padding: 0.5rem 0.3rem;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
         }
 
         .nav-menu a:hover {
-            background-color: rgba(255,255,255,0.15);
-            text-decoration: underline;
-            text-underline-offset: 4px;
+            border-bottom-color: #94a3b8;
         }
 
         .nav-menu a.active {
-            background-color: rgba(255,255,255,0.2);
+            border-bottom-color: white;
             font-weight: 600;
-            text-decoration: underline;
         }
 
-        /* mobile styles: nav becomes a fixed sidebar from left */
+        /* mobile sidebar styles */
         @media (max-width: 700px) {
             .nav-toggle {
-                display: block; /* show hamburger */
+                display: block;
             }
 
             .main-nav {
@@ -194,8 +157,7 @@
                 background: var(--color-secondary-dark);
                 transform: translateX(-100%);
                 opacity: 0;
-                transition: transform 0.3s ease, opacity 0.2s;
-                box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+                box-shadow: 4px 0 15px rgba(0,0,0,0.3);
                 z-index: 1050;
                 overflow-y: auto;
             }
@@ -208,22 +170,16 @@
             .nav-menu {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 30px 20px;
-                gap: 10px;
-            }
-
-            .nav-menu li {
-                width: 100%;
+                padding: 2rem 1.5rem;
+                gap: 1rem;
             }
 
             .nav-menu a {
+                font-size: 1.15rem;
+                padding: 0.5rem 0;
                 width: 100%;
-                padding: 12px 15px;
-                font-size: 1.1rem;
-                border-radius: 8px;
             }
 
-            /* overlay when menu is open */
             .nav-overlay {
                 display: none;
                 position: fixed;
@@ -231,117 +187,151 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0,0,0,0.4);
+                background: rgba(15, 23, 42, 0.5);
+                backdrop-filter: blur(2px);
                 z-index: 1040;
             }
             .nav-overlay.open {
                 display: block;
             }
+
+            .header-title {
+                font-size: 1rem;
+                max-width: 140px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .header-logo {
+                font-size: 1.4rem;
+            }
         }
 
-        /* main content */
+        /* main content area – soft, human scale */
         main {
-            max-width: var(--max-content-width);
+            max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 25px;
+            padding: 2rem 1.8rem;
         }
 
         section {
             scroll-margin-top: calc(var(--header-height) + 20px);
-            padding: 50px 0;
+            padding: 3rem 0;
             border-bottom: 1px solid var(--color-border);
         }
-        section:last-child {
+        section:last-of-type {
             border-bottom: none;
         }
 
+        /* typography – warm, readable */
         h2 {
-            border-bottom: 2px solid var(--color-border);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
             font-size: 2rem;
             font-weight: 600;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--color-accent-soft);
+            color: #0f172a;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 1.8rem 0 0.8rem;
+            color: #1e293b;
         }
 
         p, li {
+            color: var(--color-text-light);
             max-width: 75ch;
+            margin-bottom: 1rem;
         }
 
-        ul {
-            margin-left: 1.8rem;
+        /* cards for authorship / brief (soft background, rounded) */
+        .insight-card {
+            background: var(--color-surface);
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid var(--color-border);
         }
 
-        /* footer unchanged except minor spacing */
+        .insight-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .soft-highlight {
+            background: var(--color-accent-soft);
+            padding: 0.2rem 0.4rem;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        .brief-block {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 1.5rem 1.8rem;
+            border-radius: 18px;
+            margin: 2rem 0;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+        }
+
+        /* footer – simple & warm */
         footer {
             background: var(--color-footer-bg);
-            padding: 40px 20px;
+            padding: 3rem 1.5rem;
             text-align: center;
-            border-top: 2px solid #ccc;
+            border-top: 1px solid #cbd5e1;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
             gap: 2.8rem;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
 
         .social-links a {
-            color: #222;
+            color: #334155;
             font-size: 2.2rem;
             transition: transform 0.2s, color 0.2s;
         }
-
         .social-links a:hover {
-            color: #0077b5;
-            transform: scale(1.15);
+            color: #0f172a;
+            transform: scale(1.1);
         }
-        .social-links a[href*="whatsapp"]:hover {
-            color: #25D366;
-        }
-        .social-links a[href*="mailto"]:hover {
-            color: #c71610;
-        }
-
         .copyright {
+            color: #475569;
             font-size: 0.9rem;
-            color: #555;
         }
 
-        /* print */
-        @media print {
-            .main-nav, .nav-toggle, .social-links {
-                display: none;
-            }
+        /* small utilities */
+        @media (max-width: 500px) {
+            h2 { font-size: 1.8rem; }
+            .insight-card { padding: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- new header: logo left, bold title centered, hamburger right -->
+    <!-- header with small signature left, bold title center, hamburger right -->
     <header class="main-header">
-        <!-- left: signature logo (small) -->
         <a href="#overview" class="header-logo" aria-label="Nibal Sharrouf home">Nibal</a>
-
-        <!-- centered bold title -->
         <div class="header-title">CYCLISTIC CASE STUDY</div>
-
-        <!-- right side: menu toggle button (hamburger) and invisible spacer for balance -->
         <div style="display: flex; align-items: center;">
-            <button class="nav-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <button class="nav-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
-            <!-- invisible spacer to balance the logo on the left (only visible on desktop) -->
             <span class="header-spacer" aria-hidden="true"></span>
         </div>
     </header>
 
-    <!-- overlay for mobile menu -->
+    <!-- overlay for mobile sidebar -->
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <!-- navigation menu (becomes sidebar on mobile) -->
-    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+    <!-- navigation menu -->
+    <nav class="main-nav" id="mainNav" aria-label="Main">
         <ul class="nav-menu">
             <li><a href="#overview" class="active">Overview</a></li>
             <li><a href="#ask">Ask</a></li>
@@ -354,13 +344,37 @@
     </nav>
 
     <main>
+        <!-- ========== OVERVIEW section – enriched with authorship & brief ========= -->
         <section id="overview" tabindex="-1" aria-labelledby="overview-heading">
-            <h2 id="overview-heading">📋 Project Overview</h2>
-            <p><strong>Cyclistic</strong> is a fictional bike‑share company based in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand how casual riders and annual members use Cyclistic bikes differently.</p>
-            <p>This case study follows the six phases of data analysis: <strong>Ask, Prepare, Process, Analyze, Share,</strong> and <strong>Act</strong>. By combining historical trip data with R and Tableau, we derive actionable insights to convert casual riders into members.</p>
-            <p><em>Scroll down or use the navigation to explore each phase.</em></p>
+            <h2 id="overview-heading">📋 Project overview</h2>
+            
+            <!-- 1. Authorship (humanized, simple) -->
+            <div class="insight-card">
+                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;">👤 <span class="soft-highlight">Authorship</span></p>
+                <p><strong>Nibal Sharrouf</strong> performed this case study in <strong>March 2026</strong> as the capstone project for the <strong>Google Data Analytics Professional Certificate</strong>. The analysis used <strong>Python</strong> to explore bike‑share trips from <strong>November 2021 to October 2022</strong>. The final report and visualizations are hosted using <strong>GitHub Pages</strong>.</p>
+            </div>
+
+            <!-- 2. Case study brief – scenario & about the company -->
+            <h3>📌 Case study brief</h3>
+
+            <div class="brief-block">
+                <p style="font-weight: 600; margin-bottom: 1.2rem;">2.1 ‑ Scenario</p>
+                <p>You are a junior data analyst working on the marketing analyst team at <strong>Cyclistic</strong>, a bike‑share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand <strong>how casual riders and annual members use Cyclistic bikes differently</strong>. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with compelling data insights and professional data visualizations.</p>
+            </div>
+
+            <div class="brief-block" style="border-left-color: #7c3aed;">
+                <p style="font-weight: 600; margin-bottom: 1.2rem;">2.2 ‑ About the company</p>
+                <p>In 2016, Cyclistic launched a successful bike‑share offering. Since then, the program has grown to a fleet of <strong>5,824 bicycles</strong> that are geotracked and locked into a network of <strong>692 stations</strong> across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.</p>
+                <p style="margin-top: 1rem;">Until now, Cyclistic’s marketing strategy relied on building general awareness and appealing to broad consumer segments. One approach that helped make these things possible was the flexibility of its pricing plans: single-ride passes, full-day passes, and annual memberships. Customers who purchase single-ride or full-day passes are referred to as <strong>casual riders</strong>. Customers who purchase annual memberships are <strong>Cyclistic members</strong>.</p>
+                <p style="margin-top: 1rem;">Cyclistic’s finance analysts have concluded that annual members are much more profitable than casual riders. Although the pricing flexibility helps Cyclistic attract more customers, Moreno believes that maximizing the number of annual members will be key to future growth. Rather than creating a marketing campaign that targets all-new customers, Moreno believes there is a solid opportunity to convert casual riders into members. She notes that casual riders are already aware of the Cyclistic program and have chosen Cyclistic for their mobility needs.</p>
+                <p style="margin-top: 1rem;">Moreno has set a clear goal: <strong>Design marketing strategies aimed at converting casual riders into annual members.</strong> In order to do that, however, the team needs to better understand how annual members and casual riders differ, why casual riders would buy a membership, and how digital media could affect their marketing tactics. Moreno and her team are interested in analyzing the Cyclistic historical bike trip data to identify trends.</p>
+            </div>
+
+            <!-- small separator note -->
+            <p style="font-style: italic; color: #475569; margin-top: 1rem;">The following sections (Ask, Prepare, Process, Analyze, Share, Act) walk through the complete analysis.</p>
         </section>
 
+        <!-- remaining phases (light, but keep the existing content) -->
         <section id="ask" tabindex="-1" aria-labelledby="ask-heading">
             <h2 id="ask-heading">1. Ask</h2>
             <p><strong>Business Task:</strong> Identify key differences in bike usage between casual riders and annual members to inform a new marketing strategy aimed at converting casual riders into members.</p>
@@ -375,18 +389,18 @@
 
         <section id="process" tabindex="-1" aria-labelledby="process-heading">
             <h2 id="process-heading">3. Process</h2>
-            <p><strong>Data Cleaning & Transformation:</strong> Using R (tidyverse) to combine 12 CSV files, remove duplicates, filter nulls, and create ride length, day of week, month. Checked for outliers.</p>
-            <p><strong>Tools:</strong> R, RStudio, dplyr, tidyr, lubridate.</p>
+            <p><strong>Data Cleaning & Transformation:</strong> Using Python (pandas, numpy) to combine 12 CSV files, remove duplicates, filter nulls, and create ride length, day of week, month. Checked for outliers.</p>
+            <p><strong>Tools:</strong> Python, Jupyter Notebook, pandas, matplotlib, seaborn.</p>
         </section>
 
         <section id="analyze" tabindex="-1" aria-labelledby="analyze-heading">
             <h2 id="analyze-heading">4. Analyze</h2>
-            <p><strong>Key Findings:</strong> Casual riders take longer rides and are more active on weekends (leisure). Members have shorter, consistent rides on weekdays (commuting). Peak hours differ.</p>
+            <p><strong>Key Findings:</strong> Casual riders take longer rides and are more active on weekends (leisure). Members have shorter, consistent rides on weekdays (commuting). Peak hours differ significantly.</p>
         </section>
 
         <section id="share" tabindex="-1" aria-labelledby="share-heading">
             <h2 id="share-heading">5. Share</h2>
-            <p><strong>Visualizations:</strong> Tableau dashboards showing ride counts by day, ride length histograms. Presented via slide deck and report.</p>
+            <p><strong>Visualizations:</strong> Tableau / Python dashboards showing ride counts by day, ride length histograms. Presented via slide deck and GitHub-hosted report.</p>
         </section>
 
         <section id="act" tabindex="-1" aria-labelledby="act-heading">
@@ -400,6 +414,7 @@
         </section>
     </main>
 
+    <!-- footer with icons (same) -->
     <footer>
         <div class="social-links">
             <a href="https://wa.me/1234567890?text=Hi%20Nibal" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
@@ -413,7 +428,7 @@
             </a>
         </div>
         <div class="copyright">
-            <p><small>© 2026 Nibal Sharrouf · Google Data Analytics Capstone</small></p>
+            <p><small>© 2026 Nibal Sharrouf · Google Data Analytics Capstone · built with 🌿</small></p>
         </div>
     </footer>
 
@@ -425,12 +440,10 @@
             const navLinks = document.querySelectorAll('.nav-menu a');
             const sections = document.querySelectorAll('section');
 
-            // --- mobile menu toggle ---
             function openMenu() {
                 nav.classList.add('open');
                 overlay.classList.add('open');
                 toggleBtn.setAttribute('aria-expanded', 'true');
-                // optional: change icon to times
                 toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
             }
             function closeMenu() {
@@ -442,42 +455,32 @@
 
             toggleBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                if (nav.classList.contains('open')) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
+                nav.classList.contains('open') ? closeMenu() : openMenu();
             });
 
-            // close on overlay click
             overlay.addEventListener('click', closeMenu);
 
-            // close on link click (for mobile)
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (window.innerWidth <= 700) closeMenu();
                 });
             });
 
-            // resize listener: if screen becomes >700px, ensure menu is visible and overlay hidden
             window.addEventListener('resize', () => {
                 if (window.innerWidth > 700) {
-                    nav.classList.remove('open'); // remove sidebar state
+                    nav.classList.remove('open');
                     overlay.classList.remove('open');
                     toggleBtn.setAttribute('aria-expanded', 'false');
                     toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                } else {
-                    // if already closed, keep closed; else if open we preserve? fine.
                 }
             });
 
-            // --- active nav spy + smooth scroll (updated for all links)---
-            function removeActiveClasses() {
-                navLinks.forEach(link => link.classList.remove('active'));
+            // active link + smooth scroll
+            function removeActive() {
+                navLinks.forEach(l => l.classList.remove('active'));
             }
-
-            function setActiveLink(id) {
-                removeActiveClasses();
+            function setActive(id) {
+                removeActive();
                 const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
                 if (activeLink) activeLink.classList.add('active');
             }
@@ -485,17 +488,14 @@
             window.addEventListener('scroll', () => {
                 let current = '';
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 100; // offset
-                    const sectionBottom = sectionTop + section.clientHeight;
-                    if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                    const rect = section.getBoundingClientRect();
+                    const offset = 150;
+                    if (rect.top <= offset && rect.bottom > offset) {
                         current = section.getAttribute('id');
                     }
                 });
-                if (current) {
-                    setActiveLink(current);
-                } else if (window.scrollY < 200) {
-                    setActiveLink('overview');
-                }
+                if (current) setActive(current);
+                else if (window.scrollY < 200) setActive('overview');
             });
 
             navLinks.forEach(link => {
@@ -506,20 +506,16 @@
                     if (targetEl) {
                         targetEl.scrollIntoView({ behavior: 'smooth' });
                         history.pushState(null, null, `#${targetId}`);
-                        setActiveLink(targetId);
+                        setActive(targetId);
                     }
                 });
             });
 
-            // initial active from hash or default overview
             if (window.location.hash) {
-                const id = window.location.hash.substring(1);
-                setActiveLink(id);
+                setActive(window.location.hash.substring(1));
             } else {
-                setActiveLink('overview');
+                setActive('overview');
             }
-
-            // close menu if clicking outside (optional, but overlay already does)
         })();
     </script>
 </body>
