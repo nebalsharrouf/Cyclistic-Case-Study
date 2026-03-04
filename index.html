@@ -1,49 +1,40 @@
+Here is the updated HTML code for your Cyclistic case study website. It now includes your name in a signature font at the top, functional social media icons in the footer, and a new "Overview" page section with a brief summary of the project.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- The viewport meta tag is essential for proper responsive design on mobile devices [citation:10] -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO & Social Sharing Meta Tags -->
-    <title>Cyclistic Bike-Share Case Study | Google Data Analytics Capstone</title>
+    <title>Cyclistic Case Study | Nibal Sharrouf</title>
     <meta name="description" content="A comprehensive data analysis case study for Cyclistic, a bike-share company in Chicago. Follow the six phases of data analysis: Ask, Prepare, Process, Analyze, Share, and Act.">
-    <meta name="author" content="Your Name">
-    <!-- Keywords are less important for modern SEO but can be included [citation:2] -->
-    <meta name="keywords" content="Cyclistic, Google Data Analytics, Case Study, Bike Share, Data Analysis, R, Tableau">
+    <meta name="author" content="Nibal Sharrouf">
     
-    <!-- Open Graph Meta Tags for better sharing on social media (Facebook, LinkedIn) [citation:1] -->
-    <meta property="og:title" content="Cyclistic Bike-Share Case Study">
-    <meta property="og:description" content="A data-driven case study exploring how casual riders and annual members use Cyclistic bikes differently.">
+    <!-- Open Graph / social preview (optional, add your image when live) -->
+    <meta property="og:title" content="Cyclistic Bike-Share Case Study by Nibal Sharrouf">
+    <meta property="og:description" content="Data analysis capstone project exploring Cyclistic bike-share usage.">
     <meta property="og:type" content="website">
-    <!-- Add a full URL to an image for sharing previews: <meta property="og:image" content="https://yourdomain.com/cyclistic-preview.jpg"> -->
-    <!-- <meta property="og:url" content="https://yourdomain.com/cyclistic-case-study"> -->
-    
-    <!-- Twitter Card Meta Tags (optional but recommended) [citation:1] -->
-    <meta name="twitter:card" content="summary_large_image">
-    <!-- <meta name="twitter:image" content="https://yourdomain.com/cyclistic-preview.jpg"> -->
 
-    <!-- Favicon (basic browser icon) -->
-    <!-- Use a tool like https://favicon.io/ to generate these. For now, a simple comment. -->
-    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+    <!-- Font Awesome 5 (free) for icons – widely used and reliable -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+
+    <!-- Google Fonts for signature style (Satisfy & Pacifico are two playful script fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
 
     <style>
-        /* === CSS RESET & GLOBAL BOX-SIZING === */
-        /* Applying box-sizing: border-box globally simplifies width calculations [citation:3] */
+        /* === RESET & VARIABLES === */
         *,
         *::before,
         *::after {
             box-sizing: border-box;
         }
-
-        /* Remove default margin and padding for consistency */
         * {
             margin: 0;
             padding: 0;
         }
 
-        /* === CUSTOM PROPERTIES (CSS VARIABLES) === */
-        /* Improves maintainability by centralizing theme values [citation:10] */
         :root {
             --color-primary-dark: #111;
             --color-secondary-dark: #222;
@@ -52,176 +43,206 @@
             --color-background-light: #ffffff;
             --color-footer-bg: #f5f5f5;
             --color-border: #eee;
-            --font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            --max-content-width: 900px;
+            --font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            --font-signature: 'Pacifico', 'Satisfy', cursive; /* fallback chain */
+            --max-content-width: 1000px;
             --spacing-section: 40px 20px;
-            --border-radius-base: 0; /* Can be changed if needed */
-            --transition-hover: 0.2s ease-in-out;
         }
 
-        /* === BASE STYLES === */
         body {
             font-family: var(--font-family-base);
             line-height: 1.7;
             background-color: var(--color-background-light);
             color: var(--color-text-dark);
-            /* Improves readability on high-resolution screens */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* === HEADER & NAVIGATION (SEMANTIC STYLES) === */
-        header {
+        /* === SIGNATURE HEADER (dual line) === */
+        .signature-header {
             background: var(--color-primary-dark);
-            padding: 15px;
+            padding: 20px 15px 10px 15px;
             text-align: center;
+            border-bottom: 1px solid #333;
         }
 
-        header h1 {
-            color: var(--color-text-light);
-            margin: 0;
-            font-size: clamp(1.2rem, 5vw, 1.5rem); /* Responsive font size */
-            font-weight: 500;
+        .project-title {
+            color: #ddd;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 300;
         }
 
-        /* Using nav element for semantic identification [citation:2][citation:6] */
+        .signature-name {
+            font-family: var(--font-signature);
+            font-size: 2.8rem;
+            color: white;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            word-break: break-word;
+        }
+        /* smaller adjustment on mobile */
+        @media (max-width: 500px) {
+            .signature-name {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* navigation unchanged but with active support */
         nav {
             background: var(--color-secondary-dark);
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 10px;
-            /* Adding a subtle print style */
-            @media print {
-                display: none; /* Hide navigation when printing */
-            }
+            padding: 12px 10px;
+            gap: 5px 15px;
         }
 
         nav a {
             color: var(--color-text-light);
             text-decoration: none;
-            margin: 5px 10px;
-            font-size: 0.9rem;
-            padding: 4px 6px; /* Adds a larger click/tap area */
-            border-radius: var(--border-radius-base);
-            transition: background-color var(--transition-hover), text-decoration var(--transition-hover);
+            font-size: 1rem;
+            padding: 6px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s, text-decoration 0.2s;
         }
 
         nav a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            text-decoration: underline;
-            text-underline-offset: 4px; /* Better underline styling */
-        }
-
-        /* Style for the current page section in nav (can be toggled with JS or manually) */
-        nav a.active {
-            font-weight: bold;
+            background-color: rgba(255,255,255,0.15);
             text-decoration: underline;
             text-underline-offset: 4px;
         }
 
-        /* === MAIN CONTENT AREA === */
-        /* Using <main> to clearly identify the primary content of the page [citation:2][citation:10] */
-        main {
-            max-width: var(--max-content-width);
-            margin: 0 auto; /* Centers the main content block */
-            padding: 0 20px; /* Adds consistent side padding */
+        nav a.active {
+            font-weight: bold;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            background-color: rgba(255,255,255,0.1);
         }
 
-        /* Styling sections within main */
+        /* main and sections */
+        main {
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         section {
-            scroll-margin-top: 20px; /* Prevents content from hiding behind fixed headers when using anchor links */
+            scroll-margin-top: 30px;
             padding: var(--spacing-section);
             padding-left: 0;
             padding-right: 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        section:last-of-type {
+            border-bottom: none;
         }
 
-        /* Using a class for dividers if needed, but h2 border is kept */
         h2 {
             border-bottom: 2px solid var(--color-border);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            font-size: 2rem;
             font-weight: 400;
         }
 
-        h2:focus-visible {
-            outline: 2px solid blue; /* Ensures focusable headings are visible */
+        p, li {
+            max-width: 75ch;
         }
 
-        /* Improve paragraph readability */
-        p {
-            margin-bottom: 1.2rem;
-            max-width: 70ch; /* Limits line length for better readability */
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        /* === FOOTER === */
+        /* footer with social icons */
         footer {
-            text-align: center;
-            padding: 30px 20px;
             background: var(--color-footer-bg);
-            font-size: 0.9rem;
-            border-top: 1px solid #ddd;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid #ccc;
         }
 
-        /* === RESPONSIVE DESIGN ENHANCEMENTS === */
-        /* Mobile-first media query for smaller adjustments */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: #222;
+            font-size: 2.2rem;
+            transition: transform 0.2s, color 0.2s;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: #0077b5; /* linkedin blue */
+            transform: scale(1.1);
+        }
+        /* whatsapp green on hover */
+        .social-links a[href*="whatsapp"]:hover {
+            color: #25D366;
+        }
+        /* email hover */
+        .social-links a[href*="mailto"]:hover {
+            color: #c71610;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* mobile */
         @media (max-width: 600px) {
             nav {
                 flex-direction: column;
                 align-items: center;
-                gap: 5px;
             }
-
             nav a {
-                margin: 2px 0;
-                width: 100%; /* Full width links for easier tapping */
+                width: 100%;
                 text-align: center;
             }
-
-            section {
-                padding: 30px 15px;
+            .social-links {
+                gap: 1.8rem;
             }
-
-            h2 {
-                font-size: 1.5rem;
+            .social-links a {
+                font-size: 2rem;
             }
         }
 
-        /* Print styles - ensure page prints cleanly [citation:7] */
+        /* print helper */
         @media print {
-            body {
-                background: white;
-                color: black;
-                font-size: 12pt;
-            }
-
-            nav, footer {
+            nav, .social-links {
                 display: none;
             }
-
-            h2 {
-                border-bottom: 1px solid #ccc;
-            }
         }
 
-        /* === ACCESSIBILITY: FOCUS VISIBLE === */
-        /* Provides a clear focus indicator for keyboard navigation [citation:7] */
+        /* focus outline */
         :focus-visible {
             outline: 3px solid #007bff;
-            outline-offset: 2px;
+            outline-offset: 3px;
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <h1>🚴 Cyclistic Bike-Share: A Data Analysis Case Study</h1>
-    </header>
 
-    <!-- Semantic navigation with aria-label for screen readers [citation:2][citation:6] -->
+    <!-- new signature header: small label + name in script font -->
+    <div class="signature-header">
+        <div class="project-title">CYCLISTIC CASE STUDY</div>
+        <div class="signature-name">Nibal Sharrouf</div>
+    </div>
+
+    <!-- navigation (same structure) -->
     <nav aria-label="Main navigation - Data analysis phases">
-        <a href="#ask" class="active">Ask</a> <!-- Example of an active link -->
+        <a href="#overview" class="active">Overview</a>
+        <a href="#ask">Ask</a>
         <a href="#prepare">Prepare</a>
         <a href="#process">Process</a>
         <a href="#analyze">Analyze</a>
@@ -229,9 +250,15 @@
         <a href="#act">Act</a>
     </nav>
 
-    <!-- Main content area, contains the primary page content [citation:2] -->
     <main>
-        <!-- Each section is a distinct part of the document [citation:3][citation:10] -->
+        <!-- NEW OVERVIEW SECTION (first) -->
+        <section id="overview" tabindex="-1" aria-labelledby="overview-heading">
+            <h2 id="overview-heading">📋 Project Overview</h2>
+            <p><strong>Cyclistic</strong> is a fictional bike‑share company based in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand how casual riders and annual members use Cyclistic bikes differently.</p>
+            <p>This case study follows the six phases of data analysis: <strong>Ask, Prepare, Process, Analyze, Share,</strong> and <strong>Act</strong>. By combining historical trip data with R and Tableau, we derive actionable insights to convert casual riders into members.</p>
+            <p><em>Scroll down or use the navigation to explore each phase.</em></p>
+        </section>
+
         <section id="ask" tabindex="-1" aria-labelledby="ask-heading">
             <h2 id="ask-heading">1. Ask</h2>
             <p><strong>Business Task:</strong> Identify key differences in bike usage between casual riders and annual members to inform a new marketing strategy aimed at converting casual riders into members.</p>
@@ -253,15 +280,11 @@
         <section id="analyze" tabindex="-1" aria-labelledby="analyze-heading">
             <h2 id="analyze-heading">4. Analyze</h2>
             <p><strong>Key Findings:</strong> Analysis revealed that casual riders tend to take longer rides and are more active on weekends, suggesting leisure use. Annual members, on the other hand, have shorter, more consistent rides throughout the workweek, indicating commuting or utilitarian use. Peak hours also differ significantly.</p>
-            <!-- You could add a simple chart placeholder here -->
-            <!-- <div class="chart-placeholder">[Visualization: Ride length by user type]</div> -->
         </section>
 
         <section id="share" tabindex="-1" aria-labelledby="share-heading">
             <h2 id="share-heading">5. Share</h2>
             <p><strong>Visualizations & Communication:</strong> Created interactive dashboards using Tableau Public to clearly illustrate usage patterns. Key visualizations include bar charts comparing ride counts by day of week and histograms of ride lengths. These findings will be presented to stakeholders via a slide deck and a written report.</p>
-            <!-- Link to a live Tableau dashboard if available -->
-            <!-- <p><a href="#" target="_blank" rel="noopener noreferrer">View the interactive dashboard (opens in new tab)</a></p> -->
         </section>
 
         <section id="act" tabindex="-1" aria-labelledby="act-heading">
@@ -275,17 +298,30 @@
         </section>
     </main>
 
+    <!-- FOOTER WITH SOCIAL ICONS (WhatsApp, LinkedIn, Email) -->
     <footer>
-        <!-- Using <small> for copyright and legal text is a semantic choice -->
-        <p><small>© 2026 Your Name | Google Data Analytics Capstone Project</small></p>
-        <!-- Consider adding contact info with <address> if appropriate -->
-        <!-- <address>contact@yourname.com</address> -->
+        <div class="social-links">
+            <!-- WhatsApp icon – using Font Awesome's what's app brand. replace "phone number" with your actual profile link or number link -->
+            <a href="https://wa.me/1234567890?text=Hi%20Nibal" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <!-- LinkedIn – replace with your profile URL -->
+            <a href="https://linkedin.com/in/nibal-sharrouf" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <!-- Email – using mailto link. replace with your actual email -->
+            <a href="mailto:nibal.sharrouf@example.com" aria-label="Email">
+                <i class="far fa-envelope"></i>
+            </a>
+        </div>
+        <div class="copyright">
+            <p><small>© 2026 Nibal Sharrouf · Google Data Analytics Capstone Project</small></p>
+        </div>
     </footer>
 
-    <!-- Minimal inline script to manage 'active' class in navigation based on scroll/click (optional enhancement) -->
+    <!-- SCRIPT: active nav + smooth scroll (updated to include new overview link) -->
     <script>
         (function() {
-            // Optional: Adds a simple interactive highlight to the nav links
             const navLinks = document.querySelectorAll('nav a');
             const sections = document.querySelectorAll('section');
 
@@ -301,11 +337,11 @@
                 }
             }
 
-            // Highlight on scroll (basic version)
+            // scroll spy
             window.addEventListener('scroll', () => {
                 let current = '';
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 100; // offset for better trigger point
+                    const sectionTop = section.offsetTop - 120; // offset
                     const sectionHeight = section.clientHeight;
                     if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
                         current = section.getAttribute('id');
@@ -313,16 +349,13 @@
                 });
                 if (current) {
                     setActiveLink(current);
-                } else {
-                    // If at the very top, maybe set the first link as active? Or remove all.
-                    if (window.pageYOffset === 0) {
-                        removeActiveClasses();
-                        // Optionally activate the first link: navLinks[0]?.classList.add('active');
-                    }
+                } else if (window.pageYOffset < 100) {
+                    // if near top, highlight overview
+                    setActiveLink('overview');
                 }
             });
 
-            // Smooth scroll for nav links (prevents default jump and uses smooth behavior)
+            // smooth click
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -330,20 +363,21 @@
                     const targetElement = document.getElementById(targetId);
                     if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth' });
-                        // Update URL hash without jumping
                         history.pushState(null, null, `#${targetId}`);
-                        // Set active link immediately after click
                         setActiveLink(targetId);
                     }
                 });
             });
 
-            // If there's an initial hash in the URL, activate the corresponding link on page load
+            // initial active from hash or default to overview
             if (window.location.hash) {
-                const initialId = window.location.hash.substring(1);
-                setActiveLink(initialId);
+                const id = window.location.hash.substring(1);
+                setActiveLink(id);
+            } else {
+                setActiveLink('overview');
             }
         })();
     </script>
 </body>
 </html>
+```
