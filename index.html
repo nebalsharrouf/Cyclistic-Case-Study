@@ -1,5 +1,3 @@
-Here is the updated HTML code. The "Overview" menu now contains the detailed authorship and case study brief you provided, presented in a clean, humanized, and easy-to-read format.
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -344,21 +342,19 @@ Here is the updated HTML code. The "Overview" menu now contains the detailed aut
     </nav>
 
     <main>
-        <!-- ========== OVERVIEW section – enriched with authorship & brief ========= -->
+        <!-- OVERVIEW section (authorship & brief) unchanged -->
         <section id="overview" tabindex="-1" aria-labelledby="overview-heading">
-            <h2 id="overview-heading">📋 Project overview</h2>
+            <h2 id="overview-heading">Project overview</h2>
             
-            <!-- 1. Authorship (humanized, simple) -->
             <div class="insight-card">
-                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;">👤 <span class="soft-highlight">Authorship</span></p>
+                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;"><span class="soft-highlight">Authorship</span></p>
                 <p><strong>Nibal Sharrouf</strong> performed this case study in <strong>March 2026</strong> as the capstone project for the <strong>Google Data Analytics Professional Certificate</strong>. The analysis used <strong>Python</strong> to explore bike‑share trips from <strong>November 2021 to October 2022</strong>. The final report and visualizations are hosted using <strong>GitHub Pages</strong>.</p>
             </div>
 
-            <!-- 2. Case study brief – scenario & about the company -->
-            <h3>📌 Case study brief</h3>
+            <h3>Case study brief</h3>
 
             <div class="brief-block">
-                <p style="font-weight: 600; margin-bottom: 1.2rem;">2.1 ‑ Scenario</p>
+                <p style="font-weight: 600; margin-bottom: 1.2rem;">Scenario</p>
                 <p>You are a junior data analyst working on the marketing analyst team at <strong>Cyclistic</strong>, a bike‑share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand <strong>how casual riders and annual members use Cyclistic bikes differently</strong>. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with compelling data insights and professional data visualizations.</p>
             </div>
 
@@ -369,18 +365,38 @@ Here is the updated HTML code. The "Overview" menu now contains the detailed aut
                 <p style="margin-top: 1rem;">Cyclistic’s finance analysts have concluded that annual members are much more profitable than casual riders. Although the pricing flexibility helps Cyclistic attract more customers, Moreno believes that maximizing the number of annual members will be key to future growth. Rather than creating a marketing campaign that targets all-new customers, Moreno believes there is a solid opportunity to convert casual riders into members. She notes that casual riders are already aware of the Cyclistic program and have chosen Cyclistic for their mobility needs.</p>
                 <p style="margin-top: 1rem;">Moreno has set a clear goal: <strong>Design marketing strategies aimed at converting casual riders into annual members.</strong> In order to do that, however, the team needs to better understand how annual members and casual riders differ, why casual riders would buy a membership, and how digital media could affect their marketing tactics. Moreno and her team are interested in analyzing the Cyclistic historical bike trip data to identify trends.</p>
             </div>
-
-            <!-- small separator note -->
-            <p style="font-style: italic; color: #475569; margin-top: 1rem;">The following sections (Ask, Prepare, Process, Analyze, Share, Act) walk through the complete analysis.</p>
         </section>
 
-        <!-- remaining phases (light, but keep the existing content) -->
+        <!-- ========== ASK section – fully updated with the provided rich text ========= -->
         <section id="ask" tabindex="-1" aria-labelledby="ask-heading">
             <h2 id="ask-heading">1. Ask</h2>
-            <p><strong>Business Task:</strong> Identify key differences in bike usage between casual riders and annual members to inform a new marketing strategy aimed at converting casual riders into members.</p>
-            <p><strong>Stakeholders:</strong> Cyclistic executive team, marketing analytics team, and the director of marketing, Lily Moreno.</p>
+            
+            <!-- we format the new content with a clean, readable flow, using a subtle card for the key objective -->
+            <div style="margin-bottom: 2rem;">
+                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.5rem;">🎯 Business objective</p>
+                <p>This analysis examines <strong>how casual riders and annual members use Cyclistic bikes differently</strong>, with the objective of identifying actionable strategies to convert casual riders into annual members. Research from Cyclistic’s finance team has shown that annual members are significantly more profitable than casual riders, making the growth of annual memberships a critical focus for the company’s future success.</p>
+            </div>
+
+            <div class="insight-card" style="background: #f1f6fe;">
+                <p style="font-weight: 500; margin-bottom: 1rem;">📊 Key behavioral insights (preview)</p>
+                <p>By analyzing Cyclistic’s historical trip data, clear patterns in rider behavior emerged. <strong>Casual riders are more likely than annual members to ride during evenings, on weekends, and in warmer months.</strong> They also show a preference for electric bikes and tend to take longer trips. These insights provide valuable guidance for marketing strategies aimed at engaging casual riders more effectively.</p>
+            </div>
+
+            <div style="margin: 2rem 0 1.5rem;">
+                <p style="font-weight: 600;">✅ Recommended actions (based on findings)</p>
+                <ul style="margin-top: 0.75rem; list-style-type: disc; padding-left: 1.8rem;">
+                    <li>Creating targeted transactional emails that highlight the cost savings of becoming an annual member.</li>
+                    <li>Launching a digital campaign to showcase events and activities accessible via Cyclistic bikes.</li>
+                    <li>Expanding marketing efforts through digital channels to raise awareness of convenient cycling paths and bike-friendly destinations.</li>
+                </ul>
+            </div>
+
+            <div style="background: #ffffff; border-radius: 18px; padding: 1.2rem 1.8rem; border: 1px solid #e9eef3;">
+                <p><span style="font-weight: 600;">Stakeholders:</span> This project is presented to key stakeholders, including the Cyclistic executive team, the marketing analytics team, and Lily Moreno (director of marketing), to provide a clear understanding of user behaviors and offer data‑driven recommendations that support the company’s strategic goal of increasing annual memberships. By aligning marketing initiatives with these behavioral insights, Cyclistic can more effectively engage casual riders and drive long‑term growth.</p>
+            </div>
         </section>
 
+        <!-- remaining phases (light, consistent) -->
         <section id="prepare" tabindex="-1" aria-labelledby="prepare-heading">
             <h2 id="prepare-heading">2. Prepare</h2>
             <p><strong>Data Source:</strong> Cyclistic’s historical trip data from the past 12 months (provided by Motivate International Inc. under license).</p>
@@ -414,7 +430,7 @@ Here is the updated HTML code. The "Overview" menu now contains the detailed aut
         </section>
     </main>
 
-    <!-- footer with icons (same) -->
+    <!-- footer with icons -->
     <footer>
         <div class="social-links">
             <a href="https://wa.me/1234567890?text=Hi%20Nibal" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
