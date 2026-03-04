@@ -1,83 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cyclistic Case Study</title>
+    <meta charset="UTF-8">
+    <!-- The viewport meta tag is essential for proper responsive design on mobile devices [citation:10] -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Social Sharing Meta Tags -->
+    <title>Cyclistic Bike-Share Case Study | Google Data Analytics Capstone</title>
+    <meta name="description" content="A comprehensive data analysis case study for Cyclistic, a bike-share company in Chicago. Follow the six phases of data analysis: Ask, Prepare, Process, Analyze, Share, and Act.">
+    <meta name="author" content="Your Name">
+    <!-- Keywords are less important for modern SEO but can be included [citation:2] -->
+    <meta name="keywords" content="Cyclistic, Google Data Analytics, Case Study, Bike Share, Data Analysis, R, Tableau">
+    
+    <!-- Open Graph Meta Tags for better sharing on social media (Facebook, LinkedIn) [citation:1] -->
+    <meta property="og:title" content="Cyclistic Bike-Share Case Study">
+    <meta property="og:description" content="A data-driven case study exploring how casual riders and annual members use Cyclistic bikes differently.">
+    <meta property="og:type" content="website">
+    <!-- Add a full URL to an image for sharing previews: <meta property="og:image" content="https://yourdomain.com/cyclistic-preview.jpg"> -->
+    <!-- <meta property="og:url" content="https://yourdomain.com/cyclistic-case-study"> -->
+    
+    <!-- Twitter Card Meta Tags (optional but recommended) [citation:1] -->
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- <meta name="twitter:image" content="https://yourdomain.com/cyclistic-preview.jpg"> -->
+
+    <!-- Favicon (basic browser icon) -->
+    <!-- Use a tool like https://favicon.io/ to generate these. For now, a simple comment. -->
+    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* === CSS RESET & GLOBAL BOX-SIZING === */
+        /* Applying box-sizing: border-box globally simplifies width calculations [citation:3] */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* Remove default margin and padding for consistency */
+        * {
             margin: 0;
-            line-height: 1.6;
+            padding: 0;
         }
-        nav {
-            background: #111;
+
+        /* === CUSTOM PROPERTIES (CSS VARIABLES) === */
+        /* Improves maintainability by centralizing theme values [citation:10] */
+        :root {
+            --color-primary-dark: #111;
+            --color-secondary-dark: #222;
+            --color-text-dark: #333;
+            --color-text-light: #ffffff;
+            --color-background-light: #ffffff;
+            --color-footer-bg: #f5f5f5;
+            --color-border: #eee;
+            --font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --max-content-width: 900px;
+            --spacing-section: 40px 20px;
+            --border-radius-base: 0; /* Can be changed if needed */
+            --transition-hover: 0.2s ease-in-out;
+        }
+
+        /* === BASE STYLES === */
+        body {
+            font-family: var(--font-family-base);
+            line-height: 1.7;
+            background-color: var(--color-background-light);
+            color: var(--color-text-dark);
+            /* Improves readability on high-resolution screens */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* === HEADER & NAVIGATION (SEMANTIC STYLES) === */
+        header {
+            background: var(--color-primary-dark);
             padding: 15px;
-            position: sticky;
-            top: 0;
+            text-align: center;
         }
+
+        header h1 {
+            color: var(--color-text-light);
+            margin: 0;
+            font-size: clamp(1.2rem, 5vw, 1.5rem); /* Responsive font size */
+            font-weight: 500;
+        }
+
+        /* Using nav element for semantic identification [citation:2][citation:6] */
+        nav {
+            background: var(--color-secondary-dark);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+            /* Adding a subtle print style */
+            @media print {
+                display: none; /* Hide navigation when printing */
+            }
+        }
+
         nav a {
-            color: white;
-            margin-right: 20px;
+            color: var(--color-text-light);
             text-decoration: none;
-            font-weight: bold;
+            margin: 5px 10px;
+            font-size: 0.9rem;
+            padding: 4px 6px; /* Adds a larger click/tap area */
+            border-radius: var(--border-radius-base);
+            transition: background-color var(--transition-hover), text-decoration var(--transition-hover);
         }
+
         nav a:hover {
-            color: #00bcd4;
+            background-color: rgba(255, 255, 255, 0.1);
+            text-decoration: underline;
+            text-underline-offset: 4px; /* Better underline styling */
         }
+
+        /* Style for the current page section in nav (can be toggled with JS or manually) */
+        nav a.active {
+            font-weight: bold;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* === MAIN CONTENT AREA === */
+        /* Using <main> to clearly identify the primary content of the page [citation:2][citation:10] */
+        main {
+            max-width: var(--max-content-width);
+            margin: 0 auto; /* Centers the main content block */
+            padding: 0 20px; /* Adds consistent side padding */
+        }
+
+        /* Styling sections within main */
         section {
-            padding: 60px 80px;
+            scroll-margin-top: 20px; /* Prevents content from hiding behind fixed headers when using anchor links */
+            padding: var(--spacing-section);
+            padding-left: 0;
+            padding-right: 0;
         }
-        h1, h2 {
-            color: #333;
+
+        /* Using a class for dividers if needed, but h2 border is kept */
+        h2 {
+            border-bottom: 2px solid var(--color-border);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
+
+        h2:focus-visible {
+            outline: 2px solid blue; /* Ensures focusable headings are visible */
+        }
+
+        /* Improve paragraph readability */
+        p {
+            margin-bottom: 1.2rem;
+            max-width: 70ch; /* Limits line length for better readability */
+        }
+
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--color-footer-bg);
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+        }
+
+        /* === RESPONSIVE DESIGN ENHANCEMENTS === */
+        /* Mobile-first media query for smaller adjustments */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+
+            nav a {
+                margin: 2px 0;
+                width: 100%; /* Full width links for easier tapping */
+                text-align: center;
+            }
+
+            section {
+                padding: 30px 15px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Print styles - ensure page prints cleanly [citation:7] */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+
+            nav, footer {
+                display: none;
+            }
+
+            h2 {
+                border-bottom: 1px solid #ccc;
+            }
+        }
+
+        /* === ACCESSIBILITY: FOCUS VISIBLE === */
+        /* Provides a clear focus indicator for keyboard navigation [citation:7] */
+        :focus-visible {
+            outline: 3px solid #007bff;
+            outline-offset: 2px;
         }
     </style>
 </head>
 
 <body>
+    <header>
+        <h1>🚴 Cyclistic Bike-Share: A Data Analysis Case Study</h1>
+    </header>
 
-<nav>
-    <a href="#home">Cyclistic Case Study</a>
-    <a href="#ask">Ask</a>
-    <a href="#prepare">Prepare</a>
-    <a href="#process">Process</a>
-    <a href="#analyze">Analyze</a>
-    <a href="#share">Share</a>
-    <a href="#act">Act</a>
-</nav>
+    <!-- Semantic navigation with aria-label for screen readers [citation:2][citation:6] -->
+    <nav aria-label="Main navigation - Data analysis phases">
+        <a href="#ask" class="active">Ask</a> <!-- Example of an active link -->
+        <a href="#prepare">Prepare</a>
+        <a href="#process">Process</a>
+        <a href="#analyze">Analyze</a>
+        <a href="#share">Share</a>
+        <a href="#act">Act</a>
+    </nav>
 
-<section id="home">
-    <h1>🚴 Cyclistic Bike-Share Case Study</h1>
-    <p>This project analyzes 12 months of historical trip data to understand behavioral differences between casual riders and annual members.</p>
-</section>
+    <!-- Main content area, contains the primary page content [citation:2] -->
+    <main>
+        <!-- Each section is a distinct part of the document [citation:3][citation:10] -->
+        <section id="ask" tabindex="-1" aria-labelledby="ask-heading">
+            <h2 id="ask-heading">1. Ask</h2>
+            <p><strong>Business Task:</strong> Identify key differences in bike usage between casual riders and annual members to inform a new marketing strategy aimed at converting casual riders into members.</p>
+            <p><strong>Stakeholders:</strong> Cyclistic executive team, marketing analytics team, and the director of marketing, Lily Moreno.</p>
+        </section>
 
-<section id="ask">
-    <h2>Ask</h2>
-    <p>Business task content will go here.</p>
-</section>
+        <section id="prepare" tabindex="-1" aria-labelledby="prepare-heading">
+            <h2 id="prepare-heading">2. Prepare</h2>
+            <p><strong>Data Source:</strong> Cyclistic’s historical trip data from the past 12 months (provided by Motivate International Inc. under license).</p>
+            <p><strong>Credibility & Integrity:</strong> The data is stored in a secure, internal database and is considered reliable (ROCCC: Reliable, Original, Comprehensive, Current, Cited). It includes anonymous trip details such as start/end time, station names, and rider type (casual vs. member).</p>
+        </section>
 
-<section id="prepare">
-    <h2>Prepare</h2>
-    <p>Data source and credibility explanation will go here.</p>
-</section>
+        <section id="process" tabindex="-1" aria-labelledby="process-heading">
+            <h2 id="process-heading">3. Process</h2>
+            <p><strong>Data Cleaning & Transformation:</strong> Using R (with tidyverse) to combine 12 CSV files, remove duplicates, filter out null values, and create new calculated fields such as ride length, day of week, and month for deeper analysis. Data was also checked for outliers and inconsistencies.</p>
+            <p><strong>Tools Used:</strong> R, RStudio, and the `dplyr`, `tidyr`, and `lubridate` packages.</p>
+        </section>
 
-<section id="process">
-    <h2>Process</h2>
-    <p>Data cleaning steps will go here.</p>
-</section>
+        <section id="analyze" tabindex="-1" aria-labelledby="analyze-heading">
+            <h2 id="analyze-heading">4. Analyze</h2>
+            <p><strong>Key Findings:</strong> Analysis revealed that casual riders tend to take longer rides and are more active on weekends, suggesting leisure use. Annual members, on the other hand, have shorter, more consistent rides throughout the workweek, indicating commuting or utilitarian use. Peak hours also differ significantly.</p>
+            <!-- You could add a simple chart placeholder here -->
+            <!-- <div class="chart-placeholder">[Visualization: Ride length by user type]</div> -->
+        </section>
 
-<section id="analyze">
-    <h2>Analyze</h2>
-    <p>Insights and trends will go here.</p>
-</section>
+        <section id="share" tabindex="-1" aria-labelledby="share-heading">
+            <h2 id="share-heading">5. Share</h2>
+            <p><strong>Visualizations & Communication:</strong> Created interactive dashboards using Tableau Public to clearly illustrate usage patterns. Key visualizations include bar charts comparing ride counts by day of week and histograms of ride lengths. These findings will be presented to stakeholders via a slide deck and a written report.</p>
+            <!-- Link to a live Tableau dashboard if available -->
+            <!-- <p><a href="#" target="_blank" rel="noopener noreferrer">View the interactive dashboard (opens in new tab)</a></p> -->
+        </section>
 
-<section id="share">
-    <h2>Share</h2>
-    <p>Visualizations and presentation summary will go here.</p>
-</section>
+        <section id="act" tabindex="-1" aria-labelledby="act-heading">
+            <h2 id="act-heading">6. Act</h2>
+            <p><strong>Recommendations:</strong></p>
+            <ul>
+                <li>Launch a targeted weekend marketing campaign for casual riders, highlighting the cost-saving benefits of membership for regular leisure use.</li>
+                <li>Introduce a new "weekend-only" or "off-peak" annual pass tier.</li>
+                <li>Develop a mobile app feature that allows casual riders to easily compare their trip costs against membership options after each ride.</li>
+            </ul>
+        </section>
+    </main>
 
-<section id="act">
-    <h2>Act</h2>
-    <p>Final recommendations will go here.</p>
-</section>
+    <footer>
+        <!-- Using <small> for copyright and legal text is a semantic choice -->
+        <p><small>© 2026 Your Name | Google Data Analytics Capstone Project</small></p>
+        <!-- Consider adding contact info with <address> if appropriate -->
+        <!-- <address>contact@yourname.com</address> -->
+    </footer>
 
+    <!-- Minimal inline script to manage 'active' class in navigation based on scroll/click (optional enhancement) -->
+    <script>
+        (function() {
+            // Optional: Adds a simple interactive highlight to the nav links
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('section');
+
+            function removeActiveClasses() {
+                navLinks.forEach(link => link.classList.remove('active'));
+            }
+
+            function setActiveLink(id) {
+                removeActiveClasses();
+                const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+
+            // Highlight on scroll (basic version)
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100; // offset for better trigger point
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                if (current) {
+                    setActiveLink(current);
+                } else {
+                    // If at the very top, maybe set the first link as active? Or remove all.
+                    if (window.pageYOffset === 0) {
+                        removeActiveClasses();
+                        // Optionally activate the first link: navLinks[0]?.classList.add('active');
+                    }
+                }
+            });
+
+            // Smooth scroll for nav links (prevents default jump and uses smooth behavior)
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                        // Update URL hash without jumping
+                        history.pushState(null, null, `#${targetId}`);
+                        // Set active link immediately after click
+                        setActiveLink(targetId);
+                    }
+                });
+            });
+
+            // If there's an initial hash in the URL, activate the corresponding link on page load
+            if (window.location.hash) {
+                const initialId = window.location.hash.substring(1);
+                setActiveLink(initialId);
+            }
+        })();
+    </script>
 </body>
 </html>
