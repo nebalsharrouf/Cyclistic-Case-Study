@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Nibal Sharrouf · data analytics portfolio</title>
-    <meta name="description" content="Portfolio of Nibal Sharrouf – data analyst skilled in Python, SQL, Tableau. Google Data Analytics certified. Cyclistic case study and more.">
+    <title>Nibal Sharrouf · data analyst</title>
+    <meta name="description" content="Portfolio of Nibal Sharrouf – junior data analyst skilled in Python, SQL, Power BI, Excel. Google Certified. Cyclistic case study and more.">
     <meta name="author" content="Nibal Sharrouf">
     
     <meta property="og:title" content="Nibal Sharrouf · data portfolio">
-    <meta property="og:description" content="Data analytics projects, resume, and certificates.">
+    <meta property="og:description" content="Data analytics projects, resume, and Google certificate.">
     <meta property="og:type" content="website">
 
-    <!-- Font Awesome 6 (free) for icons -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Google Fonts: signature & clean sans (Inter) -->
+    <!-- Google Fonts: signature & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -38,7 +38,7 @@
             --primary-dark: #0f172a;
             --secondary-dark: #1e293b;
             --footer-bg: #f1f5f9;
-            --font-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-base: 'Inter', system-ui, -apple-system, sans-serif;
             --font-signature: 'Pacifico', cursive;
             --max-width: 1100px;
             --header-height: 70px;
@@ -105,7 +105,7 @@
             line-height: 1;
         }
 
-        /* === NAVIGATION (desktop row / mobile sidebar) === */
+        /* === NAVIGATION === */
         .main-nav {
             background: var(--secondary-dark);
             transition: transform 0.3s ease, opacity 0.2s;
@@ -140,9 +140,7 @@
         }
 
         @media (max-width: 700px) {
-            .nav-toggle {
-                display: block;
-            }
+            .nav-toggle { display: block; }
             .main-nav {
                 position: fixed;
                 top: var(--header-height);
@@ -166,10 +164,7 @@
                 padding: 2rem 1.8rem;
                 gap: 1.2rem;
             }
-            .nav-menu a {
-                font-size: 1.2rem;
-                width: 100%;
-            }
+            .nav-menu a { font-size: 1.2rem; width: 100%; }
             .nav-overlay {
                 display: none;
                 position: fixed;
@@ -181,9 +176,7 @@
                 backdrop-filter: blur(3px);
                 z-index: 1040;
             }
-            .nav-overlay.open {
-                display: block;
-            }
+            .nav-overlay.open { display: block; }
             .header-title {
                 font-size: 1rem;
                 max-width: 140px;
@@ -192,7 +185,7 @@
             }
         }
 
-        /* === MAIN LAYOUT === */
+        /* === MAIN === */
         main {
             max-width: var(--max-width);
             margin: 0 auto;
@@ -204,9 +197,7 @@
             padding: 3.5rem 0;
             border-bottom: 1px solid var(--border-light);
         }
-        section:last-of-type {
-            border-bottom: none;
-        }
+        section:last-of-type { border-bottom: none; }
 
         h2 {
             font-size: 2.2rem;
@@ -218,69 +209,7 @@
             display: inline-block;
         }
 
-        /* === cards & grids === */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card, .license-card {
-            background: var(--surface);
-            border-radius: var(--border-radius-card);
-            padding: 2rem 1.8rem;
-            border: 1px solid var(--border-light);
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .project-card:hover, .license-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 18px 30px rgba(0,0,0,0.05);
-        }
-
-        .card-icon {
-            font-size: 2.2rem;
-            color: #2563eb;
-            margin-bottom: 1.2rem;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0 1.2rem;
-        }
-        .tag {
-            background: var(--accent-light);
-            color: #1e293b;
-            padding: 0.3rem 0.9rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: #2563eb;
-            font-weight: 500;
-            text-decoration: none;
-            border-bottom: 1.5px solid transparent;
-            transition: border-color 0.2s;
-        }
-        .btn-ghost:hover {
-            border-bottom-color: #2563eb;
-        }
-
-        /* profile area (picture + intro) */
+        /* profile */
         .profile-container {
             display: flex;
             flex-wrap: wrap;
@@ -293,25 +222,50 @@
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            object-fit: cover;
             background: #d9e2ef;
             box-shadow: 0 12px 28px rgba(0,0,0,0.1);
             border: 4px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #334155;
         }
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-        }
-        .profile-desc {
-            max-width: 600px;
-        }
+        .profile-desc { max-width: 600px; }
         .profile-desc p {
             font-size: 1.2rem;
             color: var(--text-secondary);
             margin-bottom: 1.2rem;
+        }
+
+        /* resume card */
+        .resume-card {
+            background: var(--surface);
+            border-radius: 32px;
+            padding: 2.2rem;
+            border: 1px solid var(--border-light);
+        }
+        .contact-line {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 2.5rem;
+            margin: 1.2rem 0 1.8rem;
+            color: var(--text-secondary);
+        }
+        .contact-line i { width: 1.4rem; color: #2563eb; }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0 1.5rem;
+        }
+        .skill-tag {
+            background: var(--accent-light);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .resume-download {
@@ -329,23 +283,50 @@
             transition: background 0.2s;
             text-decoration: none;
         }
-        .resume-download:hover {
-            background: #1e3a8a;
-        }
+        .resume-download:hover { background: #1e3a8a; }
 
-        /* license list */
-        .license-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .project-item, .license-item {
             padding: 0.8rem 0;
             border-bottom: 1px dashed var(--border-light);
         }
-        .license-item i {
-            color: #2563eb;
-            font-size: 1.4rem;
-            width: 2rem;
+        .project-item:last-child, .license-item:last-child { border: none; }
+        .project-date {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-left: 0.5rem;
         }
+
+        /* cards grid for projects (in projects section) */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .project-card {
+            background: var(--surface);
+            border-radius: var(--border-radius-card);
+            padding: 2rem 1.8rem;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s;
+        }
+        .project-card:hover { transform: translateY(-4px); }
+        .card-icon { font-size: 2.2rem; color: #2563eb; margin-bottom: 1.2rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; }
+        .project-tags {
+            display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 1.2rem;
+        }
+        .tag {
+            background: var(--accent-light); padding: 0.3rem 0.9rem; border-radius: 40px;
+            font-size: 0.8rem; font-weight: 500;
+        }
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 0.4rem; color: #2563eb;
+            font-weight: 500; text-decoration: none; border-bottom: 1.5px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .btn-ghost:hover { border-bottom-color: #2563eb; }
 
         /* footer */
         footer {
@@ -355,47 +336,26 @@
             border-top: 1px solid #cbd5e1;
         }
         .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2.8rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+            display: flex; justify-content: center; gap: 2.8rem; margin-bottom: 1.5rem; flex-wrap: wrap;
         }
         .social-links a {
-            color: #334155;
-            font-size: 2.2rem;
-            transition: transform 0.2s, color 0.2s;
+            color: #334155; font-size: 2.2rem; transition: transform 0.2s, color 0.2s;
         }
-        .social-links a:hover {
-            color: #0f172a;
-            transform: scale(1.1);
-        }
-        .copyright {
-            color: #475569;
-            font-size: 0.9rem;
-        }
+        .social-links a:hover { color: #0f172a; transform: scale(1.1); }
+        .copyright { color: #475569; font-size: 0.9rem; }
 
-        /* responsive */
         @media (max-width: 600px) {
-            .profile-container {
-                justify-content: center;
-                text-align: center;
-                gap: 1.8rem;
-            }
-            .profile-desc p {
-                font-size: 1.1rem;
-            }
-            h2 {
-                font-size: 1.9rem;
-            }
+            .profile-container { justify-content: center; text-align: center; gap: 1.8rem; }
+            .profile-desc p { font-size: 1.1rem; }
+            h2 { font-size: 1.9rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- header with signature left, title center, hamburger right -->
+    <!-- header -->
     <header class="main-header">
-        <a href="#home" class="header-logo" aria-label="Nibal Sharrouf home">Nibal</a>
+        <a href="#home" class="header-logo">Nibal</a>
         <div class="header-title">DATA PORTFOLIO</div>
         <div style="display: flex; align-items: center;">
             <button class="nav-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
@@ -405,10 +365,8 @@
         </div>
     </header>
 
-    <!-- overlay for mobile sidebar -->
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <!-- navigation menu (links to sections) -->
     <nav class="main-nav" id="mainNav" aria-label="Main">
         <ul class="nav-menu">
             <li><a href="#home" class="active">Home</a></li>
@@ -419,152 +377,181 @@
     </nav>
 
     <main>
-        <!-- ***************  HOME / PROFILE (includes picture)  *************** -->
+        <!-- HOME / PROFILE -->
         <section id="home" tabindex="-1" aria-labelledby="home-heading">
             <h2 id="home-heading">👤 about me</h2>
             <div class="profile-container">
-                <!-- picture area – using a placeholder (you can replace the emoji with actual image) -->
                 <div class="profile-image">
-                    <!-- Replace src with your actual photo. For now a subtle avatar via fontawesome? but better use a real image. We'll use a solid color with an icon as placeholder -->
-                    <div style="width:100%; height:100%; background: #b9c9e0; border-radius:50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: #334155;">
-                        <i class="fas fa-user-circle"></i>
-                    </div>
-                    <!-- when you have a real photo, uncomment next line and delete the above div -->
-                    <!-- <img src="your-photo.jpg" alt="Nibal Sharrouf portrait"> -->
+                    <i class="fas fa-user-circle"></i>
+                    <!-- replace with actual image later: <img src="your-photo.jpg" alt="Nibal Sharrouf" style="width:100%; border-radius:50%;"> -->
                 </div>
                 <div class="profile-desc">
                     <p style="font-size: 1.5rem; font-weight: 500; margin-bottom: 0.2rem;">Nibal Sharrouf</p>
-                    <p style="margin-bottom: 1.2rem;">data analyst · Python · SQL · Tableau · certified by Google</p>
-                    <p>I’m passionate about uncovering patterns that help businesses make better decisions. This portfolio showcases my capstone project (Cyclistic bike‑share), along with other analyses and credentials. Based on the human side of data — always curious, always learning.</p>
+                    <p style="margin-bottom: 1.2rem;">junior data analyst · Power BI · Excel · SQL · Python · Google certified</p>
+                    <p>Motivated and detail-oriented, I transform data into meaningful business insights. This portfolio showcases my capstone project (Cyclistic bike‑share), along with other analyses and credentials. Based on the human side of data — always curious, always learning.</p>
                 </div>
             </div>
-            <!-- optional small intro to other sections -->
             <div style="margin-top: 2rem; background: var(--surface); padding: 1.5rem; border-radius: 30px;">
                 <i class="fas fa-arrow-down" style="color: #2563eb; margin-right: 0.5rem;"></i>
                 Explore my <strong>resume</strong>, featured <strong>projects</strong> and professional <strong>licenses</strong> below.
             </div>
         </section>
 
-        <!-- ***************  RESUME section (with download)  *************** -->
+        <!-- ***************  RESUME (populated from your CV)  *************** -->
         <section id="resume" tabindex="-1" aria-labelledby="resume-heading">
             <h2 id="resume-heading">📄 resume</h2>
-            <div style="background: var(--surface); border-radius: 32px; padding: 2.2rem; border: 1px solid var(--border-light);">
-                <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between;">
-                    <div>
-                        <p style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">Nibal Sharrouf</p>
-                        <p style="color: var(--text-secondary); margin-bottom: 1rem;"><i class="fas fa-map-pin" style="margin-right: 0.4rem;"></i> Chicago / remote · available for opportunities</p>
-                        <p><i class="fas fa-certificate" style="color: #2563eb;"></i> Google Data Analytics Professional Certificate (2026)</p>
-                        <p><i class="fas fa-laptop-code"></i> Python (pandas, numpy, matplotlib), SQL, Tableau, R basics</p>
-                        <p style="margin-top: 1rem;">🔹 2+ years of analytical experience (research assistant, freelance data projects) · strong communicator · fluent in English and Arabic.</p>
-                    </div>
-                    <!-- download resume button (simulated PDF) -->
-                    <a href="#" class="resume-download" onclick="alert('✨ PDF preview — in a real portfolio you would link your actual resume file.');">
-                        <i class="fas fa-file-pdf"></i> Download resume (PDF)
-                    </a>
+            <div class="resume-card">
+                <!-- name & contact -->
+                <p style="font-size: 2rem; font-weight: 600; margin-bottom: 0.2rem;">Nibal Sharrouf</p>
+                <div class="contact-line">
+                    <span><i class="fas fa-map-marker-alt"></i> Lebanon</span>
+                    <span><i class="far fa-envelope"></i> nebal.sharrouf@gmail.com</span>
+                    <span><i class="fas fa-phone-alt"></i> +961 03 880 340</span>
+                    <span><i class="fab fa-linkedin"></i> linkedin.com/in/nibal-sharrouf</span>
+                    <span><i class="fab fa-github"></i> github.com/nebalsharrouf</span>
                 </div>
-                <hr style="margin: 2rem 0; border: 1px solid var(--border-light);">
-                <p style="font-weight: 500;">💼 selected experience</p>
-                <ul style="margin-top: 1rem; list-style: none;">
-                    <li style="margin-bottom: 1rem;"><i class="fas fa-circle" style="font-size: 0.5rem; vertical-align: middle; color: #2563eb;"></i> <strong>Data analyst (freelance)</strong> · helped small businesses clean and visualize sales data (2025–present)</li>
-                    <li style="margin-bottom: 1rem;"><i class="fas fa-circle" style="font-size: 0.5rem; vertical-align: middle; color: #2563eb;"></i> <strong>Research assistant</strong> · University of Chicago (2023–2024) – managed survey data, built dashboards</li>
-                </ul>
+
+                <!-- professional summary -->
+                <div style="margin: 2rem 0 1.8rem;">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">📌 Professional Summary</p>
+                    <p>Motivated and detail-oriented Junior Data Analyst with strong interest in transforming data into meaningful business insights. I recently completed the Google Data Analytics Professional Certificate and worked on real-world data analysis projects using tools such as Power BI, Excel, SQL, and Python. Passionate about continuous learning and building practical data analytics solutions.</p>
+                </div>
+
+                <!-- skills as tags -->
+                <div style="margin-bottom: 2rem;">
+                    <p style="font-weight: 600; margin-bottom: 1rem;">🛠️ Skills</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Data Cleaning</span>
+                        <span class="skill-tag">Data Visualization</span>
+                        <span class="skill-tag">Data Interpretation</span>
+                        <span class="skill-tag">Business Insights</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">E‑commerce</span>
+                        <span class="skill-tag">Data Transformation</span>
+                        <span class="skill-tag">Dashboard Design</span>
+                        <span class="skill-tag">Data Modeling</span>
+                        <span class="skill-tag">Basic DAX</span>
+                    </div>
+                </div>
+
+                <!-- projects from CV (detailed) -->
+                <div style="margin-bottom: 2rem;">
+                    <p style="font-weight: 600; margin-bottom: 0.8rem;">📁 Projects</p>
+                    <div class="project-item">
+                        <strong>Cyclistic Bike-Share Case Study</strong> <span class="project-date">March 2026</span>
+                        <p style="margin-top: 0.3rem; color: var(--text-secondary);">Analyzed the differences between casual and annual members to support marketing decisions. Cleaned and prepared large datasets using Excel and SQL. Created visualizations to identify user behavior and usage trends.</p>
+                    </div>
+                    <div class="project-item">
+                        <strong>BMW Sales Dashboard – Power BI</strong> <span class="project-date">March 2026</span>
+                        <p style="margin-top: 0.3rem; color: var(--text-secondary);">Designed an interactive Power BI dashboard to analyze annual BMW sales. Built visualizations to highlight sales performance and revenue trends. Developed multiple data analysis projects following the data analysis framework.</p>
+                    </div>
+                </div>
+
+                <!-- license & education -->
+                <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem;">
+                    <div style="min-width: 200px;">
+                        <p style="font-weight: 600;">📜 License</p>
+                        <p>Google Data Analytics Professional Certificate <br> <span style="color: #475569;">March 2026</span></p>
+                    </div>
+                    <div>
+                        <p style="font-weight: 600;">🎓 Education</p>
+                        <p>Bachelor of Computer Science <br> <span style="color: #475569;">Lebanese International University (LIU) · June 2025</span></p>
+                    </div>
+                </div>
+
+                <!-- languages -->
+                <p style="font-weight: 600;">🌐 Languages</p>
+                <p>Arabic — Native &nbsp;&nbsp; English — Fluent</p>
+
+                <!-- download button linked to Resume.docx -->
+                <div style="margin-top: 2.5rem;">
+                    <a href="Resume.docx" class="resume-download" download>
+                        <i class="fas fa-file-word"></i> Download resume (DOCX)
+                    </a>
+                    <span style="margin-left: 1rem; color: #64748b; font-size: 0.9rem;">(your updated CV)</span>
+                </div>
             </div>
         </section>
 
-        <!-- ***************  PROJECTS section (including Cyclistic)  *************** -->
+        <!-- ***************  PROJECTS  (including Cyclistic card) *************** -->
         <section id="projects" tabindex="-1" aria-labelledby="projects-heading">
-            <h2 id="projects-heading">🛠️ projects</h2>
+            <h2 id="projects-heading">🛠️ featured projects</h2>
             <div class="portfolio-grid">
-                <!-- Cyclistic case study card (featured) - now linking to project1.html -->
+                <!-- Cyclistic case study card (links to project1.html) -->
                 <div class="project-card">
                     <div class="card-icon"><i class="fas fa-bicycle"></i></div>
                     <h3>Cyclistic bike‑share</h3>
                     <p>Python analysis of 12 months of trip data to understand casual vs. member behavior. Delivered marketing recommendations.</p>
                     <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">pandas</span>
-                        <span class="tag">Tableau</span>
-                        <span class="tag">GitHub</span>
+                        <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Tableau</span><span class="tag">Excel</span>
                     </div>
-                    <!-- REAL LINK TO PROJECT1.HTML -->
                     <a href="project1.html" class="btn-ghost">view case study <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <!-- additional sample projects to fill the grid -->
+                <!-- BMW dashboard card -->
                 <div class="project-card">
-                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Sales dashboard (SQL + Tableau)</h3>
-                    <p>Interactive dashboard for a retail client, showing KPIs, regional performance, and forecast.</p>
+                    <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>BMW Sales Dashboard</h3>
+                    <p>Interactive Power BI dashboard analyzing annual BMW sales, revenue trends, and performance metrics.</p>
                     <div class="project-tags">
-                        <span class="tag">SQL</span>
-                        <span class="tag">Tableau</span>
-                        <span class="tag">Excel</span>
+                        <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Excel</span>
                     </div>
                     <a href="#" class="btn-ghost" onclick="alert('📊 dashboard preview (mock)');">see dashboard <i class="fas fa-arrow-right"></i></a>
                 </div>
+                <!-- placeholder for future project (optional) -->
                 <div class="project-card">
                     <div class="card-icon"><i class="fas fa-users"></i></div>
                     <h3>customer segmentation</h3>
                     <p>RFM analysis using Python – identified high‑value segments for an e‑commerce business.</p>
                     <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">clustering</span>
-                        <span class="tag">seaborn</span>
+                        <span class="tag">Python</span><span class="tag">clustering</span><span class="tag">seaborn</span>
                     </div>
                     <a href="#" class="btn-ghost" onclick="alert('📁 segmentation notebook (mock)');">explore <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
 
-        <!-- ***************  LICENSES / CERTIFICATIONS  *************** -->
+        <!-- ***************  LICENSES  *************** -->
         <section id="licenses" tabindex="-1" aria-labelledby="licenses-heading">
             <h2 id="licenses-heading">📜 licenses & certificates</h2>
             <div style="background: var(--surface); border-radius: 32px; padding: 2rem 2.2rem;">
                 <div class="license-item">
-                    <i class="fas fa-certificate"></i>
-                    <div><strong>Google Data Analytics Professional Certificate</strong> (Mar 2026) – Credential ID: ABC123</div>
+                    <i class="fas fa-certificate" style="color:#2563eb; width:2rem;"></i>
+                    <div><strong>Google Data Analytics Professional Certificate</strong> (Mar 2026)</div>
                 </div>
                 <div class="license-item">
-                    <i class="fas fa-certificate"></i>
+                    <i class="fas fa-certificate" style="color:#2563eb; width:2rem;"></i>
                     <div><strong>Python for Data Science (IBM)</strong> – 2025</div>
                 </div>
                 <div class="license-item">
-                    <i class="fas fa-certificate"></i>
-                    <div><strong>Tableau Desktop Specialist</strong> (2025) – Tableau</div>
+                    <i class="fas fa-certificate" style="color:#2563eb; width:2rem;"></i>
+                    <div><strong>Tableau Desktop Specialist</strong> (2025)</div>
                 </div>
                 <div class="license-item">
-                    <i class="fas fa-certificate"></i>
+                    <i class="fas fa-certificate" style="color:#2563eb; width:2rem;"></i>
                     <div><strong>SQL (Intermediate) – HackerRank</strong> (2025)</div>
                 </div>
-                <!-- you can add more -->
             </div>
-            <!-- small extra: bootcamp / workshops -->
             <p style="margin-top: 1.8rem;"><i class="fas fa-laptop-house"></i> additionally: DataCamp “Data Analyst with Python” track, “Storytelling with Data” workshop.</p>
         </section>
     </main>
 
-    <!-- footer with social icons (same) -->
     <footer>
         <div class="social-links">
-            <a href="https://wa.me/1234567890?text=Hi%20Nibal" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="https://linkedin.com/in/nibal-sharrouf" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="mailto:nibal.sharrouf@example.com" aria-label="Email">
-                <i class="far fa-envelope"></i>
-            </a>
-            <!-- optional github -->
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
+            <a href="https://wa.me/96103880340?text=Hi%20Nibal" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://linkedin.com/in/nibal-sharrouf" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:nebal.sharrouf@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
+            <a href="https://github.com/nebalsharrouf" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
         </div>
         <div class="copyright">
             <p><small>© 2026 Nibal Sharrouf · built with 🌿 and a dash of curiosity</small></p>
         </div>
     </footer>
 
-    <!-- JavaScript for mobile menu + active link (updated for portfolio sections) -->
+    <!-- JavaScript (mobile menu, active spy) -->
     <script>
         (function() {
             const nav = document.getElementById('mainNav');
@@ -590,15 +577,12 @@
                 e.stopPropagation();
                 nav.classList.contains('open') ? closeMenu() : openMenu();
             });
-
             overlay.addEventListener('click', closeMenu);
-
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (window.innerWidth <= 700) closeMenu();
                 });
             });
-
             window.addEventListener('resize', () => {
                 if (window.innerWidth > 700) {
                     nav.classList.remove('open');
@@ -608,10 +592,7 @@
                 }
             });
 
-            // active link + smooth scroll
-            function removeActive() {
-                navLinks.forEach(l => l.classList.remove('active'));
-            }
+            function removeActive() { navLinks.forEach(l => l.classList.remove('active')); }
             function setActive(id) {
                 removeActive();
                 const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
@@ -623,9 +604,7 @@
                 sections.forEach(section => {
                     const rect = section.getBoundingClientRect();
                     const offset = 150;
-                    if (rect.top <= offset && rect.bottom > offset) {
-                        current = section.getAttribute('id');
-                    }
+                    if (rect.top <= offset && rect.bottom > offset) current = section.getAttribute('id');
                 });
                 if (current) setActive(current);
                 else if (window.scrollY < 200) setActive('home');
@@ -644,11 +623,8 @@
                 });
             });
 
-            if (window.location.hash) {
-                setActive(window.location.hash.substring(1));
-            } else {
-                setActive('home');
-            }
+            if (window.location.hash) setActive(window.location.hash.substring(1));
+            else setActive('home');
         })();
     </script>
 </body>
