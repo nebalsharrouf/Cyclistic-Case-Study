@@ -1,3 +1,5 @@
+I've updated the Cyclistic case study page (`project1.html`) with the modern, polished theme from your admin dashboard—the deep navy header, refined cards, and soft color palette are now applied.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,16 +14,16 @@
     <meta property="og:description" content="Data analysis capstone exploring how casual riders and annual members use Cyclistic bikes differently.">
     <meta property="og:type" content="website">
 
-    <!-- Font Awesome 5 (icons) -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <!-- Font Awesome 6 (matching admin) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Google Fonts: signature & clean humanist sans (Inter) -->
+    <!-- Google Fonts: signature & Inter (same as admin) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Pacifico&display=swap" rel="stylesheet">
 
     <style>
-        /* === friendly reset + variables === */
+        /* === reset + variables - exactly from admin theme === */
         * {
             margin: 0;
             padding: 0;
@@ -30,7 +32,7 @@
 
         :root {
             --color-bg: #ffffff;
-            --color-surface: #f8fafc;
+            --color-surface: #f9fafc;
             --color-text: #1e293b;
             --color-text-light: #334155;
             --color-primary-dark: #0f172a;      /* deep navy */
@@ -42,7 +44,8 @@
             --font-signature: 'Pacifico', cursive;
             --max-width: 1000px;
             --header-height: 70px;
-            --space-unit: 1.5rem;
+            --border-radius-card: 28px;          /* from admin cards */
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.03);
         }
 
         body {
@@ -53,7 +56,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* === HEADER: logo left / title centered / hamburger right === */
+        /* === HEADER: logo left / title centered / hamburger right (admin style) === */
         .main-header {
             background: var(--color-primary-dark);
             height: var(--header-height);
@@ -65,7 +68,7 @@
             position: sticky;
             top: 0;
             z-index: 1100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .header-logo {
@@ -91,7 +94,7 @@
         }
 
         .header-spacer {
-            width: 75px; /* matches approximate logo width */
+            width: 75px;
             flex-shrink: 0;
         }
 
@@ -99,7 +102,7 @@
             background: transparent;
             border: none;
             color: white;
-            font-size: 1.9rem;
+            font-size: 2rem;
             cursor: pointer;
             display: none;
             line-height: 1;
@@ -128,7 +131,7 @@
             font-size: 1rem;
             padding: 0.5rem 0.3rem;
             border-bottom: 2px solid transparent;
-            transition: border-color 0.2s, color 0.2s;
+            transition: border-color 0.2s;
         }
 
         .nav-menu a:hover {
@@ -204,36 +207,37 @@
             }
         }
 
-        /* main content area – soft, human scale */
+        /* main content area – soft, human scale (admin panel style) */
         main {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 2rem 1.8rem;
+            padding: 2.5rem 2rem;
         }
 
         section {
             scroll-margin-top: calc(var(--header-height) + 20px);
-            padding: 3rem 0;
+            padding: 3.5rem 0;
             border-bottom: 1px solid var(--color-border);
         }
         section:last-of-type {
             border-bottom: none;
         }
 
-        /* typography – warm, readable */
+        /* typography – matching admin */
         h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 600;
-            margin-bottom: 1.8rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--color-accent-soft);
+            margin-bottom: 2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 4px solid var(--color-accent-soft);
             color: #0f172a;
+            display: inline-block;
         }
 
         h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin: 1.8rem 0 0.8rem;
+            margin: 2rem 0 1rem;
             color: #1e293b;
         }
 
@@ -243,13 +247,13 @@
             margin-bottom: 1rem;
         }
 
-        /* cards for authorship / brief (soft background, rounded) */
+        /* cards from admin theme */
         .insight-card {
             background: var(--color-surface);
-            border-radius: 24px;
+            border-radius: var(--border-radius-card);
             padding: 1.8rem 2rem;
             margin: 2rem 0 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--color-border);
         }
 
@@ -259,8 +263,8 @@
 
         .soft-highlight {
             background: var(--color-accent-soft);
-            padding: 0.2rem 0.4rem;
-            border-radius: 8px;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
             font-weight: 500;
             color: #0f172a;
         }
@@ -268,13 +272,14 @@
         .brief-block {
             background: white;
             border-left: 5px solid #2563eb;
-            padding: 1.5rem 1.8rem;
-            border-radius: 18px;
+            padding: 1.5rem 2rem;
+            border-radius: 24px;
             margin: 2rem 0;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
         }
 
-        /* footer – simple & warm */
+        /* footer – same as admin */
         footer {
             background: var(--color-footer-bg);
             padding: 3rem 1.5rem;
@@ -306,14 +311,14 @@
 
         /* small utilities */
         @media (max-width: 500px) {
-            h2 { font-size: 1.8rem; }
+            h2 { font-size: 1.9rem; }
             .insight-card { padding: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- header with small signature left, bold title center, hamburger right -->
+    <!-- header with signature left, bold title center, hamburger right (identical to admin look) -->
     <header class="main-header">
         <a href="#overview" class="header-logo" aria-label="Nibal Sharrouf home">Nibal</a>
         <div class="header-title">CYCLISTIC CASE STUDY</div>
@@ -342,7 +347,7 @@
     </nav>
 
     <main>
-        <!-- OVERVIEW section (authorship & brief) unchanged -->
+        <!-- OVERVIEW section -->
         <section id="overview" tabindex="-1" aria-labelledby="overview-heading">
             <h2 id="overview-heading">📋 Project overview</h2>
             
@@ -368,11 +373,10 @@
             <p style="font-style: italic; color: #475569; margin-top: 1rem;">The following sections walk through the complete analysis.</p>
         </section>
 
-        <!-- ========== ASK section – fully updated with the provided rich text ========= -->
+        <!-- ASK section -->
         <section id="ask" tabindex="-1" aria-labelledby="ask-heading">
             <h2 id="ask-heading">1. Ask</h2>
             
-            <!-- we format the new content with a clean, readable flow, using a subtle card for the key objective -->
             <div style="margin-bottom: 2rem;">
                 <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.5rem;">🎯 Business objective</p>
                 <p>This analysis examines <strong>how casual riders and annual members use Cyclistic bikes differently</strong>, with the objective of identifying actionable strategies to convert casual riders into annual members. Research from Cyclistic’s finance team has shown that annual members are significantly more profitable than casual riders, making the growth of annual memberships a critical focus for the company’s future success.</p>
@@ -392,56 +396,69 @@
                 </ul>
             </div>
 
-            <div style="background: #ffffff; border-radius: 18px; padding: 1.2rem 1.8rem; border: 1px solid #e9eef3;">
+            <div style="background: #ffffff; border-radius: 24px; padding: 1.2rem 1.8rem; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
                 <p><span style="font-weight: 600;">Stakeholders:</span> This project is presented to key stakeholders, including the Cyclistic executive team, the marketing analytics team, and Lily Moreno (director of marketing), to provide a clear understanding of user behaviors and offer data‑driven recommendations that support the company’s strategic goal of increasing annual memberships. By aligning marketing initiatives with these behavioral insights, Cyclistic can more effectively engage casual riders and drive long‑term growth.</p>
             </div>
         </section>
 
-        <!-- remaining phases (light, consistent) -->
+        <!-- remaining phases with same refined style -->
         <section id="prepare" tabindex="-1" aria-labelledby="prepare-heading">
             <h2 id="prepare-heading">2. Prepare</h2>
-            <p><strong>Data Source:</strong> Cyclistic’s historical trip data from the past 12 months (provided by Motivate International Inc. under license).</p>
-            <p><strong>Credibility & Integrity:</strong> The data is stored in a secure, internal database and is considered reliable (ROCCC). It includes anonymous trip details such as start/end time, station names, and rider type.</p>
+            <div class="insight-card">
+                <p><strong>Data Source:</strong> Cyclistic’s historical trip data from the past 12 months (provided by Motivate International Inc. under license).</p>
+                <p><strong>Credibility & Integrity:</strong> The data is stored in a secure, internal database and is considered reliable (ROCCC). It includes anonymous trip details such as start/end time, station names, and rider type.</p>
+            </div>
         </section>
 
         <section id="process" tabindex="-1" aria-labelledby="process-heading">
             <h2 id="process-heading">3. Process</h2>
-            <p><strong>Data Cleaning & Transformation:</strong> Using Python (pandas, numpy) to combine 12 CSV files, remove duplicates, filter nulls, and create ride length, day of week, month. Checked for outliers.</p>
-            <p><strong>Tools:</strong> Python, Jupyter Notebook, pandas, matplotlib, seaborn.</p>
+            <div class="insight-card">
+                <p><strong>Data Cleaning & Transformation:</strong> Using Python (pandas, numpy) to combine 12 CSV files, remove duplicates, filter nulls, and create ride length, day of week, month. Checked for outliers.</p>
+                <p><strong>Tools:</strong> Python, Jupyter Notebook, pandas, matplotlib, seaborn.</p>
+            </div>
         </section>
 
         <section id="analyze" tabindex="-1" aria-labelledby="analyze-heading">
             <h2 id="analyze-heading">4. Analyze</h2>
-            <p><strong>Key Findings:</strong> Casual riders take longer rides and are more active on weekends (leisure). Members have shorter, consistent rides on weekdays (commuting). Peak hours differ significantly.</p>
+            <div class="insight-card">
+                <p><strong>Key Findings:</strong> Casual riders take longer rides and are more active on weekends (leisure). Members have shorter, consistent rides on weekdays (commuting). Peak hours differ significantly.</p>
+            </div>
         </section>
 
         <section id="share" tabindex="-1" aria-labelledby="share-heading">
             <h2 id="share-heading">5. Share</h2>
-            <p><strong>Visualizations:</strong> Tableau / Python dashboards showing ride counts by day, ride length histograms. Presented via slide deck and GitHub-hosted report.</p>
+            <div class="insight-card">
+                <p><strong>Visualizations:</strong> Tableau / Python dashboards showing ride counts by day, ride length histograms. Presented via slide deck and GitHub-hosted report.</p>
+            </div>
         </section>
 
         <section id="act" tabindex="-1" aria-labelledby="act-heading">
             <h2 id="act-heading">6. Act</h2>
-            <p><strong>Recommendations:</strong></p>
-            <ul>
-                <li>Weekend marketing campaign for casual riders highlighting membership savings.</li>
-                <li>Introduce "weekend-only" or off-peak annual pass.</li>
-                <li>App feature comparing trip costs vs. membership.</li>
-            </ul>
+            <div class="insight-card">
+                <p><strong>Recommendations:</strong></p>
+                <ul>
+                    <li>Weekend marketing campaign for casual riders highlighting membership savings.</li>
+                    <li>Introduce "weekend-only" or off-peak annual pass.</li>
+                    <li>App feature comparing trip costs vs. membership.</li>
+                </ul>
+            </div>
         </section>
     </main>
 
-    <!-- footer with icons -->
+    <!-- footer with icons (updated to your real info) -->
     <footer>
         <div class="social-links">
-            <a href="https://wa.me/1234567890?text=Hi%20Nibal" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <a href="https://wa.me/96103880340?text=Hi%20Nibal" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <i class="fab fa-whatsapp"></i>
             </a>
             <a href="https://linkedin.com/in/nibal-sharrouf" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <i class="fab fa-linkedin-in"></i>
             </a>
-            <a href="mailto:nibal.sharrouf@example.com" aria-label="Email">
+            <a href="mailto:nebal.sharrouf@gmail.com" aria-label="Email">
                 <i class="far fa-envelope"></i>
+            </a>
+            <a href="https://github.com/nebalsharrouf" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fab fa-github"></i>
             </a>
         </div>
         <div class="copyright">
@@ -492,7 +509,6 @@
                 }
             });
 
-            // active link + smooth scroll
             function removeActive() {
                 navLinks.forEach(l => l.classList.remove('active'));
             }
@@ -537,3 +553,4 @@
     </script>
 </body>
 </html>
+```
