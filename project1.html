@@ -3,728 +3,537 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nibal · portfolio admin</title>
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Inter & Pacifico (signature) -->
+    
+    <title>Cyclistic case study · Nibal Sharrouf</title>
+    <meta name="description" content="Cyclistic bike‑share case study by Nibal Sharrouf — Google Data Analytics capstone. Python analysis, casual vs member insights.">
+    <meta name="author" content="Nibal Sharrouf">
+    
+    <meta property="og:title" content="Cyclistic Bike‑Share Case Study · Nibal Sharrouf">
+    <meta property="og:description" content="Data analysis capstone exploring how casual riders and annual members use Cyclistic bikes differently.">
+    <meta property="og:type" content="website">
+
+    <!-- Font Awesome 5 (icons) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+
+    <!-- Google Fonts: signature & clean humanist sans (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
     <style>
+        /* === friendly reset + variables === */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --color-bg: #ffffff;
+            --color-surface: #f8fafc;
+            --color-text: #1e293b;
+            --color-text-light: #334155;
+            --color-primary-dark: #0f172a;      /* deep navy */
+            --color-secondary-dark: #1e293b;
+            --color-accent-soft: #dbeafe;
+            --color-border: #e2e8f0;
+            --color-footer-bg: #f1f5f9;
+            --font-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-signature: 'Pacifico', cursive;
+            --max-width: 1000px;
+            --header-height: 70px;
+            --space-unit: 1.5rem;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f3f6fc;
-            color: #1e293b;
-            padding: 2rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            font-family: var(--font-base);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .admin-header {
+        /* === HEADER: logo left / title centered / hamburger right === */
+        .main-header {
+            background: var(--color-primary-dark);
+            height: var(--header-height);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 1300px;
-            margin: 0 auto 2rem auto;
-            width: 100%;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            background: #0f172a;
+            padding: 0 1.5rem;
             color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-family: 'Pacifico', cursive;
-            transform: rotate(-3deg);
-        }
-
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.6rem;
-            background: linear-gradient(135deg, #0f172a, #2563eb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .preview-link {
-            background: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            border: 1px solid #cbd5e1;
-            text-decoration: none;
-            color: #0f172a;
-            transition: all 0.2s;
-        }
-        .preview-link:hover {
-            background: #f1f5f9;
-        }
-
-        /* dashboard grid */
-        .dashboard {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 1.8rem;
-            width: 100%;
-        }
-
-        /* left side – edit panels (like Shopify sections) */
-        .edit-panel {
-            background: white;
-            border-radius: 32px;
-            padding: 1.8rem 2rem;
-            box-shadow: 0 20px 35px -8px rgba(0,27,58,0.15);
-            border: 1px solid #e9eff6;
-            margin-bottom: 1.8rem;
-        }
-
-        .panel-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        .panel-header i {
-            font-size: 1.5rem;
-            color: #2563eb;
-            background: #eef2ff;
-            padding: 10px;
-            border-radius: 18px;
-        }
-
-        .panel-header h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .field-group {
-            margin-bottom: 1.4rem;
-        }
-
-        .field-group label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            color: #475569;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .field-group input, .field-group textarea {
-            width: 100%;
-            padding: 0.9rem 1.2rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 20px;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            transition: 0.15s;
-            background: #fafdff;
-        }
-
-        .field-group input:focus, .field-group textarea:focus {
-            border-color: #2563eb;
-            outline: none;
-            background: white;
-        }
-
-        .row-2col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .project-card-admin, .license-card-admin {
-            background: #f8fafc;
-            border-radius: 24px;
-            padding: 1.5rem;
-            margin-bottom: 1.2rem;
-            border: 2px solid #e2e8f0;
-        }
-
-        .flex-between {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-        }
-
-        .project-title-input {
-            font-weight: 700;
-            font-size: 1.2rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 40px;
-            padding: 0.4rem 1rem;
-            width: 70%;
-        }
-
-        .remove-btn {
-            background: none;
-            border: none;
-            font-size: 1.3rem;
-            color: #dc2626;
-            cursor: pointer;
-            opacity: 0.6;
-            transition: 0.1s;
-        }
-        .remove-btn:hover { opacity: 1; }
-
-        .add-btn {
-            background: #eef2ff;
-            border: 2px dashed #2563eb;
-            color: #2563eb;
-            font-weight: 600;
-            padding: 0.8rem;
-            border-radius: 50px;
-            width: 100%;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-top: 0.8rem;
-            transition: 0.1s;
-        }
-        .add-btn:hover {
-            background: #dbeafe;
-        }
-
-        .status-badge {
-            background: #fef3c7;
-            color: #b45309;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* right side – bot chat (like a helpful assistant) */
-        .chat-panel {
-            background: white;
-            border-radius: 32px;
-            padding: 1.8rem;
-            box-shadow: 0 20px 35px -8px rgba(0,27,58,0.15);
-            border: 1px solid #e9eff6;
-            height: fit-content;
             position: sticky;
-            top: 2rem;
+            top: 0;
+            z-index: 1100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        .chat-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .chat-avatar {
-            background: #0f172a;
+        .header-logo {
+            font-family: var(--font-signature);
+            font-size: 1.7rem;
             color: white;
-            width: 48px;
-            height: 48px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: opacity 0.2s;
+        }
+        .header-logo:hover { opacity: 0.85; }
+
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            color: white;
+            white-space: nowrap;
+            text-transform: uppercase;
         }
 
-        .chat-header h3 {
-            font-size: 1.3rem;
+        .header-spacer {
+            width: 75px; /* matches approximate logo width */
+            flex-shrink: 0;
+        }
+
+        .nav-toggle {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.9rem;
+            cursor: pointer;
+            display: none;
+            line-height: 1;
+            padding: 0 4px;
+        }
+
+        /* === NAVIGATION (desktop row / mobile sidebar) === */
+        .main-nav {
+            background: var(--color-secondary-dark);
+            transition: transform 0.3s ease, opacity 0.2s;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 0.75rem 1.5rem;
+            gap: 0.5rem 1.8rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 0.3rem;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            border-bottom-color: #94a3b8;
+        }
+
+        .nav-menu a.active {
+            border-bottom-color: white;
             font-weight: 600;
         }
 
-        .chat-messages {
-            background: #f8fafc;
-            border-radius: 30px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            min-height: 250px;
-            border: 1px solid #e2e8f0;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        /* mobile sidebar styles */
+        @media (max-width: 700px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 260px;
+                height: 100vh;
+                background: var(--color-secondary-dark);
+                transform: translateX(-100%);
+                opacity: 0;
+                box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+                z-index: 1050;
+                overflow-y: auto;
+            }
+
+            .main-nav.open {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem 1.5rem;
+                gap: 1rem;
+            }
+
+            .nav-menu a {
+                font-size: 1.15rem;
+                padding: 0.5rem 0;
+                width: 100%;
+            }
+
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(15, 23, 42, 0.5);
+                backdrop-filter: blur(2px);
+                z-index: 1040;
+            }
+            .nav-overlay.open {
+                display: block;
+            }
+
+            .header-title {
+                font-size: 1rem;
+                max-width: 140px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .header-logo {
+                font-size: 1.4rem;
+            }
         }
 
-        .bot-msg, .user-msg {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
+        /* main content area – soft, human scale */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem 1.8rem;
         }
 
-        .bot-msg .avatar {
-            background: #2563eb;
-            color: white;
-            border-radius: 30px;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            flex-shrink: 0;
+        section {
+            scroll-margin-top: calc(var(--header-height) + 20px);
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        section:last-of-type {
+            border-bottom: none;
         }
 
-        .user-msg {
-            flex-direction: row-reverse;
+        /* typography – warm, readable */
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--color-accent-soft);
+            color: #0f172a;
         }
 
-        .user-msg .avatar {
-            background: #64748b;
-            color: white;
-            border-radius: 30px;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .bubble {
-            background: white;
-            padding: 0.8rem 1.2rem;
-            border-radius: 24px;
-            border: 1px solid #dbe0e8;
-            max-width: 80%;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-
-        .user-msg .bubble {
-            background: #2563eb;
-            color: white;
-            border: none;
-        }
-
-        .chat-input-area {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .chat-input-area input {
-            flex: 1;
-            padding: 1rem 1.2rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 40px;
-            font-size: 1rem;
-        }
-
-        .chat-input-area button {
-            background: #0f172a;
-            border: none;
-            color: white;
-            width: 55px;
-            height: 55px;
-            border-radius: 60px;
+        h3 {
             font-size: 1.4rem;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-        .chat-input-area button:hover {
-            background: #1e3a8a;
-        }
-
-        .helper-notes {
-            background: #eef2ff;
-            border-radius: 18px;
-            padding: 1.2rem;
-            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 1.8rem 0 0.8rem;
             color: #1e293b;
-            margin-top: 1.4rem;
-            border: 1px solid #cbd5e1;
         }
 
-        .helper-notes i {
-            color: #2563eb;
-            margin-right: 6px;
+        p, li {
+            color: var(--color-text-light);
+            max-width: 75ch;
+            margin-bottom: 1rem;
         }
 
-        /* small screen */
-        @media (max-width: 900px) {
-            .dashboard { grid-template-columns: 1fr; }
-            body { padding: 1rem; }
+        /* cards for authorship / brief (soft background, rounded) */
+        .insight-card {
+            background: var(--color-surface);
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid var(--color-border);
+        }
+
+        .insight-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .soft-highlight {
+            background: var(--color-accent-soft);
+            padding: 0.2rem 0.4rem;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        .brief-block {
+            background: white;
+            border-left: 5px solid #2563eb;
+            padding: 1.5rem 1.8rem;
+            border-radius: 18px;
+            margin: 2rem 0;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+        }
+
+        /* footer – simple & warm */
+        footer {
+            background: var(--color-footer-bg);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.8rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: #334155;
+            font-size: 2.2rem;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .social-links a:hover {
+            color: #0f172a;
+            transform: scale(1.1);
+        }
+        .copyright {
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        /* small utilities */
+        @media (max-width: 500px) {
+            h2 { font-size: 1.8rem; }
+            .insight-card { padding: 1.2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="admin-header">
-        <div class="logo-area">
-            <span class="logo-icon">N</span>
-            <span class="logo-text">folio admin</span>
+
+    <!-- header with small signature left, bold title center, hamburger right -->
+    <header class="main-header">
+        <a href="#overview" class="header-logo" aria-label="Nibal Sharrouf home">Nibal</a>
+        <div class="header-title">CYCLISTIC CASE STUDY</div>
+        <div style="display: flex; align-items: center;">
+            <button class="nav-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <span class="header-spacer" aria-hidden="true"></span>
         </div>
-        <a href="#" class="preview-link" target="_blank"><i class="fas fa-eye" style="margin-right: 6px;"></i> preview portfolio</a>
-    </div>
+    </header>
 
-    <div class="dashboard">
-        <!-- LEFT SIDE – EDIT SECTIONS (like Shopify) -->
-        <div class="left-edit">
-            <!-- PROFILE SECTION -->
-            <div class="edit-panel">
-                <div class="panel-header">
-                    <i class="fas fa-user-edit"></i>
-                    <h2>Profile</h2>
-                </div>
-                <div class="field-group">
-                    <label>Full name</label>
-                    <input type="text" id="profileName" value="Nibal Sharrouf">
-                </div>
-                <div class="field-group">
-                    <label>Title / headline</label>
-                    <input type="text" id="profileTitle" value="junior data analyst · Power BI · Excel · SQL · Python · Google certified">
-                </div>
-                <div class="field-group">
-                    <label>About me (short bio)</label>
-                    <textarea id="profileBio" rows="3">Motivated and detail-oriented, I transform data into meaningful business insights. This portfolio showcases my capstone project (Cyclistic bike‑share), along with the BMW sales dashboard. Based on the human side of data — always curious, always learning.</textarea>
-                </div>
-                <div class="row-2col">
-                    <div class="field-group">
-                        <label>Location</label>
-                        <input type="text" id="profileLocation" value="Lebanon">
-                    </div>
-                    <div class="field-group">
-                        <label>Email</label>
-                        <input type="email" id="profileEmail" value="nebal.sharrouf@gmail.com">
-                    </div>
-                </div>
-                <div class="row-2col">
-                    <div class="field-group">
-                        <label>Phone</label>
-                        <input type="text" id="profilePhone" value="+961 03 880 340">
-                    </div>
-                    <div class="field-group">
-                        <label>GitHub</label>
-                        <input type="text" id="profileGithub" value="github.com/nebalsharrouf">
-                    </div>
-                </div>
+    <!-- overlay for mobile sidebar -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- navigation menu -->
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+        <ul class="nav-menu">
+            <li><a href="#overview" class="active">Overview</a></li>
+            <li><a href="#ask">Ask</a></li>
+            <li><a href="#prepare">Prepare</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#analyze">Analyze</a></li>
+            <li><a href="#share">Share</a></li>
+            <li><a href="#act">Act</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- OVERVIEW section (authorship & brief) unchanged -->
+        <section id="overview" tabindex="-1" aria-labelledby="overview-heading">
+            <h2 id="overview-heading">📋 Project overview</h2>
+            
+            <div class="insight-card">
+                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;">👤 <span class="soft-highlight">Authorship</span></p>
+                <p><strong>Nibal Sharrouf</strong> performed this case study in <strong>March 2026</strong> as the capstone project for the <strong>Google Data Analytics Professional Certificate</strong>. The analysis used <strong>Python</strong> to explore bike‑share trips from <strong>November 2021 to October 2022</strong>. The final report and visualizations are hosted using <strong>GitHub Pages</strong>.</p>
             </div>
 
-            <!-- PROJECTS (dynamic, two default) -->
-            <div class="edit-panel" id="projectsPanel">
-                <div class="panel-header">
-                    <i class="fas fa-briefcase"></i>
-                    <h2>Projects</h2>
-                </div>
-                <div id="projectsList">
-                    <!-- injected via JS -->
-                </div>
-                <button class="add-btn" id="addProjectBtn"><i class="fas fa-plus" style="margin-right: 8px;"></i> add new project</button>
+            <h3>📌 Case study brief</h3>
+
+            <div class="brief-block">
+                <p style="font-weight: 600; margin-bottom: 1.2rem;">2.1 ‑ Scenario</p>
+                <p>You are a junior data analyst working on the marketing analyst team at <strong>Cyclistic</strong>, a bike‑share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand <strong>how casual riders and annual members use Cyclistic bikes differently</strong>. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with compelling data insights and professional data visualizations.</p>
             </div>
 
-            <!-- LICENSES (only two: google + power bi pending) -->
-            <div class="edit-panel">
-                <div class="panel-header">
-                    <i class="fas fa-certificate"></i>
-                    <h2>Licenses</h2>
-                </div>
-                <div id="licensesList"></div>
-                <button class="add-btn" id="addLicenseBtn"><i class="fas fa-plus" style="margin-right: 8px;"></i> add license</button>
+            <div class="brief-block" style="border-left-color: #7c3aed;">
+                <p style="font-weight: 600; margin-bottom: 1.2rem;">2.2 ‑ About the company</p>
+                <p>In 2016, Cyclistic launched a successful bike‑share offering. Since then, the program has grown to a fleet of <strong>5,824 bicycles</strong> that are geotracked and locked into a network of <strong>692 stations</strong> across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.</p>
+                <p style="margin-top: 1rem;">Until now, Cyclistic’s marketing strategy relied on building general awareness and appealing to broad consumer segments. One approach that helped make these things possible was the flexibility of its pricing plans: single-ride passes, full-day passes, and annual memberships. Customers who purchase single-ride or full-day passes are referred to as <strong>casual riders</strong>. Customers who purchase annual memberships are <strong>Cyclistic members</strong>.</p>
+                <p style="margin-top: 1rem;">Cyclistic’s finance analysts have concluded that annual members are much more profitable than casual riders. Although the pricing flexibility helps Cyclistic attract more customers, Moreno believes that maximizing the number of annual members will be key to future growth. Rather than creating a marketing campaign that targets all-new customers, Moreno believes there is a solid opportunity to convert casual riders into members. She notes that casual riders are already aware of the Cyclistic program and have chosen Cyclistic for their mobility needs.</p>
+                <p style="margin-top: 1rem;">Moreno has set a clear goal: <strong>Design marketing strategies aimed at converting casual riders into annual members.</strong> In order to do that, however, the team needs to better understand how annual members and casual riders differ, why casual riders would buy a membership, and how digital media could affect their marketing tactics. Moreno and her team are interested in analyzing the Cyclistic historical bike trip data to identify trends.</p>
+            </div>
+            <p style="font-style: italic; color: #475569; margin-top: 1rem;">The following sections walk through the complete analysis.</p>
+        </section>
+
+        <!-- ========== ASK section – fully updated with the provided rich text ========= -->
+        <section id="ask" tabindex="-1" aria-labelledby="ask-heading">
+            <h2 id="ask-heading">1. Ask</h2>
+            
+            <!-- we format the new content with a clean, readable flow, using a subtle card for the key objective -->
+            <div style="margin-bottom: 2rem;">
+                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.5rem;">🎯 Business objective</p>
+                <p>This analysis examines <strong>how casual riders and annual members use Cyclistic bikes differently</strong>, with the objective of identifying actionable strategies to convert casual riders into annual members. Research from Cyclistic’s finance team has shown that annual members are significantly more profitable than casual riders, making the growth of annual memberships a critical focus for the company’s future success.</p>
             </div>
 
-            <!-- RESUME DOWNLOAD LINK -->
-            <div class="edit-panel">
-                <div class="panel-header">
-                    <i class="fas fa-file-word"></i>
-                    <h2>Resume file</h2>
-                </div>
-                <div class="field-group">
-                    <label>Resume filename (in folder)</label>
-                    <input type="text" id="resumePath" value="Resume.docx">
-                </div>
-                <p style="color: #475569; margin-top: 0.5rem;"><i class="fas fa-info-circle"></i> Make sure the file is in the same folder as this admin page.</p>
+            <div class="insight-card" style="background: #f1f6fe;">
+                <p style="font-weight: 500; margin-bottom: 1rem;">📊 Key behavioral insights (preview)</p>
+                <p>By analyzing Cyclistic’s historical trip data, clear patterns in rider behavior emerged. <strong>Casual riders are more likely than annual members to ride during evenings, on weekends, and in warmer months.</strong> They also show a preference for electric bikes and tend to take longer trips. These insights provide valuable guidance for marketing strategies aimed at engaging casual riders more effectively.</p>
             </div>
+
+            <div style="margin: 2rem 0 1.5rem;">
+                <p style="font-weight: 600;">✅ Recommended actions (based on findings)</p>
+                <ul style="margin-top: 0.75rem; list-style-type: disc; padding-left: 1.8rem;">
+                    <li>Creating targeted transactional emails that highlight the cost savings of becoming an annual member.</li>
+                    <li>Launching a digital campaign to showcase events and activities accessible via Cyclistic bikes.</li>
+                    <li>Expanding marketing efforts through digital channels to raise awareness of convenient cycling paths and bike-friendly destinations.</li>
+                </ul>
+            </div>
+
+            <div style="background: #ffffff; border-radius: 18px; padding: 1.2rem 1.8rem; border: 1px solid #e9eef3;">
+                <p><span style="font-weight: 600;">Stakeholders:</span> This project is presented to key stakeholders, including the Cyclistic executive team, the marketing analytics team, and Lily Moreno (director of marketing), to provide a clear understanding of user behaviors and offer data‑driven recommendations that support the company’s strategic goal of increasing annual memberships. By aligning marketing initiatives with these behavioral insights, Cyclistic can more effectively engage casual riders and drive long‑term growth.</p>
+            </div>
+        </section>
+
+        <!-- remaining phases (light, consistent) -->
+        <section id="prepare" tabindex="-1" aria-labelledby="prepare-heading">
+            <h2 id="prepare-heading">2. Prepare</h2>
+            <p><strong>Data Source:</strong> Cyclistic’s historical trip data from the past 12 months (provided by Motivate International Inc. under license).</p>
+            <p><strong>Credibility & Integrity:</strong> The data is stored in a secure, internal database and is considered reliable (ROCCC). It includes anonymous trip details such as start/end time, station names, and rider type.</p>
+        </section>
+
+        <section id="process" tabindex="-1" aria-labelledby="process-heading">
+            <h2 id="process-heading">3. Process</h2>
+            <p><strong>Data Cleaning & Transformation:</strong> Using Python (pandas, numpy) to combine 12 CSV files, remove duplicates, filter nulls, and create ride length, day of week, month. Checked for outliers.</p>
+            <p><strong>Tools:</strong> Python, Jupyter Notebook, pandas, matplotlib, seaborn.</p>
+        </section>
+
+        <section id="analyze" tabindex="-1" aria-labelledby="analyze-heading">
+            <h2 id="analyze-heading">4. Analyze</h2>
+            <p><strong>Key Findings:</strong> Casual riders take longer rides and are more active on weekends (leisure). Members have shorter, consistent rides on weekdays (commuting). Peak hours differ significantly.</p>
+        </section>
+
+        <section id="share" tabindex="-1" aria-labelledby="share-heading">
+            <h2 id="share-heading">5. Share</h2>
+            <p><strong>Visualizations:</strong> Tableau / Python dashboards showing ride counts by day, ride length histograms. Presented via slide deck and GitHub-hosted report.</p>
+        </section>
+
+        <section id="act" tabindex="-1" aria-labelledby="act-heading">
+            <h2 id="act-heading">6. Act</h2>
+            <p><strong>Recommendations:</strong></p>
+            <ul>
+                <li>Weekend marketing campaign for casual riders highlighting membership savings.</li>
+                <li>Introduce "weekend-only" or off-peak annual pass.</li>
+                <li>App feature comparing trip costs vs. membership.</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- footer with icons -->
+    <footer>
+        <div class="social-links">
+            <a href="https://wa.me/1234567890?text=Hi%20Nibal" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://linkedin.com/in/nibal-sharrouf" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:nibal.sharrouf@example.com" aria-label="Email">
+                <i class="far fa-envelope"></i>
+            </a>
         </div>
-
-        <!-- RIGHT SIDE – BOT CHAT (simple instructions) -->
-        <div class="chat-panel">
-            <div class="chat-header">
-                <span class="chat-avatar"><i class="fas fa-robot"></i></span>
-                <h3>assistant · easy edit</h3>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="bot-msg">
-                    <span class="avatar"><i class="fas fa-robot"></i></span>
-                    <div class="bubble">👋 Hi Nibal! Tell me what to change — for example:<br>• "Change headline to 'data analyst specialized in Power BI'"<br>• "Add project: SQL analysis, with tags SQL, Excel"<br>• "Update Google license date to April 2026"</div>
-                </div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="chatInput" placeholder="type your instruction...">
-                <button id="sendChatBtn"><i class="fas fa-paper-plane"></i></button>
-            </div>
-            <div class="helper-notes">
-                <i class="fas fa-lightbulb"></i> <strong>Quick examples:</strong> “set my location to Beirut” · “rename BMW project to 'BMW 2026 dashboard'” · “mark Power BI as completed” · “add tag 'Tableau' to first project”
-            </div>
+        <div class="copyright">
+            <p><small>© 2026 Nibal Sharrouf · Google Data Analytics Capstone · built with 🌿</small></p>
         </div>
-    </div>
+    </footer>
 
     <script>
         (function() {
-            // ---------- data model (in memory, reflects the live preview) ----------
-            let profile = {
-                name: "Nibal Sharrouf",
-                title: "junior data analyst · Power BI · Excel · SQL · Python · Google certified",
-                bio: "Motivated and detail-oriented, I transform data into meaningful business insights. This portfolio showcases my capstone project (Cyclistic bike‑share), along with the BMW sales dashboard. Based on the human side of data — always curious, always learning.",
-                location: "Lebanon",
-                email: "nebal.sharrouf@gmail.com",
-                phone: "+961 03 880 340",
-                github: "github.com/nebalsharrouf"
-            };
+            const nav = document.getElementById('mainNav');
+            const toggleBtn = document.getElementById('menuToggle');
+            const overlay = document.getElementById('navOverlay');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const sections = document.querySelectorAll('section');
 
-            let projects = [
-                { title: "Cyclistic bike‑share", desc: "Python analysis of 12 months of trip data to understand casual vs. member behavior. Delivered marketing recommendations.", tags: ["Python","pandas","Tableau","Excel"], link: "project1.html", linkText: "view case study" },
-                { title: "BMW Sales Dashboard", desc: "Interactive Power BI dashboard analyzing annual BMW sales, revenue trends, and performance metrics.", tags: ["Power BI","DAX","Excel"], link: "https://www.linkedin.com/posts/nibal-sharrouf_powerbi-dataanalytics-dashboarddesign-activity-7434686730332684288-fMXp?utm_medium=ios_app&rcm=ACoAAFZNVTsBtLDpP4G3SW3KiOITYZdx_OTVOoQ&utm_source=social_share_send&utm_campaign=copy_link", linkText: "watch demo" }
-            ];
-
-            let licenses = [
-                { name: "Google Data Analytics Professional Certificate", date: "Mar 2026", status: "done" },
-                { name: "Microsoft Power BI Data Analyst", date: "", status: "pending" }
-            ];
-
-            let resumeFile = "Resume.docx";
-
-            // ---------- helper: render projects to left panel ----------
-            function renderProjects() {
-                const container = document.getElementById('projectsList');
-                container.innerHTML = '';
-                projects.forEach((proj, idx) => {
-                    const card = document.createElement('div');
-                    card.className = 'project-card-admin';
-                    card.innerHTML = `
-                        <div class="flex-between">
-                            <input class="project-title-input" data-index="${idx}" data-field="title" value="${proj.title.replace(/"/g, '&quot;')}" placeholder="Title">
-                            <button class="remove-btn" data-project-index="${idx}"><i class="fas fa-trash"></i></button>
-                        </div>
-                        <div class="field-group" style="margin-top:8px;">
-                            <textarea rows="2" data-index="${idx}" data-field="desc" placeholder="Description">${proj.desc.replace(/"/g, '&quot;')}</textarea>
-                        </div>
-                        <div class="field-group">
-                            <label>Tags (comma separated)</label>
-                            <input type="text" data-index="${idx}" data-field="tags" value="${proj.tags.join(', ')}">
-                        </div>
-                        <div class="row-2col">
-                            <input type="text" data-index="${idx}" data-field="link" value="${proj.link}" placeholder="link">
-                            <input type="text" data-index="${idx}" data-field="linkText" value="${proj.linkText}" placeholder="button text">
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-                // attach input listeners for realtime update (optional, but we want to keep data synced)
-                document.querySelectorAll('.project-card-admin input, .project-card-admin textarea').forEach(el => {
-                    el.addEventListener('input', function(e) {
-                        const idx = this.dataset.index;
-                        const field = this.dataset.field;
-                        if (field === 'tags') {
-                            projects[idx].tags = this.value.split(',').map(t => t.trim()).filter(t => t);
-                        } else {
-                            projects[idx][field] = this.value;
-                        }
-                    });
-                });
-                // remove buttons
-                document.querySelectorAll('.remove-btn[data-project-index]').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const idx = btn.dataset.projectIndex;
-                        projects.splice(idx, 1);
-                        renderProjects();
-                    });
-                });
+            function openMenu() {
+                nav.classList.add('open');
+                overlay.classList.add('open');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+            }
+            function closeMenu() {
+                nav.classList.remove('open');
+                overlay.classList.remove('open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
             }
 
-            // licenses render
-            function renderLicenses() {
-                const container = document.getElementById('licensesList');
-                container.innerHTML = '';
-                licenses.forEach((lic, idx) => {
-                    const div = document.createElement('div');
-                    div.className = 'license-card-admin';
-                    div.innerHTML = `
-                        <div class="flex-between">
-                            <input style="font-weight:600; width:70%;" value="${lic.name.replace(/"/g, '&quot;')}" data-lic-index="${idx}" data-field="name" placeholder="license name">
-                            <button class="remove-btn" data-lic-index="${idx}"><i class="fas fa-trash"></i></button>
-                        </div>
-                        <div style="display:flex; gap:10px; margin-top:12px;">
-                            <input type="text" value="${lic.date}" data-lic-index="${idx}" data-field="date" placeholder="date (e.g. Mar 2026)">
-                            <select data-lic-index="${idx}" data-field="status">
-                                <option value="done" ${lic.status === 'done' ? 'selected' : ''}>✅ done</option>
-                                <option value="pending" ${lic.status === 'pending' ? 'selected' : ''}>⏳ pending</option>
-                            </select>
-                        </div>
-                    `;
-                    container.appendChild(div);
-                });
-                // attach listeners
-                document.querySelectorAll('[data-lic-index]').forEach(el => {
-                    el.addEventListener('change', function(e) {
-                        const idx = this.dataset.licIndex;
-                        const field = this.dataset.field;
-                        licenses[idx][field] = this.value;
-                    });
-                    el.addEventListener('input', function(e) {
-                        const idx = this.dataset.licIndex;
-                        const field = this.dataset.field;
-                        if (field) licenses[idx][field] = this.value;
-                    });
-                });
-                document.querySelectorAll('.remove-btn[data-lic-index]').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const idx = btn.dataset.licIndex;
-                        licenses.splice(idx, 1);
-                        renderLicenses();
-                    });
-                });
-            }
-
-            // profile sync
-            function syncProfileFromInputs() {
-                profile.name = document.getElementById('profileName').value;
-                profile.title = document.getElementById('profileTitle').value;
-                profile.bio = document.getElementById('profileBio').value;
-                profile.location = document.getElementById('profileLocation').value;
-                profile.email = document.getElementById('profileEmail').value;
-                profile.phone = document.getElementById('profilePhone').value;
-                profile.github = document.getElementById('profileGithub').value;
-                resumeFile = document.getElementById('resumePath').value;
-            }
-
-            document.getElementById('profileName').addEventListener('input', syncProfileFromInputs);
-            document.getElementById('profileTitle').addEventListener('input', syncProfileFromInputs);
-            document.getElementById('profileBio').addEventListener('input', syncProfileFromInputs);
-            document.getElementById('profileLocation').addEventListener('input', syncProfileFromInputs);
-            document.getElementById('profileEmail').addEventListener('input', syncProfileFromInputs);
-            document.getElementById('profilePhone').addEventListener('input', syncProfileFromInputs);
-            document.getElementById('profileGithub').addEventListener('input', syncProfileFromInputs);
-            document.getElementById('resumePath').addEventListener('input', (e) => { resumeFile = e.target.value; });
-
-            // add project
-            document.getElementById('addProjectBtn').addEventListener('click', () => {
-                projects.push({ title: "new project", desc: "description", tags: ["new"], link: "#", linkText: "view" });
-                renderProjects();
-                addBotMessage("➕ new project added. you can edit it now.");
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                nav.classList.contains('open') ? closeMenu() : openMenu();
             });
 
-            document.getElementById('addLicenseBtn').addEventListener('click', () => {
-                licenses.push({ name: "new license", date: "", status: "pending" });
-                renderLicenses();
-                addBotMessage("📜 new license added.");
+            overlay.addEventListener('click', closeMenu);
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 700) closeMenu();
+                });
             });
 
-            // ---------- chat ----------
-            const chatMessages = document.getElementById('chatMessages');
-            const chatInput = document.getElementById('chatInput');
-            const sendBtn = document.getElementById('sendChatBtn');
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 700) {
+                    nav.classList.remove('open');
+                    overlay.classList.remove('open');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                    toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
 
-            function addBotMessage(text) {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = 'bot-msg';
-                msgDiv.innerHTML = `<span class="avatar"><i class="fas fa-robot"></i></span><div class="bubble">${text}</div>`;
-                chatMessages.appendChild(msgDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+            // active link + smooth scroll
+            function removeActive() {
+                navLinks.forEach(l => l.classList.remove('active'));
+            }
+            function setActive(id) {
+                removeActive();
+                const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
+                if (activeLink) activeLink.classList.add('active');
             }
 
-            function addUserMessage(text) {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = 'user-msg';
-                msgDiv.innerHTML = `<span class="avatar"><i class="fas fa-user"></i></span><div class="bubble">${text}</div>`;
-                chatMessages.appendChild(msgDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            function processInstruction(cmd) {
-                const lower = cmd.toLowerCase();
-                // simple rule-based bot for common edits
-                if (lower.includes('change headline') || lower.includes('set title')) {
-                    let newTitle = cmd.split('to')[1] || cmd.replace(/.*(change|set).*(headline|title)/i,'').trim();
-                    if (newTitle) {
-                        profile.title = newTitle;
-                        document.getElementById('profileTitle').value = newTitle;
-                        addBotMessage(`✅ Headline updated to: "${newTitle}"`);
-                    } else addBotMessage(`👀 tell me the new headline, e.g. "change headline to data analyst"`);
-                }
-                else if (lower.includes('location') && (lower.includes('set')||lower.includes('change'))) {
-                    let loc = cmd.split('to')[1] || 'Beirut';
-                    profile.location = loc.trim();
-                    document.getElementById('profileLocation').value = loc.trim();
-                    addBotMessage(`📍 location changed to ${loc.trim()}`);
-                }
-                else if (lower.includes('add project')) {
-                    projects.push({ title: "new project", desc: "edit description", tags: ["new"], link: "#", linkText: "view" });
-                    renderProjects();
-                    addBotMessage(`➕ new project added. you can now edit its fields.`);
-                }
-                else if (lower.includes('rename project') && lower.includes('bmw')) {
-                    if (projects[1]) {
-                        let newName = cmd.split('to')[1] || 'BMW Dashboard 2026';
-                        projects[1].title = newName.trim();
-                        renderProjects();
-                        addBotMessage(`🚗 project 2 renamed to "${newName.trim()}"`);
-                    } else addBotMessage("couldn't find BMW project");
-                }
-                else if (lower.includes('mark power bi as completed') || lower.includes('set power bi to done')) {
-                    if (licenses[1]) {
-                        licenses[1].status = 'done';
-                        renderLicenses();
-                        addBotMessage(`✅ Power BI license marked as completed!`);
-                    } else addBotMessage("power bi license not found");
-                }
-                else if (lower.includes('add tag') && lower.includes('first project')) {
-                    let tag = cmd.split('tag')[1]?.split(' ')[1] || 'Tableau';
-                    if (projects[0]) {
-                        if (!projects[0].tags.includes(tag)) projects[0].tags.push(tag);
-                        renderProjects();
-                        addBotMessage(`🏷️ added tag "${tag}" to Cyclistic project`);
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const offset = 150;
+                    if (rect.top <= offset && rect.bottom > offset) {
+                        current = section.getAttribute('id');
                     }
-                }
-                else {
-                    addBotMessage(`🤖 I understood your message, but I'm a simple demo bot. Try something like "change headline to senior analyst" or "add project" – the fields are editable manually above.`);
-                }
+                });
+                if (current) setActive(current);
+                else if (window.scrollY < 200) setActive('overview');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                        history.pushState(null, null, `#${targetId}`);
+                        setActive(targetId);
+                    }
+                });
+            });
+
+            if (window.location.hash) {
+                setActive(window.location.hash.substring(1));
+            } else {
+                setActive('overview');
             }
-
-            sendBtn.addEventListener('click', () => {
-                let msg = chatInput.value.trim();
-                if (!msg) return;
-                addUserMessage(msg);
-                chatInput.value = '';
-                processInstruction(msg);
-            });
-
-            chatInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') sendBtn.click();
-            });
-
-            // initial renders
-            renderProjects();
-            renderLicenses();
-
-            // for demo, also handle sync
-            window.profile = profile; window.projects = projects; window.licenses = licenses;  // debug
         })();
     </script>
-    <!-- tiny note: this admin panel does not actually write files (it's a frontend demo) but you can copy the updated content into your real portfolio. The bot gives you the feel of easy editing. -->
 </body>
 </html>
