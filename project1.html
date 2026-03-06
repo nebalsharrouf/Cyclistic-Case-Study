@@ -399,15 +399,7 @@
             </div>
         </section>
 
-        <!-- PREPARE section (updated with your content) -->
-        <section id="prepare" tabindex="-1" aria-labelledby="prepare-heading">
-            <h2 id="prepare-heading">2. Prepare</h2>
-            <div class="insight-card">
-                <p>Cyclistic's historical trip data is publicly available and is used to explore how different types of customers use Cyclistic bikes. The dataset is provided and confirmed by Motivate International Inc. and is stored in a secure internal database, which makes it reliable and trustworthy according to the ROCCC principles. The data is organized in monthly files covering the period from November 2021 to October 2022, with each month containing between 103,000 and 823,000 trip records giving a total of <strong>5,755,694 rows</strong> across all 12 months. It includes anonymous trip information such as start and end time, station names, ride duration, and rider type (casual or member). Because of the large size of the dataset, Python will be used to clean, process, and analyze the data efficiently. The dataset respects user privacy because it does not include any personal or identifiable information, which helps maintain security and accessibility. The data's integrity is verified by checking for missing values, duplicates, and formatting issues during the cleaning process. Analyzing this dataset will help answer the main question by identifying the differences in how casual riders and annual members use Cyclistic bikes.</p>
-            </div>
-        </section>
-
-                <!-- PROCESS section with images -->
+              <!-- PROCESS section with images -->
         <section id="process" tabindex="-1" aria-labelledby="process-heading">
             <h2 id="process-heading">3. Process</h2>
             
@@ -447,52 +439,65 @@
                         <img src="Load_ALL_Months_Data.png" alt="Load complete dataset" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
                     </div>
                     
-                    <!-- Step 5: Data info & type detection -->
+                    <!-- Step 5: First rows preview -->
                     <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">ℹ️ 5. Info and data type detection</p>
-                        <img src="info_type_detection.png" alt="Check data types and info" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
-                    </div>
-                    
-                    <!-- Step 6: First rows preview -->
-                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">👁️ 6. See first rows of dataset</p>
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">👁️ 5. See first rows of dataset</p>
                         <img src="See_first_rows.png" alt="Preview first rows" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
                     </div>
                     
-                    <!-- Step 7: Remove duplicates -->
+                    <!-- Step 6: Remove duplicates -->
                     <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">🗑️ 7. Remove duplicate records</p>
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">🗑️ 6. Remove duplicate records</p>
                         <img src="remove_duplicates.png" alt="Remove duplicate entries" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
                     </div>
                     
-                    <!-- Step 8: Convert date/time -->
+                    <!-- Step 7: Convert date/time -->
                     <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">⏱️ 8. Convert to datetime format</p>
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">⏱️ 7. Convert to datetime format</p>
                         <img src="convert_date_time.png" alt="Convert date and time columns" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
                     </div>
                     
-                    <!-- Step 9: Create new columns -->
+                    <!-- Step 8: Create new columns -->
                     <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">➕ 9. Create calculation columns</p>
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">➕ 8. Create calculation columns</p>
                         <img src="create_culomns.png" alt="Create new feature columns" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
                     </div>
                     
-                    <!-- Step 10: Statistical summary -->
+                    <!-- Step 9: Count member vs casual -->
                     <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">📈 10. Mean, median, max analysis</p>
-                        <img src="Mean_Median_Max.png" alt="Statistical summary" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">👥 9. Count member vs casual riders</p>
+                        <img src="count_member_vs_casual.png" alt="Compare rider types" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
                     </div>
                     
-                    <!-- Step 11: Member vs casual count -->
+                    <!-- Step 10: Basic stats with table -->
                     <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">👥 11. Count member vs casual riders</p>
-                        <img src="count_member_vs_casual.png" alt="Compare rider types" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">📊 10. Basic stats for all rides</p>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <img src="Mean_Median_Max.png" alt="Statistical summary" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                            <div style="background: #f1f5f9; border-radius: 16px; padding: 1rem; font-family: monospace; font-size: 0.9rem; border: 1px solid var(--color-border);">
+                                <p style="font-weight: 600; margin-bottom: 0.5rem; color: #0f172a;">Ride duration statistics (minutes):</p>
+                                <pre style="margin: 0; color: #334155; white-space: pre-wrap; word-break: break-word;">count    5.755582e+06
+mean     1.944260e+01
+std      1.747400e+02
+min      0.000000e+00
+25%      5.850000e+00
+50%      1.033333e+01
+75%      1.856667e+01
+max      4.138725e+04</pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 11: Info and type detection -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">ℹ️ 11. Info and data type detection</p>
+                        <img src="info_type_detection.png" alt="Check data types and info" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
                     </div>
                 </div>
                 
                 <!-- Optional caption for the image grid -->
                 <p style="margin-top: 2rem; font-style: italic; color: #475569; text-align: center; font-size: 0.95rem;">
-                    ⬆️ Complete Python analysis workflow — from data loading to cleaning and initial exploration
+                    ⬆️ Complete Python analysis workflow — from data loading through cleaning to statistical exploration
                 </p>
             </div>
         </section>
