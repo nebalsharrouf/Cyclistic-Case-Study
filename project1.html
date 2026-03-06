@@ -407,12 +407,93 @@
             </div>
         </section>
 
-        <!-- PROCESS section -->
+                <!-- PROCESS section with images -->
         <section id="process" tabindex="-1" aria-labelledby="process-heading">
             <h2 id="process-heading">3. Process</h2>
-            <div class="insight-card">
+            
+            <div class="insight-card" style="margin-bottom: 2rem;">
                 <p><strong>Data Cleaning & Transformation:</strong> Using Python (pandas, numpy) to combine 12 CSV files, remove duplicates, filter nulls, and create ride length, day of week, month. Checked for outliers.</p>
                 <p><strong>Tools:</strong> Python, Jupyter Notebook, pandas, matplotlib, seaborn.</p>
+            </div>
+
+            <!-- Process steps with images in responsive grid -->
+            <div style="margin-top: 2.5rem;">
+                <h3 style="margin-bottom: 1.5rem;">📸 Python Analysis Workflow</h3>
+                
+                <!-- Responsive image grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; margin-top: 1.5rem;">
+                    
+                    <!-- Step 1: Import Libraries -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">📦 1. Import Python libraries</p>
+                        <img src="Import_Pandas.png" alt="Import pandas and required libraries" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 2: List all monthly files -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">📂 2. List all monthly data folders</p>
+                        <img src="list_all_month_folders.png" alt="List all month folders" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 3: Examine folder structure -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">🔍 3. Look inside one folder</p>
+                        <img src="Look_Inside_One_Folder.png" alt="Inspect folder contents" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 4: Load all data -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">📊 4. Load all months data</p>
+                        <img src="Load_ALL_Months_Data.png" alt="Load complete dataset" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 5: Data info & type detection -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">ℹ️ 5. Info and data type detection</p>
+                        <img src="info_type_detection.png" alt="Check data types and info" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 6: First rows preview -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">👁️ 6. See first rows of dataset</p>
+                        <img src="See_first_rows.png" alt="Preview first rows" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 7: Remove duplicates -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">🗑️ 7. Remove duplicate records</p>
+                        <img src="remove_duplicates.png" alt="Remove duplicate entries" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 8: Convert date/time -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">⏱️ 8. Convert to datetime format</p>
+                        <img src="convert_date_time.png" alt="Convert date and time columns" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 9: Create new columns -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">➕ 9. Create calculation columns</p>
+                        <img src="create_culomns.png" alt="Create new feature columns" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 10: Statistical summary -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">📈 10. Mean, median, max analysis</p>
+                        <img src="Mean_Median_Max.png" alt="Statistical summary" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                    
+                    <!-- Step 11: Member vs casual count -->
+                    <div style="background: var(--color-surface); border-radius: var(--border-radius-card); padding: 1.2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem; color: #0f172a;">👥 11. Count member vs casual riders</p>
+                        <img src="count_member_vs_casual.png" alt="Compare rider types" style="width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--color-border);">
+                    </div>
+                </div>
+                
+                <!-- Optional caption for the image grid -->
+                <p style="margin-top: 2rem; font-style: italic; color: #475569; text-align: center; font-size: 0.95rem;">
+                    ⬆️ Complete Python analysis workflow — from data loading to cleaning and initial exploration
+                </p>
             </div>
         </section>
 
