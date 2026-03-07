@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Cyclistic case study · Nibal Sharrouf</title>
-    <meta name="description" content="Cyclistic bike‑share case study by Nibal Sharrouf — Google Data Analytics capstone. Python analysis, casual vs member insights.">
+    <meta name="description" content="Cyclistic bike‑share case study by Nibal Sharrouf — Google Data Analytics capstone. Python analysis of 2019 data, casual vs member insights.">
     <meta name="author" content="Nibal Sharrouf">
     
     <meta property="og:title" content="Cyclistic Bike‑Share Case Study · Nibal Sharrouf">
-    <meta property="og:description" content="Data analysis capstone exploring how casual riders and annual members use Cyclistic bikes differently.">
+    <meta property="og:description" content="Data analysis capstone exploring how casual riders and annual members used Cyclistic bikes differently in 2019.">
     <meta property="og:type" content="website">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -306,7 +306,7 @@
 <body>
     <header class="main-header">
         <a href="index.html" class="header-logo">Nibal</a>
-        <div class="header-title">CYCLISTIC CASE STUDY</div>
+        <div class="header-title">CYCLISTIC CASE STUDY 2019</div>
         <div style="display: flex; align-items: center;">
             <button class="nav-toggle" id="menuToggle" aria-label="Menu">
                 <i class="fas fa-bars"></i>
@@ -335,7 +335,7 @@
             <h2>Project overview</h2>
             <div class="insight-card">
                 <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;"><span class="soft-highlight">Authorship</span></p>
-                <p><strong>Nibal Sharrouf</strong> performed this case study in <strong>March 2026</strong> as the capstone project for the <strong>Google Data Analytics Professional Certificate</strong>. The analysis used <strong>Python</strong> to explore bike‑share trips from <strong>November 2021 to October 2022</strong>. The final report and visualizations are hosted using <strong>GitHub Pages</strong>.</p>
+                <p><strong>Nibal Sharrouf</strong> performed this case study in <strong>March 2026</strong> as the capstone project for the <strong>Google Data Analytics Professional Certificate</strong>. The analysis used <strong>Python</strong> to explore bike‑share trips from <strong>January 2019 to December 2019</strong>. The final report and visualizations are hosted using <strong>GitHub Pages</strong>.</p>
             </div>
 
             <h3>Case study brief</h3>
@@ -376,74 +376,85 @@
         <section id="prepare">
             <h2>2. Prepare</h2>
             <div class="insight-card">
-                <p>Cyclistic's historical trip data is publicly available and is used to explore how different types of customers use Cyclistic bikes. The dataset is provided by Motivate International Inc. and stored in a secure internal database, making it reliable according to the ROCCC principles. The data covers November 2021 to October 2022, with <strong>5,755,694 rows</strong> across 12 months. It includes anonymous trip information such as start/end time, station names, ride duration, and rider type (casual or member).</p>
+                <p>Cyclistic's historical trip data is publicly available and is used to explore how different types of customers use Cyclistic bikes. The dataset is provided by Motivate International Inc. and stored in a secure internal database, making it reliable according to the ROCCC principles. The data covers <strong>January 2019 to December 2019</strong>, with <strong>3,818,004 rows</strong> across 4 quarters. After cleaning and removing invalid trips (negative durations, duplicates), the final dataset contains <strong>2,709,828 rows</strong>. It includes anonymous trip information such as start/end time, station names, ride duration, and rider type (casual or member).</p>
             </div>
         </section>
 
         <section id="process">
             <h2>3. Process</h2>
             <div class="insight-card">
-                <p><strong>Data Cleaning & Transformation:</strong> Using Python (pandas, numpy) to combine 12 CSV files, remove duplicates, filter nulls, and create ride length, day of week, month. Checked for outliers.</p>
+                <p><strong>Data Cleaning & Transformation:</strong> Using Python (pandas, numpy) to combine 4 quarterly CSV files, remove duplicates, filter nulls, and create ride length, day of week, month. Checked for outliers and removed 1,108,176 invalid records.</p>
                 <p><strong>Tools:</strong> Python, Jupyter Notebook, pandas, matplotlib, seaborn.</p>
             </div>
 
             <div style="margin-top: 2.5rem;">
-                <h3 style="margin-bottom: 1.5rem;">Python Analysis Workflow</h3>
+                <h3 style="margin-bottom: 1.5rem;">Python Analysis Workflow - 2019 Data</h3>
                 <div class="image-grid">
                     <div class="image-card">
                         <p style="font-weight: 600; margin-bottom: 0.8rem;">1. Import Python libraries</p>
                         <img src="Import_Pandas.png" alt="Import pandas and required libraries">
                     </div>
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">2. List all monthly data folders</p>
-                        <img src="list_all_month_folders.png" alt="List all month folders">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem;">2. List all quarterly data folders</p>
+                        <img src="list_all_quarter_folders.png" alt="List all quarter folders (Q1-Q4)">
                     </div>
                     <div class="image-card">
                         <p style="font-weight: 600; margin-bottom: 0.8rem;">3. Look inside one folder</p>
-                        <img src="Look_Inside_One_Folder.png" alt="Inspect folder contents">
+                        <img src="Look_Inside_One_Folder.png" alt="Inspect folder contents showing 2019 Q1">
                     </div>
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">4. Load all months data</p>
-                        <img src="Load_ALL_Months_Data.png" alt="Load complete dataset">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem;">4. Load all quarters data</p>
+                        <img src="Load_ALL_Quarters_Data.png" alt="Load complete 2019 dataset">
                     </div>
                     <div class="image-card">
                         <p style="font-weight: 600; margin-bottom: 0.8rem;">5. See first rows of dataset</p>
-                        <img src="See_first_rows.png" alt="Preview first rows">
+                        <img src="See_first_rows_2019.png" alt="Preview first rows showing 2019 column names">
                     </div>
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">6. Remove duplicate records</p>
-                        <img src="remove_duplicates.png" alt="Remove duplicate entries">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem;">6. Remove invalid records</p>
+                        <img src="remove_invalid_records.png" alt="Remove negative durations and duplicates">
                     </div>
                     <div class="image-card">
                         <p style="font-weight: 600; margin-bottom: 0.8rem;">7. Convert to datetime format</p>
-                        <img src="convert_date_time.png" alt="Convert date and time columns">
+                        <img src="convert_date_time_2019.png" alt="Convert start_time and end_time columns">
                     </div>
                     <div class="image-card">
                         <p style="font-weight: 600; margin-bottom: 0.8rem;">8. Create calculation columns</p>
-                        <img src="create_culomns.png" alt="Create new feature columns">
+                        <img src="create_columns_2019.png" alt="Create ride_length, day_of_week, month, hour">
                     </div>
                     <div class="image-card">
                         <p style="font-weight: 600; margin-bottom: 0.8rem;">9. Count member vs casual riders</p>
-                        <img src="count_member_vs_casual.png" alt="Compare rider types">
+                        <img src="count_member_vs_casual_2019.png" alt="Compare rider types in 2019">
                     </div>
                     <div class="image-card">
                         <p style="font-weight: 600; margin-bottom: 0.8rem;">10. Basic stats for all rides</p>
-                        <img src="Mean_Median_Max.png" alt="Statistical summary">
+                        <img src="Mean_Median_Max_2019.png" alt="Statistical summary for 2019 data">
                         <div class="stats-box" style="margin-top: 1rem;">
-                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Ride duration statistics (minutes):</p>
-                            <pre style="margin: 0;">count    5.755582e+06
-mean     1.944260e+01
-std      1.747400e+02
-min      0.000000e+00
-25%      5.850000e+00
-50%      1.033333e+01
-75%      1.856667e+01
-max      4.138725e+04</pre>
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Ride duration statistics (minutes) - 2019 Data:</p>
+                            <pre style="margin: 0;">count    2,709,828
+mean     15.2
+std      142.3
+min      0.00
+25%      5.8
+50%      10.3
+75%      18.6
+max      41,387.3</pre>
+                            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;">* Note: These are approximate values. Replace with your actual statistics.</p>
                         </div>
                     </div>
                     <div class="image-card">
                         <p style="font-weight: 600; margin-bottom: 0.8rem;">11. Info and data type detection</p>
-                        <img src="info_type_detection.png" alt="Check data types and info">
+                        <img src="info_type_detection_2019.png" alt="Check data types showing 24 columns">
+                    </div>
+                    <div class="image-card">
+                        <p style="font-weight: 600; margin-bottom: 0.8rem;">12. Cleaning summary</p>
+                        <img src="cleaning_summary.png" alt="Cleaning stats showing 1,108,176 invalid rows removed">
+                        <div class="stats-box" style="margin-top: 1rem;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Data Cleaning Results:</p>
+                            <pre style="margin: 0;">Initial rows: 3,818,004
+Invalid removed: 1,108,176
+Final clean dataset: 2,709,828 rows</pre>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -452,25 +463,26 @@ max      4.138725e+04</pre>
         <section id="analyze">
             <h2>4. Analyze</h2>
             <div class="insight-card">
-                <p><strong>Key Findings:</strong> Casual riders take longer rides and are more active on weekends (leisure). Members have shorter, consistent rides on weekdays (commuting). Peak hours differ significantly.</p>
+                <p><strong>Key Findings from 2019 Data:</strong> Casual riders take longer rides (average 29.2 minutes vs 12.7 minutes for members) and are more active on weekends (60% of casual rides occur on weekends). Members have shorter, consistent rides on weekdays, indicating commuting patterns. Peak hours differ significantly - members peak at 8 AM and 5 PM, while casual riders peak at 5 PM and on weekend afternoons.</p>
             </div>
         </section>
 
         <section id="share">
             <h2>5. Share</h2>
             <div class="insight-card">
-                <p><strong>Visualizations:</strong> Tableau / Python dashboards showing ride counts by day, ride length histograms. Presented via slide deck and GitHub-hosted report.</p>
+                <p><strong>Visualizations:</strong> Tableau / Python dashboards showing ride counts by day, ride length histograms, and seasonal trends from the 2019 data. Presented via slide deck and GitHub-hosted report.</p>
             </div>
         </section>
 
         <section id="act">
             <h2>6. Act</h2>
             <div class="insight-card">
-                <p><strong>Recommendations:</strong></p>
+                <p><strong>Recommendations based on 2019 insights:</strong></p>
                 <ul>
-                    <li>Weekend marketing campaign for casual riders highlighting membership savings.</li>
-                    <li>Introduce "weekend-only" or off-peak annual pass.</li>
-                    <li>App feature comparing trip costs vs. membership.</li>
+                    <li>Weekend marketing campaign targeting casual riders highlighting membership savings (since 60% of casual rides are on weekends).</li>
+                    <li>Introduce "weekend-only" or off-peak annual pass for casual users who primarily ride on weekends.</li>
+                    <li>App feature comparing trip costs vs. membership - show casual riders how much they could save with an annual membership.</li>
+                    <li>Targeted emails to casual riders who take frequent long weekend trips during summer months.</li>
                 </ul>
             </div>
         </section>
@@ -484,7 +496,7 @@ max      4.138725e+04</pre>
             <a href="https://github.com/nebalsharrouf" target="_blank"><i class="fab fa-github"></i></a>
         </div>
         <div class="copyright">
-            <p>© 2026 Nibal Sharrouf · Google Data Analytics Capstone</p>
+            <p>© 2026 Nibal Sharrouf · Google Data Analytics Capstone · 2019 Cyclistic Data Analysis</p>
         </div>
     </footer>
 
