@@ -253,6 +253,11 @@
             padding: 1.2rem;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--color-border);
+            transition: transform 0.2s;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-5px);
         }
 
         .image-card img {
@@ -260,6 +265,7 @@
             height: auto;
             border-radius: 16px;
             border: 1px solid var(--color-border);
+            margin-top: 0.8rem;
         }
 
         .stats-box {
@@ -269,6 +275,7 @@
             font-family: monospace;
             font-size: 0.9rem;
             border: 1px solid var(--color-border);
+            margin-top: 1rem;
         }
 
         footer {
@@ -391,69 +398,91 @@
                 <h3 style="margin-bottom: 1.5rem;">Python Analysis Workflow - 2019 Data</h3>
                 <div class="image-grid">
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">1. Import Python libraries</p>
-                        <img src="Import_Pandas.png" alt="Import pandas and required libraries">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">1. Importing Python libraries</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Importing the essential Python libraries for data analysis: pandas, numpy, and os.</p>
+                        <img src="1-import_pd_np_os.png" alt="Import pandas, numpy and os libraries">
                     </div>
+                    
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">2. List all quarterly data folders</p>
-                        <img src="list_all_quarter_folders.png" alt="List all quarter folders (Q1-Q4)">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">2. Loading the quarterly data</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Loading the four quarterly CSV files from the CyclisDataQ1-Q4 folder.</p>
+                        <img src="2-Importing_Data.png" alt="Loading quarterly CSV files">
                     </div>
+                    
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">3. Look inside one folder</p>
-                        <img src="Look_Inside_One_Folder.png" alt="Inspect folder contents showing 2019 Q1">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">3. Storing data in a list</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Storing each quarter's data in a list before combining them together.</p>
+                        <img src="3-all_data.png" alt="Data stored in list">
                     </div>
+                    
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">4. Load all quarters data</p>
-                        <img src="Load_ALL_Quarters_Data.png" alt="Load complete 2019 dataset">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">4. Combining all quarters</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Combining all four quarters into one master dataframe called all_trips.</p>
+                        <img src="4-all_trips.png" alt="Combined dataframe all_trips">
                     </div>
+                    
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">5. See first rows of dataset</p>
-                        <img src="See_first_rows_2019.png" alt="Preview first rows showing 2019 column names">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">5. Viewing column names</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Viewing all column names from the original 2019 dataset before renaming.</p>
+                        <img src="5-culomn_name_in_dataset.png" alt="Original column names">
                     </div>
+                    
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">6. Remove invalid records</p>
-                        <img src="remove_invalid_records.png" alt="Remove negative durations and duplicates">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">6. Standardizing column names</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Standardizing column names to make them consistent and easier to work with.</p>
+                        <img src="6-Rename_Culomns.png" alt="Renaming columns">
                     </div>
+                    
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">7. Convert to datetime format</p>
-                        <img src="convert_date_time_2019.png" alt="Convert start_time and end_time columns">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">7. Converting to datetime</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Converting start_time and end_time columns to proper datetime format.</p>
+                        <img src="7-Change_Date_Time.png" alt="Datetime conversion">
                     </div>
+                    
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">8. Create calculation columns</p>
-                        <img src="create_columns_2019.png" alt="Create ride_length, day_of_week, month, hour">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">8. Creating new columns</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Creating new columns: ride_length in minutes, day_of_week, month, and hour.</p>
+                        <img src="8-New_Culomns_Added.png" alt="New analysis columns">
                     </div>
+                    
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">9. Count member vs casual riders</p>
-                        <img src="count_member_vs_casual_2019.png" alt="Compare rider types in 2019">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">9. Standardizing user type</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Standardizing the user type column to 'member_casual' for consistency.</p>
+                        <img src="9-standerdize_to_meMber_casual.png" alt="User type standardization">
                     </div>
+                    
                     <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">10. Basic stats for all rides</p>
-                        <img src="Mean_Median_Max_2019.png" alt="Statistical summary for 2019 data">
-                        <div class="stats-box" style="margin-top: 1rem;">
-                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Ride duration statistics (minutes) - 2019 Data:</p>
-                            <pre style="margin: 0;">count    2,709,828
-mean     15.2
-std      142.3
-min      0.00
-25%      5.8
-50%      10.3
-75%      18.6
-max      41,387.3</pre>
-                            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;">* Note: These are approximate values. Replace with your actual statistics.</p>
-                        </div>
-                    </div>
-                    <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">11. Info and data type detection</p>
-                        <img src="info_type_detection_2019.png" alt="Check data types showing 24 columns">
-                    </div>
-                    <div class="image-card">
-                        <p style="font-weight: 600; margin-bottom: 0.8rem;">12. Cleaning summary</p>
-                        <img src="cleaning_summary.png" alt="Cleaning stats showing 1,108,176 invalid rows removed">
-                        <div class="stats-box" style="margin-top: 1rem;">
-                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Data Cleaning Results:</p>
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">10. Cleaning the data</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Removing invalid rows including negative ride lengths and duplicate entries.</p>
+                        <img src="10-cleaning_data.png" alt="Data cleaning process">
+                        <div class="stats-box">
+                            <p style="font-weight: 600; margin-bottom: 0.3rem;">Cleaning Results:</p>
                             <pre style="margin: 0;">Initial rows: 3,818,004
 Invalid removed: 1,108,176
 Final clean dataset: 2,709,828 rows</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="image-card">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">11. Final dataset summary</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Final dataset summary showing 2.7 million clean trips ready for analysis.</p>
+                        <img src="11-Final_Dataset_Summary.png" alt="Dataset summary">
+                    </div>
+                    
+                    <div class="image-card">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">12. Ride length statistics</p>
+                        <p style="font-size: 0.95rem; color: #475569;">Statistical summary of ride lengths showing mean, median, and range for all trips.</p>
+                        <img src="12-Describe_mean_median_min_max.png" alt="Statistical summary">
+                        <div class="stats-box">
+                            <p style="font-weight: 600; margin-bottom: 0.3rem;">Ride duration statistics (minutes):</p>
+                            <pre style="margin: 0;">count    2,709,828
+mean     25.01
+std      573.06
+min      1.02
+25%      6.77
+50%      11.62
+75%      20.95
+max      177,200.4</pre>
                         </div>
                     </div>
                 </div>
@@ -556,7 +585,6 @@ Final clean dataset: 2,709,828 rows</pre>
 
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
-                    // Don't prevent default for Home link to index.html
                     if (link.getAttribute('href') === 'index.html') return;
                     
                     e.preventDefault();
