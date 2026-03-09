@@ -26,20 +26,16 @@
 
         :root {
             --color-bg: #ffffff;
-            --color-surface: #f9fafc;
             --color-text: #1e293b;
             --color-text-light: #334155;
             --color-primary-dark: #0f172a;
             --color-secondary-dark: #1e293b;
-            --color-accent-soft: #dbeafe;
             --color-border: #e2e8f0;
             --color-footer-bg: #f1f5f9;
             --font-base: 'Inter', system-ui, sans-serif;
             --font-signature: 'Pacifico', cursive;
             --max-width: 1000px;
             --header-height: 70px;
-            --border-radius-card: 28px;
-            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.03);
         }
 
         body {
@@ -194,7 +190,7 @@
             font-weight: 600;
             margin-bottom: 2rem;
             padding-bottom: 0.6rem;
-            border-bottom: 4px solid var(--color-accent-soft);
+            border-bottom: 4px solid #dbeafe;
             color: #0f172a;
             display: inline-block;
         }
@@ -212,18 +208,8 @@
             margin-bottom: 1rem;
         }
 
-        .insight-card {
-            background: var(--color-surface);
-            border-radius: var(--border-radius-card);
-            padding: 1.8rem 2rem;
-            margin: 2rem 0 1.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--color-border);
-        }
-        .insight-card p:last-child { margin-bottom: 0; }
-
         .soft-highlight {
-            background: var(--color-accent-soft);
+            background: #dbeafe;
             padding: 0.2rem 0.6rem;
             border-radius: 30px;
             font-weight: 500;
@@ -231,13 +217,7 @@
         }
 
         .brief-block {
-            background: white;
-            border-left: 5px solid #2563eb;
-            padding: 1.5rem 2rem;
-            border-radius: 24px;
             margin: 2rem 0;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--color-border);
         }
 
         .image-grid {
@@ -248,16 +228,7 @@
         }
 
         .image-card {
-            background: var(--color-surface);
-            border-radius: var(--border-radius-card);
             padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--color-border);
-            transition: transform 0.2s;
-        }
-        
-        .image-card:hover {
-            transform: translateY(-5px);
         }
 
         .image-card img {
@@ -272,21 +243,14 @@
         }
 
         .stats-box {
-            background: #f1f5f9;
-            border-radius: 16px;
-            padding: 1rem;
             font-family: monospace;
             font-size: 0.9rem;
-            border: 1px solid var(--color-border);
             margin-top: 1rem;
+            padding: 0.5rem 0;
         }
 
         .graph-explanation {
-            background: #f8fafc;
-            border-radius: 16px;
-            padding: 1.2rem;
             margin: 1rem 0 0.8rem;
-            border-left: 4px solid #2563eb;
             font-size: 0.95rem;
         }
         .graph-explanation p { margin-bottom: 0.3rem; }
@@ -325,7 +289,6 @@
 
         @media (max-width: 500px) {
             h2 { font-size: 1.9rem; }
-            .insight-card { padding: 1.2rem; }
             .image-card img { width: 100%; }
         }
     </style>
@@ -359,7 +322,7 @@
     <main>
         <section id="overview">
             <h2>Project overview</h2>
-            <div class="insight-card">
+            <div>
                 <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;"><span class="soft-highlight">Authorship</span></p>
                 <p><strong>Nibal Sharrouf</strong> performed this case study in <strong>March 2026</strong> as the capstone project for the <strong>Google Data Analytics Professional Certificate</strong>. The analysis used <strong>Python</strong> to explore bike share trips from <strong>January 2019 to December 2019</strong>. The visualization was created by power bi and the final report and are hosted using <strong>GitHub Pages</strong>.</p>
             </div>
@@ -370,7 +333,7 @@
                 <p>You are a junior data analyst working on the marketing analyst team at <strong>Cyclistic</strong>, a bike share company in Chicago. The director of marketing believes the company's future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand <strong>how casual riders and annual members use Cyclistic bikes differently</strong>.</p>
             </div>
 
-            <div class="brief-block" style="border-left-color: #7c3aed;">
+            <div class="brief-block">
                 <p style="font-weight: 600; margin-bottom: 1.2rem;">About the company</p>
                 <p>In 2016, Cyclistic launched a successful bike share offering. Since then, the program has grown to a fleet of <strong>5,824 bicycles</strong> that are geotracked and locked into a network of <strong>692 stations</strong> across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.</p>
                 <p style="margin-top: 1rem;">Customers who purchase single-ride or full-day passes are referred to as <strong>casual riders</strong>. Customers who purchase annual memberships are <strong>Cyclistic members</strong>. Cyclistic's finance analysts have concluded that annual members are much more profitable than casual riders. Moreno has set a clear goal: <strong>Design marketing strategies aimed at converting casual riders into annual members.</strong></p>
@@ -384,7 +347,7 @@
                 <p>This analysis examines <strong>how casual riders and annual members use Cyclistic bikes differently</strong>, with the objective of identifying actionable strategies to convert casual riders into annual members.</p>
             </div>
 
-            <div class="insight-card" style="background: #f1f6fe;">
+            <div>
                 <p style="font-weight: 500; margin-bottom: 1rem;">Key behavioral insights (preview)</p>
                 <p><strong>Casual riders are more likely than annual members to ride during evenings, on weekends, and in warmer months. They also show a preference for electric bikes and tend to take longer trips.</strong></p>
             </div>
@@ -401,7 +364,7 @@
 
         <section id="prepare">
             <h2>2. Prepare</h2>
-            <div class="insight-card">
+            <div>
                 <p>Cyclistic's historical trip data is publicly available and is used to explore how different types of customers use Cyclistic bikes. The dataset is provided by Motivate International Inc. and stored in a secure internal database, making it reliable according to the ROCCC principles. The data covers <strong>January 2019 to December 2019</strong>, with <strong>3,818,004 rows</strong> across 4 quarters. After cleaning and removing invalid trips (negative durations, duplicates), the final dataset contains <strong>2,709,828 rows</strong>. It includes anonymous trip information such as start/end time, station names, ride duration, and rider type (casual or member).</p>
             </div>
         </section>
@@ -553,7 +516,7 @@ Final clean dataset: 2,709,828 rows</pre>
             <h2>5. Act</h2>
             
             <h3>Conclusion:</h3>
-            <div class="insight-card">
+            <div>
                 <p>Finally, the analysis shows a clear difference in how annual members and casual riders use the bikes. Members mostly use the bikes during weekdays, especially in the morning and evening hours, which suggests that many of them ride to commute to work or for daily transportation. This insight is very valuable for the marketing team because it helps them understand the type of people who usually choose annual memberships. These riders are likely workers who need a reliable and convenient way to travel during the week.</p>
                 
                 <p>On the other hand, casual riders use the bikes in a very different way. Their trips mostly happen on weekends, and they tend to ride for longer periods of time. Many of these rides take place in the afternoon and evening, which suggests that casual riders are using the bikes more for leisure, entertainment, and exploring the city rather than commuting. In many cases, these riders may be tourists or people who simply want to enjoy biking during their free time.</p>
