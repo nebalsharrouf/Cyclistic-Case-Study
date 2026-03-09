@@ -278,6 +278,17 @@
             margin-top: 1rem;
         }
 
+        .graph-explanation {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin: 1rem 0 0.5rem;
+            border-left: 4px solid #2563eb;
+            font-size: 0.95rem;
+        }
+        .graph-explanation p { margin-bottom: 0.3rem; }
+        .graph-title { font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
+
         footer {
             background: var(--color-footer-bg);
             padding: 3rem 1.5rem;
@@ -331,8 +342,7 @@
             <li><a href="#ask">Ask</a></li>
             <li><a href="#prepare">Prepare</a></li>
             <li><a href="#process">Process</a></li>
-            <li><a href="#analyze">Analyze</a></li>
-            <li><a href="#share">Share</a></li>
+            <li><a href="#analyze-share">Analyze & Share</a></li>
             <li><a href="#act">Act</a></li>
         </ul>
     </nav>
@@ -387,107 +397,161 @@
             </div>
         </section>
 
-<div class="image-grid">
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">1. Importing Python libraries</p>
-        <p style="font-size: 0.95rem; color: #475569;">Importing the essential Python libraries for data analysis: pandas, numpy, and os.</p>
-        <img src="import_pd_np_os.png" alt="Import pandas, numpy and os libraries">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">2. Loading the quarterly data</p>
-        <p style="font-size: 0.95rem; color: #475569;">Loading the four quarterly CSV files from the CyclisDataQ1-Q4 folder.</p>
-        <img src="Importing_Data.png" alt="Loading quarterly CSV files">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">3. Storing data in a list</p>
-        <p style="font-size: 0.95rem; color: #475569;">Storing each quarter's data in a list before combining them together.</p>
-        <img src="all_data.png" alt="Data stored in list">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">4. Combining all quarters</p>
-        <p style="font-size: 0.95rem; color: #475569;">Combining all four quarters into one master dataframe called all_trips.</p>
-        <img src="all_trips.png" alt="Combined dataframe all_trips">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">5. Viewing column names</p>
-        <p style="font-size: 0.95rem; color: #475569;">Viewing all column names from the original 2019 dataset before renaming.</p>
-        <img src="culomn_name_in_dataset.png" alt="Original column names">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">6. Standardizing column names</p>
-        <p style="font-size: 0.95rem; color: #475569;">Standardizing column names to make them consistent and easier to work with.</p>
-        <img src="Rename_Culomns.png" alt="Renaming columns">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">7. Converting to datetime</p>
-        <p style="font-size: 0.95rem; color: #475569;">Converting start_time and end_time columns to proper datetime format.</p>
-        <img src="Change_Date_Time.png" alt="Datetime conversion">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">8. Creating new columns</p>
-        <p style="font-size: 0.95rem; color: #475569;">Creating new columns: ride_length in minutes, day_of_week, month, and hour.</p>
-        <img src="New_Culomns_Added.png" alt="New analysis columns">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">9. Standardizing user type</p>
-        <p style="font-size: 0.95rem; color: #475569;">Standardizing the user type column to 'member_casual' for consistency.</p>
-        <img src="standerdize_to_meMber_casual.png" alt="User type standardization">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">10. Cleaning the data</p>
-        <p style="font-size: 0.95rem; color: #475569;">Removing invalid rows including negative ride lengths and duplicate entries.</p>
-        <img src="cleaning_data.png" alt="Data cleaning process">
-        <div class="stats-box">
-            <p style="font-weight: 600; margin-bottom: 0.3rem;">Cleaning Results:</p>
-            <pre style="margin: 0;">Initial rows: 3,818,004
+        <section id="process">
+            <h2>3. Process</h2>
+            <div class="image-grid">
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">1. Importing Python libraries</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Importing the essential Python libraries for data analysis: pandas, numpy, and os.</p>
+                    <img src="import_pd_np_os.png" alt="Import pandas, numpy and os libraries">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">2. Loading the quarterly data</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Loading the four quarterly CSV files from the CyclisDataQ1-Q4 folder.</p>
+                    <img src="Importing_Data.png" alt="Loading quarterly CSV files">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">3. Storing data in a list</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Storing each quarter's data in a list before combining them together.</p>
+                    <img src="all_data.png" alt="Data stored in list">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">4. Combining all quarters</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Combining all four quarters into one master dataframe called all_trips.</p>
+                    <img src="all_trips.png" alt="Combined dataframe all_trips">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">5. Viewing column names</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Viewing all column names from the original 2019 dataset before renaming.</p>
+                    <img src="culomn_name_in_dataset.png" alt="Original column names">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">6. Standardizing column names</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Standardizing column names to make them consistent and easier to work with.</p>
+                    <img src="Rename_Culomns.png" alt="Renaming columns">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">7. Converting to datetime</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Converting start_time and end_time columns to proper datetime format.</p>
+                    <img src="Change_Date_Time.png" alt="Datetime conversion">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">8. Creating new columns</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Creating new columns: ride_length in minutes, day_of_week, month, and hour.</p>
+                    <img src="New_Culomns_Added.png" alt="New analysis columns">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">9. Standardizing user type</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Standardizing the user type column to 'member_casual' for consistency.</p>
+                    <img src="standerdize_to_meMber_casual.png" alt="User type standardization">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">10. Cleaning the data</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Removing invalid rows including negative ride lengths and duplicate entries.</p>
+                    <img src="cleaning_data.png" alt="Data cleaning process">
+                    <div class="stats-box">
+                        <p style="font-weight: 600; margin-bottom: 0.3rem;">Cleaning Results:</p>
+                        <pre style="margin: 0;">Initial rows: 3,818,004
 Invalid removed: 1,108,176
 Final clean dataset: 2,709,828 rows</pre>
-        </div>
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">11. Final dataset summary</p>
-        <p style="font-size: 0.95rem; color: #475569;">Final dataset summary showing 2.7 million clean trips ready for analysis.</p>
-        <img src="Final_Dataset_Summary.png" alt="Dataset summary">
-    </div>
-    
-    <div class="image-card">
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">12. Ride length statistics</p>
-        <p style="font-size: 0.95rem; color: #475569;">Statistical summary of ride lengths showing mean, median, and range for all trips.</p>
-        <img src="Describe_mean_median_min_max.png" alt="Statistical summary">
-        <div class="stats-box">
-            <p style="font-weight: 600; margin-bottom: 0.3rem;">Ride duration statistics (minutes):</p>
-           
-        </div>
-    </div>
-</div>
-        </section>
-
-        <section id="analyze">
-            <h2>4. Analyze</h2>
-            <div class="insight-card">
-                <p><strong>Key Findings from 2019 Data:</strong> Casual riders take longer rides (average 29.2 minutes vs 12.7 minutes for members) and are more active on weekends (60% of casual rides occur on weekends). Members have shorter, consistent rides on weekdays, indicating commuting patterns. Peak hours differ significantly - members peak at 8 AM and 5 PM, while casual riders peak at 5 PM and on weekend afternoons.</p>
+                    </div>
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">11. Final dataset summary</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Final dataset summary showing 2.7 million clean trips ready for analysis.</p>
+                    <img src="Final_Dataset_Summary.png" alt="Dataset summary">
+                </div>
+                
+                <div class="image-card">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">12. Ride length statistics</p>
+                    <p style="font-size: 0.95rem; color: #475569;">Statistical summary of ride lengths showing mean, median, and range for all trips.</p>
+                    <img src="Describe_mean_median_min_max.png" alt="Statistical summary">
+                    <div class="stats-box">
+                        <p style="font-weight: 600; margin-bottom: 0.3rem;">Ride duration statistics (minutes):</p>
+                       
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="share">
-            <h2>5. Share</h2>
-            <div class="insight-card">
-                <p><strong>Visualizations:</strong> Tableau / Python dashboards showing ride counts by day, ride length histograms, and seasonal trends from the 2019 data. Presented via slide deck and GitHub-hosted report.</p>
+        <section id="analyze-share">
+            <h2>4. Analyze & Share</h2>
+            <p style="margin-bottom: 2rem;">This section presents the key findings from the 2019 Cyclistic data, combining analysis with visual explanations of how casual riders and annual members use bikes differently.</p>
+            
+            <!-- Graph 1: Weekly Riding Patterns -->
+            <div class="image-card" style="margin-bottom: 2rem;">
+                <div class="graph-title">Graph 1: Weekly Riding Patterns</div>
+                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>count_of_trips_by_day_of_week_according_to_customers.png</code></p>
+                <div class="graph-explanation">
+                    <p>This graph shows the total number of bike rides for each day of the week across all users. Weekdays range from 60,000 to 90,000 rides for casual customers. Weekend days are significantly higher, with Saturday at 155,000 rides and Sunday at 115,000 rides, indicating increased usage on weekends.</p>
+                    <p style="margin-top: 0.5rem;">For members, weekdays range from 320,000 to 350,000 rides. Weekend days are significantly lower, with Saturday at 200,000 rides and Sunday at 180,000 rides, indicating increased usage on weekdays.</p>
+                </div>
+                <img src="count_of_trips_by_day_of_week_according_to_customers.png" alt="Weekly riding patterns chart">
+            </div>
+
+            <!-- Graph 2: Hourly Riding Patterns -->
+            <div class="image-card" style="margin-bottom: 2rem;">
+                <div class="graph-title">Graph 2: Hourly Riding Patterns</div>
+                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>count_of_trips_by_hour_according_to_customers.png</code></p>
+                <div class="graph-explanation">
+                    <p>This graph compares hourly ride patterns between casual riders and members. Members show distinct peaks in the early morning (around 7 AM-8 AM) and late afternoon (5 PM-6 PM). Casual riders show increasing activity throughout the day, with the highest peak at 6 PM and sustained high numbers through the afternoon until evening.</p>
+                </div>
+                <img src="count_of_trips_by_hour_according_to_customers.png" alt="Hourly riding patterns chart">
+            </div>
+
+            <!-- Graph 3: Monthly Riding Trends -->
+            <div class="image-card" style="margin-bottom: 2rem;">
+                <div class="graph-title">Graph 3: Monthly Riding Trends</div>
+                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>count_of_trips_by_month_according_to_customers.png</code></p>
+                <div class="graph-explanation">
+                    <p>This graph shows total rides per month from September through December. September has the highest ridership at 0.48 million rides. There is a steady decline each month, with October at 0.38M, November dropping to 0.18M, and December at 0.16M rides.</p>
+                </div>
+                <img src="count_of_trips_by_month_according_to_customers.png" alt="Monthly riding trends chart">
+            </div>
+
+            <!-- Graph 4: Trip Duration Distribution -->
+            <div class="image-card" style="margin-bottom: 2rem;">
+                <div class="graph-title">Graph 4: Trip Duration Distribution</div>
+                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>count_of_trips_by_sec_according_to_customers.png</code></p>
+                <div class="graph-explanation">
+                    <p>This graph shows the distribution of trip durations for casual riders. The highest number of casual rides occur around 300 seconds (5 minutes) with 5000 rides. As trip duration increases beyond 300 seconds, the number of rides gradually decreases. Another peak occurs around 150 seconds with 20,000 rides.</p>
+                </div>
+                <img src="count_of_trips_by_sec_according_to_customers.png" alt="Trip duration distribution chart">
+            </div>
+
+            <!-- Graph 5: Rider Type Composition -->
+            <div class="image-card" style="margin-bottom: 2rem;">
+                <div class="graph-title">Graph 5: Rider Type Composition</div>
+                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>Percentage_of_ridelength_between_members_and_casuals.png</code></p>
+                <div class="graph-explanation">
+                    <p>This graph shows the breakdown of total rides between the two user types. Casual riders account for 0.62 million rides (22.92% of total). Members account for 2.09 million rides (77.08% of total). The data shows that members account for approximately 77% of total rides, while casual riders account for approximately 23% of total rides.</p>
+                </div>
+                <img src="Percentage_of_ridelength_between_members_and_casuals.png" alt="Rider type composition chart">
+            </div>
+
+            <!-- Graph 6: Gender Distribution by Rider Type -->
+            <div class="image-card" style="margin-bottom: 2rem;">
+                <div class="graph-title">Graph 6: Gender Distribution by Rider Type</div>
+                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>Percentage_of_trip_by_gender_according_to_members_and_casuals.png</code></p>
+                <div class="graph-explanation">
+                    <p>This graph shows the percentage of rides attributed to gender within each rider category. For casual riders, 38% of rides are associated with a specific gender category. For members, 1% of rides are associated with a specific gender category. Male members are the peak at 45%.</p>
+                </div>
+                <img src="Percentage_of_trip_by_gender_according_to_members_and_casuals.png" alt="Gender distribution chart">
             </div>
         </section>
 
         <section id="act">
-            <h2>6. Act</h2>
+            <h2>5. Act</h2>
             <div class="insight-card">
                 <p><strong>Recommendations based on 2019 insights:</strong></p>
                 <ul>
