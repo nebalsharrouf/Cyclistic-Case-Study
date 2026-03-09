@@ -250,7 +250,7 @@
         .image-card {
             background: var(--color-surface);
             border-radius: var(--border-radius-card);
-            padding: 1.2rem;
+            padding: 1.5rem;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--color-border);
             transition: transform 0.2s;
@@ -261,11 +261,14 @@
         }
 
         .image-card img {
-            width: 100%;
+            width: 80%;
             height: auto;
+            display: block;
+            margin: 1rem auto 0.5rem;
             border-radius: 16px;
             border: 1px solid var(--color-border);
-            margin-top: 0.8rem;
+            max-height: 280px;
+            object-fit: contain;
         }
 
         .stats-box {
@@ -282,12 +285,17 @@
             background: #f8fafc;
             border-radius: 16px;
             padding: 1.2rem;
-            margin: 1rem 0 0.5rem;
+            margin: 1rem 0 0.8rem;
             border-left: 4px solid #2563eb;
             font-size: 0.95rem;
         }
         .graph-explanation p { margin-bottom: 0.3rem; }
-        .graph-title { font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
+        .graph-title { 
+            font-weight: 700; 
+            color: #0f172a; 
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
 
         footer {
             background: var(--color-footer-bg);
@@ -318,6 +326,7 @@
         @media (max-width: 500px) {
             h2 { font-size: 1.9rem; }
             .insight-card { padding: 1.2rem; }
+            .image-card img { width: 100%; }
         }
     </style>
 </head>
@@ -476,10 +485,6 @@ Final clean dataset: 2,709,828 rows</pre>
                     <p style="font-weight: 600; margin-bottom: 0.5rem;">12. Ride length statistics</p>
                     <p style="font-size: 0.95rem; color: #475569;">Statistical summary of ride lengths showing mean, median, and range for all trips.</p>
                     <img src="Describe_mean_median_min_max.png" alt="Statistical summary">
-                    <div class="stats-box">
-                        <p style="font-weight: 600; margin-bottom: 0.3rem;">Ride duration statistics (minutes):</p>
-                       
-                    </div>
                 </div>
             </div>
         </section>
@@ -488,10 +493,9 @@ Final clean dataset: 2,709,828 rows</pre>
             <h2>4. Analyze & Share</h2>
             <p style="margin-bottom: 2rem;">This section presents the key findings from the 2019 Cyclistic data, combining analysis with visual explanations of how casual riders and annual members use bikes differently.</p>
             
-            <!-- Graph 1: Weekly Riding Patterns -->
+            <!-- Weekly Riding Patterns -->
             <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Graph 1: Weekly Riding Patterns</div>
-                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>count_of_trips_by_day_of_week_according_to_customers.png</code></p>
+                <div class="graph-title">Weekly Riding Patterns</div>
                 <div class="graph-explanation">
                     <p>This graph shows the total number of bike rides for each day of the week across all users. Weekdays range from 60,000 to 90,000 rides for casual customers. Weekend days are significantly higher, with Saturday at 155,000 rides and Sunday at 115,000 rides, indicating increased usage on weekends.</p>
                     <p style="margin-top: 0.5rem;">For members, weekdays range from 320,000 to 350,000 rides. Weekend days are significantly lower, with Saturday at 200,000 rides and Sunday at 180,000 rides, indicating increased usage on weekdays.</p>
@@ -499,50 +503,45 @@ Final clean dataset: 2,709,828 rows</pre>
                 <img src="count_of_trips_by_day_of_week_according_to_customers.png" alt="Weekly riding patterns chart">
             </div>
 
-            <!-- Graph 2: Hourly Riding Patterns -->
+            <!-- Hourly Riding Patterns -->
             <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Graph 2: Hourly Riding Patterns</div>
-                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>count_of_trips_by_hour_according_to_customers.png</code></p>
+                <div class="graph-title">Hourly Riding Patterns</div>
                 <div class="graph-explanation">
                     <p>This graph compares hourly ride patterns between casual riders and members. Members show distinct peaks in the early morning (around 7 AM-8 AM) and late afternoon (5 PM-6 PM). Casual riders show increasing activity throughout the day, with the highest peak at 6 PM and sustained high numbers through the afternoon until evening.</p>
                 </div>
                 <img src="count_of_trips_by_hour_according_to_customers.png" alt="Hourly riding patterns chart">
             </div>
 
-            <!-- Graph 3: Monthly Riding Trends -->
+            <!-- Monthly Riding Trends -->
             <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Graph 3: Monthly Riding Trends</div>
-                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>count_of_trips_by_month_according_to_customers.png</code></p>
+                <div class="graph-title">Monthly Riding Trends</div>
                 <div class="graph-explanation">
                     <p>This graph shows total rides per month from September through December. September has the highest ridership at 0.48 million rides. There is a steady decline each month, with October at 0.38M, November dropping to 0.18M, and December at 0.16M rides.</p>
                 </div>
                 <img src="count_of_trips_by_month_according_to_customers.png" alt="Monthly riding trends chart">
             </div>
 
-            <!-- Graph 4: Trip Duration Distribution -->
+            <!-- Trip Duration Distribution -->
             <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Graph 4: Trip Duration Distribution</div>
-                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>count_of_trips_by_sec_according_to_customers.png</code></p>
+                <div class="graph-title">Trip Duration Distribution</div>
                 <div class="graph-explanation">
                     <p>This graph shows the distribution of trip durations for casual riders. The highest number of casual rides occur around 300 seconds (5 minutes) with 5000 rides. As trip duration increases beyond 300 seconds, the number of rides gradually decreases. Another peak occurs around 150 seconds with 20,000 rides.</p>
                 </div>
                 <img src="count_of_trips_by_sec_according_to_customers.png" alt="Trip duration distribution chart">
             </div>
 
-            <!-- Graph 5: Rider Type Composition -->
+            <!-- Rider Type Composition -->
             <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Graph 5: Rider Type Composition</div>
-                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>Percentage_of_ridelength_between_members_and_casuals.png</code></p>
+                <div class="graph-title">Rider Type Composition</div>
                 <div class="graph-explanation">
                     <p>This graph shows the breakdown of total rides between the two user types. Casual riders account for 0.62 million rides (22.92% of total). Members account for 2.09 million rides (77.08% of total). The data shows that members account for approximately 77% of total rides, while casual riders account for approximately 23% of total rides.</p>
                 </div>
                 <img src="Percentage_of_ridelength_between_members_and_casuals.png" alt="Rider type composition chart">
             </div>
 
-            <!-- Graph 6: Gender Distribution by Rider Type -->
+            <!-- Gender Distribution by Rider Type -->
             <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Graph 6: Gender Distribution by Rider Type</div>
-                <p style="font-size: 0.95rem; font-weight: 500;">File: <code>Percentage_of_trip_by_gender_according_to_members_and_casuals.png</code></p>
+                <div class="graph-title">Gender Distribution by Rider Type</div>
                 <div class="graph-explanation">
                     <p>This graph shows the percentage of rides attributed to gender within each rider category. For casual riders, 38% of rides are associated with a specific gender category. For members, 1% of rides are associated with a specific gender category. Male members are the peak at 45%.</p>
                 </div>
