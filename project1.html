@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Cyclistic case study · Nibal Sharrouf</title>
+    <title>Cyclistic Case Study 2019 · Nibal Sharrouf</title>
     <meta name="description" content="Cyclistic bike‑share case study by Nibal Sharrouf — Google Data Analytics capstone. Python analysis of 2019 data, casual vs member insights.">
     <meta name="author" content="Nibal Sharrouf">
     
     <meta property="og:title" content="Cyclistic Bike‑Share Case Study · Nibal Sharrouf">
-    <meta property="og:description" content="Data analysis capstone exploring how casual riders and annual members used Cyclistic bikes differently in 2019.">
+    <meta property="og:description" content="Data analysis exploring how casual riders and annual members used Cyclistic bikes differently in 2019.">
     <meta property="og:type" content="website">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Source+Serif+4:opsz@8..60&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -26,625 +25,431 @@
 
         :root {
             --color-bg: #ffffff;
-            --color-surface: #f9fafc;
-            --color-text: #1e293b;
-            --color-text-light: #334155;
-            --color-primary-dark: #0f172a;
-            --color-secondary-dark: #1e293b;
-            --color-accent-soft: #dbeafe;
-            --color-border: #e2e8f0;
-            --color-footer-bg: #f1f5f9;
-            --font-base: 'Inter', system-ui, sans-serif;
-            --font-signature: 'Pacifico', cursive;
-            --max-width: 1000px;
-            --header-height: 70px;
-            --border-radius-card: 28px;
-            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.03);
+            --color-text: #1a1e24;
+            --color-text-soft: #3b4a5c;
+            --color-accent: #1e3a5f;
+            --color-accent-light: #e8edf3;
+            --color-border: #d8e0e8;
+            --color-card-bg: #f9fbfd;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-serif: 'Source Serif 4', Georgia, serif;
+            --max-width: 900px;
         }
 
         body {
-            font-family: var(--font-base);
+            font-family: var(--font-sans);
             background-color: var(--color-bg);
             color: var(--color-text);
             line-height: 1.6;
+            font-weight: 400;
         }
 
-        .main-header {
-            background: var(--color-primary-dark);
-            height: var(--header-height);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 1.5rem;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .header-logo {
-            font-family: var(--font-signature);
-            font-size: 1.7rem;
-            color: white;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: opacity 0.2s;
-        }
-        .header-logo:hover { opacity: 0.85; }
-
-        .header-title {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: white;
-            white-space: nowrap;
-            text-transform: uppercase;
-        }
-
-        .header-spacer { width: 75px; }
-
-        .nav-toggle {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            display: none;
-            line-height: 1;
-        }
-
-        .main-nav {
-            background: var(--color-secondary-dark);
-            transition: transform 0.3s ease, opacity 0.2s;
-        }
-
-        .nav-menu {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            list-style: none;
-            padding: 0.75rem 1.5rem;
-            gap: 0.5rem 1.8rem;
-        }
-
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 0.3rem;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.2s;
-        }
-
-        .nav-menu a:hover { border-bottom-color: #94a3b8; }
-        .nav-menu a.active { border-bottom-color: white; font-weight: 600; }
-
-        @media (max-width: 700px) {
-            .nav-toggle { display: block; }
-            
-            .main-nav {
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                width: 260px;
-                height: 100vh;
-                background: var(--color-secondary-dark);
-                transform: translateX(-100%);
-                opacity: 0;
-                box-shadow: 4px 0 15px rgba(0,0,0,0.3);
-                z-index: 1050;
-                overflow-y: auto;
-            }
-            
-            .main-nav.open { transform: translateX(0); opacity: 1; }
-            
-            .nav-menu {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 2rem 1.5rem;
-                gap: 1rem;
-            }
-            
-            .nav-menu a {
-                font-size: 1.15rem;
-                padding: 0.5rem 0;
-                width: 100%;
-            }
-            
-            .nav-overlay {
-                display: none;
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(15, 23, 42, 0.5);
-                backdrop-filter: blur(2px);
-                z-index: 1040;
-            }
-            .nav-overlay.open { display: block; }
-            
-            .header-title {
-                font-size: 1rem;
-                max-width: 140px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .header-logo { font-size: 1.4rem; }
-        }
-
-        main {
+        .container {
             max-width: var(--max-width);
             margin: 0 auto;
             padding: 2.5rem 2rem;
         }
 
-        section {
-            scroll-margin-top: calc(var(--header-height) + 20px);
-            padding: 3.5rem 0;
+        /* Report header */
+        .report-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1.5rem;
+        }
+
+        .report-title {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0a1c2f;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .report-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-soft);
+            font-weight: 400;
+            max-width: 70ch;
+        }
+
+        .byline {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #546e7a;
+        }
+
+        /* Section styling */
+        .section {
+            margin: 3.5rem 0;
+            scroll-margin-top: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.6rem;
+        }
+
+        .section-number {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--color-accent);
+            font-weight: 500;
+            min-width: 2.2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #0a1c2f;
+        }
+
+        .subsection-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin: 2rem 0 1.2rem;
+            color: #1e3a5f;
+        }
+
+        /* Text elements */
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--color-text-soft);
+            max-width: 75ch;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            color: var(--color-text);
+        }
+
+        /* Cards for insights and graphs */
+        .insight-block {
+            background-color: var(--color-card-bg);
+            border-left: 4px solid var(--color-accent);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .graph-card {
+            margin: 2.8rem 0;
+            padding: 1.8rem 0;
             border-bottom: 1px solid var(--color-border);
         }
-        section:last-of-type { border-bottom: none; }
 
-        h2 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            padding-bottom: 0.6rem;
-            border-bottom: 4px solid var(--color-accent-soft);
-            color: #0f172a;
-            display: inline-block;
+        .graph-card:last-child {
+            border-bottom: none;
         }
 
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 2rem 0 1rem;
-            color: #1e293b;
-        }
-
-        p, li {
-            color: var(--color-text-light);
-            max-width: 75ch;
+        .graph-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #0a1c2f;
             margin-bottom: 1rem;
         }
 
-        .insight-card {
-            background: var(--color-surface);
-            border-radius: var(--border-radius-card);
-            padding: 1.8rem 2rem;
-            margin: 2rem 0 1.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--color-border);
-        }
-        .insight-card p:last-child { margin-bottom: 0; }
-
-        .soft-highlight {
-            background: var(--color-accent-soft);
-            padding: 0.2rem 0.6rem;
-            border-radius: 30px;
-            font-weight: 500;
-            color: #0f172a;
+        .graph-description {
+            background-color: #f5f8fc;
+            padding: 1.2rem 1.5rem;
+            margin: 1.2rem 0 1.5rem;
+            border-radius: 8px;
+            font-size: 0.98rem;
+            color: #2c3e50;
         }
 
-        .brief-block {
-            background: white;
-            border-left: 5px solid #2563eb;
-            padding: 1.5rem 2rem;
-            border-radius: 24px;
-            margin: 2rem 0;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--color-border);
+        .graph-description p {
+            margin-bottom: 0.5rem;
         }
 
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.8rem;
-            margin-top: 1.5rem;
+        .graph-image {
+            margin: 1.5rem 0 0.5rem;
+            text-align: center;
         }
 
-        .image-card {
-            background: var(--color-surface);
-            border-radius: var(--border-radius-card);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--color-border);
-            transition: transform 0.2s;
-        }
-        
-        .image-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .image-card img {
-            width: 80%;
+        .graph-image img {
+            max-width: 85%;
             height: auto;
-            display: block;
-            margin: 1rem auto 0.5rem;
-            border-radius: 16px;
+            border-radius: 8px;
             border: 1px solid var(--color-border);
-            max-height: 280px;
-            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Data tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 0.6rem 0.3rem;
+            border-bottom: 1px solid var(--color-border);
+            font-weight: 500;
+            color: var(--color-accent);
+        }
+
+        .data-table td {
+            padding: 0.4rem 0.3rem;
+            border-bottom: 1px solid #ecf1f6;
         }
 
         .stats-box {
-            background: #f1f5f9;
-            border-radius: 16px;
-            padding: 1rem;
-            font-family: monospace;
+            background: #f0f4fa;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-family: var(--font-sans);
             font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        /* Process grid */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .process-item {
+            background: var(--color-card-bg);
             border: 1px solid var(--color-border);
-            margin-top: 1rem;
-        }
-
-        .graph-explanation {
-            background: #f8fafc;
-            border-radius: 16px;
+            border-radius: 10px;
             padding: 1.2rem;
-            margin: 1rem 0 0.8rem;
-            border-left: 4px solid #2563eb;
-            font-size: 0.95rem;
-        }
-        .graph-explanation p { margin-bottom: 0.3rem; }
-        .graph-title { 
-            font-weight: 700; 
-            color: #0f172a; 
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
         }
 
-        footer {
-            background: var(--color-footer-bg);
-            padding: 3rem 1.5rem;
+        .process-item p:first-child {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: #0a1c2f;
+        }
+
+        .process-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-top: 0.8rem;
+            border: 1px solid #d0dceb;
+        }
+
+        /* Lists */
+        ul {
+            margin: 1rem 0 1.5rem 1.8rem;
+            color: var(--color-text-soft);
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--color-border);
+            margin: 2.5rem 0;
+        }
+
+        /* Footer */
+        .report-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.9rem;
+            color: #607586;
             text-align: center;
-            border-top: 1px solid #cbd5e1;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2.8rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .social-links a {
-            color: #334155;
-            font-size: 2.2rem;
-            transition: transform 0.2s, color 0.2s;
-        }
-        .social-links a:hover {
-            color: #0f172a;
-            transform: scale(1.1);
-        }
-        .copyright { color: #475569; font-size: 0.9rem; }
-
-        @media (max-width: 500px) {
-            h2 { font-size: 1.9rem; }
-            .insight-card { padding: 1.2rem; }
-            .image-card img { width: 100%; }
+        @media (max-width: 600px) {
+            .container { padding: 1.5rem; }
+            .report-title { font-size: 1.9rem; }
+            .section-title { font-size: 1.5rem; }
+            .section-number { font-size: 1rem; }
+            .graph-image img { max-width: 100%; }
         }
     </style>
 </head>
 <body>
-    <header class="main-header">
-        <a href="index.html" class="header-logo">Nibal</a>
-        <div class="header-title">CYCLISTIC CASE STUDY 2019</div>
-        <div style="display: flex; align-items: center;">
-            <button class="nav-toggle" id="menuToggle" aria-label="Menu">
-                <i class="fas fa-bars"></i>
-            </button>
-            <span class="header-spacer"></span>
+    <div class="container">
+        <!-- Report header -->
+        <div class="report-header">
+            <h1 class="report-title">Cyclistic bike‑share: casual riders vs. annual members</h1>
+            <div class="report-subtitle">A data analysis case study · 2019 trip data</div>
+            <div class="byline">Nibal Sharrouf · March 2026 · Google Data Analytics capstone</div>
         </div>
-    </header>
 
-    <div class="nav-overlay" id="navOverlay"></div>
-
-    <nav class="main-nav" id="mainNav">
-        <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#ask">Ask</a></li>
-            <li><a href="#prepare">Prepare</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#analyze-share">Analyze & Share</a></li>
-            <li><a href="#act">Act</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <section id="overview">
-            <h2>Project overview</h2>
-            <div class="insight-card">
-                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;"><span class="soft-highlight">Authorship</span></p>
-                <p><strong>Nibal Sharrouf</strong> performed this case study in <strong>March 2026</strong> as the capstone project for the <strong>Google Data Analytics Professional Certificate</strong>. The analysis used <strong>Python</strong> to explore bike‑share trips from <strong>January 2019 to December 2019</strong>. The final report and visualizations are hosted using <strong>GitHub Pages</strong>.</p>
+        <!-- Overview (no section number) -->
+        <div class="section" id="overview">
+            <div class="section-header">
+                <span class="section-number">—</span>
+                <h2 class="section-title">Overview</h2>
             </div>
-
-            <h3>Case study brief</h3>
-            <div class="brief-block">
-                <p style="font-weight: 600; margin-bottom: 1.2rem;">2.1 - Scenario</p>
-                <p>You are a junior data analyst working on the marketing analyst team at <strong>Cyclistic</strong>, a bike‑share company in Chicago. The director of marketing believes the company's future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand <strong>how casual riders and annual members use Cyclistic bikes differently</strong>.</p>
+            <p class="lead">This report examines how casual riders and annual members use Cyclistic bikes differently, based on 2019 trip data. The objective is to identify actionable strategies to convert casual riders into annual members.</p>
+            <div class="insight-block">
+                <p><strong>Case brief:</strong> Cyclistic is a Chicago‑based bike‑share company. Customers who purchase single‑ride or full‑day passes are casual riders; those with annual memberships are members. Finance analysts have found members are more profitable, and the marketing director aims to convert casual riders.</p>
+                <p style="margin-top: 0.8rem;"><strong>Data:</strong> 3,818,004 trips (Jan–Dec 2019), cleaned to 2,709,828 rows. Source: Motivate International Inc. (public data).</p>
             </div>
+        </div>
 
-            <div class="brief-block" style="border-left-color: #7c3aed;">
-                <p style="font-weight: 600; margin-bottom: 1.2rem;">2.2 - About the company</p>
-                <p>In 2016, Cyclistic launched a successful bike‑share offering. Since then, the program has grown to a fleet of <strong>5,824 bicycles</strong> that are geotracked and locked into a network of <strong>692 stations</strong> across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.</p>
-                <p style="margin-top: 1rem;">Customers who purchase single-ride or full-day passes are referred to as <strong>casual riders</strong>. Customers who purchase annual memberships are <strong>Cyclistic members</strong>. Cyclistic's finance analysts have concluded that annual members are much more profitable than casual riders. Moreno has set a clear goal: <strong>Design marketing strategies aimed at converting casual riders into annual members.</strong></p>
+        <!-- 1. Ask -->
+        <div class="section" id="ask">
+            <div class="section-header">
+                <span class="section-number">1.</span>
+                <h2 class="section-title">Ask</h2>
             </div>
-        </section>
+            <p><strong>Business task:</strong> Understand how casual riders and annual members use Cyclistic bikes differently. The insight will guide marketing designed to convert casuals into members.</p>
+            <p><strong>Key questions:</strong> When do they ride? How long are their trips? How do patterns differ by day, hour, month, and rider type?</p>
+        </div>
 
-        <section id="ask">
-            <h2>1. Ask</h2>
-            <div style="margin-bottom: 2rem;">
-                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.5rem;">Business objective</p>
-                <p>This analysis examines <strong>how casual riders and annual members use Cyclistic bikes differently</strong>, with the objective of identifying actionable strategies to convert casual riders into annual members.</p>
+        <!-- 2. Prepare -->
+        <div class="section" id="prepare">
+            <div class="section-header">
+                <span class="section-number">2.</span>
+                <h2 class="section-title">Prepare</h2>
             </div>
+            <p>Data is publicly available, stored securely, and follows ROCCC principles (reliable, original, comprehensive, current, cited). It includes anonymous trip records: start/end time, station names, ride duration, and user type (casual or member). The cleaned dataset contains 2.7 million trips.</p>
+        </div>
 
-            <div class="insight-card" style="background: #f1f6fe;">
-                <p style="font-weight: 500; margin-bottom: 1rem;">Key behavioral insights (preview)</p>
-                <p><strong>Casual riders are more likely than annual members to ride during evenings, on weekends, and in warmer months.</strong> They also show a preference for electric bikes and tend to take longer trips.</p>
+        <!-- 3. Process -->
+        <div class="section" id="process">
+            <div class="section-header">
+                <span class="section-number">3.</span>
+                <h2 class="section-title">Process</h2>
             </div>
-
-            <div style="margin: 2rem 0 1.5rem;">
-                <p style="font-weight: 600;">Recommended actions</p>
-                <ul style="margin-top: 0.75rem; padding-left: 1.8rem;">
-                    <li>Creating targeted transactional emails that highlight the cost savings of becoming an annual member.</li>
-                    <li>Launching a digital campaign to showcase events and activities accessible via Cyclistic bikes.</li>
-                    <li>Expanding marketing efforts through digital channels to raise awareness of convenient cycling paths.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="prepare">
-            <h2>2. Prepare</h2>
-            <div class="insight-card">
-                <p>Cyclistic's historical trip data is publicly available and is used to explore how different types of customers use Cyclistic bikes. The dataset is provided by Motivate International Inc. and stored in a secure internal database, making it reliable according to the ROCCC principles. The data covers <strong>January 2019 to December 2019</strong>, with <strong>3,818,004 rows</strong> across 4 quarters. After cleaning and removing invalid trips (negative durations, duplicates), the final dataset contains <strong>2,709,828 rows</strong>. It includes anonymous trip information such as start/end time, station names, ride duration, and rider type (casual or member).</p>
-            </div>
-        </section>
-
-        <section id="process">
-            <h2>3. Process</h2>
-            <div class="image-grid">
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">1. Importing Python libraries</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Importing the essential Python libraries for data analysis: pandas, numpy, and os.</p>
-                    <img src="import_pd_np_os.png" alt="Import pandas, numpy and os libraries">
+            <p>Python was used for data cleaning, transformation, and analysis. The steps included:</p>
+            <div class="process-grid">
+                <div class="process-item">
+                    <p>Importing libraries</p>
+                    <p style="font-size: 0.9rem;">pandas, numpy, os</p>
+                    <img src="import_pd_np_os.png" alt="">
                 </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">2. Loading the quarterly data</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Loading the four quarterly CSV files from the CyclisDataQ1-Q4 folder.</p>
-                    <img src="Importing_Data.png" alt="Loading quarterly CSV files">
+                <div class="process-item">
+                    <p>Loading quarterly data</p>
+                    <img src="Importing_Data.png" alt="">
                 </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">3. Storing data in a list</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Storing each quarter's data in a list before combining them together.</p>
-                    <img src="all_data.png" alt="Data stored in list">
+                <div class="process-item">
+                    <p>Combining datasets</p>
+                    <img src="all_trips.png" alt="">
                 </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">4. Combining all quarters</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Combining all four quarters into one master dataframe called all_trips.</p>
-                    <img src="all_trips.png" alt="Combined dataframe all_trips">
+                <div class="process-item">
+                    <p>Standardizing columns</p>
+                    <img src="Rename_Culomns.png" alt="">
                 </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">5. Viewing column names</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Viewing all column names from the original 2019 dataset before renaming.</p>
-                    <img src="culomn_name_in_dataset.png" alt="Original column names">
+                <div class="process-item">
+                    <p>Creating time columns</p>
+                    <img src="New_Culomns_Added.png" alt="">
                 </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">6. Standardizing column names</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Standardizing column names to make them consistent and easier to work with.</p>
-                    <img src="Rename_Culomns.png" alt="Renaming columns">
-                </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">7. Converting to datetime</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Converting start_time and end_time columns to proper datetime format.</p>
-                    <img src="Change_Date_Time.png" alt="Datetime conversion">
-                </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">8. Creating new columns</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Creating new columns: ride_length in minutes, day_of_week, month, and hour.</p>
-                    <img src="New_Culomns_Added.png" alt="New analysis columns">
-                </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">9. Standardizing user type</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Standardizing the user type column to 'member_casual' for consistency.</p>
-                    <img src="standerdize_to_meMber_casual.png" alt="User type standardization">
-                </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">10. Cleaning the data</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Removing invalid rows including negative ride lengths and duplicate entries.</p>
-                    <img src="cleaning_data.png" alt="Data cleaning process">
-                    <div class="stats-box">
-                        <p style="font-weight: 600; margin-bottom: 0.3rem;">Cleaning Results:</p>
-                        <pre style="margin: 0;">Initial rows: 3,818,004
-Invalid removed: 1,108,176
-Final clean dataset: 2,709,828 rows</pre>
+                <div class="process-item">
+                    <p>Cleaning invalid trips</p>
+                    <img src="cleaning_data.png" alt="">
+                    <div class="stats-box" style="margin-top: 0.8rem;">
+                        <strong>Cleaning results:</strong> 3,818,004 → 2,709,828 rows
                     </div>
                 </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">11. Final dataset summary</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Final dataset summary showing 2.7 million clean trips ready for analysis.</p>
-                    <img src="Final_Dataset_Summary.png" alt="Dataset summary">
-                </div>
-                
-                <div class="image-card">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem;">12. Ride length statistics</p>
-                    <p style="font-size: 0.95rem; color: #475569;">Statistical summary of ride lengths showing mean, median, and range for all trips.</p>
-                    <img src="Describe_mean_median_min_max.png" alt="Statistical summary">
-                </div>
             </div>
-        </section>
+        </div>
 
-        <section id="analyze-share">
-            <h2>4. Analyze & Share</h2>
-            <p style="margin-bottom: 2rem;">This section presents the key findings from the 2019 Cyclistic data, combining analysis with visual explanations of how casual riders and annual members use bikes differently.</p>
-            
+        <!-- 4. Analyze & Share (merged) -->
+        <div class="section" id="analyze-share">
+            <div class="section-header">
+                <span class="section-number">4.</span>
+                <h2 class="section-title">Analyze & Share</h2>
+            </div>
+            <p>This section presents the key findings from the 2019 data. Each graph is accompanied by a description of what it shows.</p>
+
             <!-- Weekly Riding Patterns -->
-            <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Weekly Riding Patterns</div>
-                <div class="graph-explanation">
-                    <p>This graph shows the total number of bike rides for each day of the week across all users. Weekdays range from 60,000 to 90,000 rides for casual customers. Weekend days are significantly higher, with Saturday at 155,000 rides and Sunday at 115,000 rides, indicating increased usage on weekends.</p>
-                    <p style="margin-top: 0.5rem;">For members, weekdays range from 320,000 to 350,000 rides. Weekend days are significantly lower, with Saturday at 200,000 rides and Sunday at 180,000 rides, indicating increased usage on weekdays.</p>
+            <div class="graph-card">
+                <h3 class="graph-title">Weekly Riding Patterns</h3>
+                <div class="graph-description">
+                    <p><strong>Casual riders:</strong> Weekday rides range from 60,000 to 90,000. Weekend days are significantly higher: Saturday 155,000, Sunday 115,000 — indicating leisure use.</p>
+                    <p><strong>Members:</strong> Weekday rides are 320,000–350,000, with lower weekend usage (Saturday 200,000, Sunday 180,000) — consistent with commuting.</p>
                 </div>
-                <img src="count_of_trips_by_day_of_week_according_to_customers.png" alt="Weekly riding patterns chart">
+                <div class="graph-image">
+                    <img src="count_of_trips_by_day_of_week_according_to_customers.png" alt="Weekly riding patterns">
+                </div>
             </div>
 
             <!-- Hourly Riding Patterns -->
-            <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Hourly Riding Patterns</div>
-                <div class="graph-explanation">
-                    <p>This graph compares hourly ride patterns between casual riders and members. Members show distinct peaks in the early morning (around 7 AM-8 AM) and late afternoon (5 PM-6 PM). Casual riders show increasing activity throughout the day, with the highest peak at 6 PM and sustained high numbers through the afternoon until evening.</p>
+            <div class="graph-card">
+                <h3 class="graph-title">Hourly Riding Patterns</h3>
+                <div class="graph-description">
+                    <p>Members have two distinct peaks: early morning (7–8 AM) and late afternoon (5–6 PM) — typical commuter hours. Casual riders show activity building through the day, with the highest point at 6 PM and sustained use through the afternoon and evening.</p>
                 </div>
-                <img src="count_of_trips_by_hour_according_to_customers.png" alt="Hourly riding patterns chart">
+                <div class="graph-image">
+                    <img src="count_of_trips_by_hour_according_to_customers.png" alt="Hourly riding patterns">
+                </div>
             </div>
 
             <!-- Monthly Riding Trends -->
-            <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Monthly Riding Trends</div>
-                <div class="graph-explanation">
-                    <p>This graph shows total rides per month from September through December. September has the highest ridership at 0.48 million rides. There is a steady decline each month, with October at 0.38M, November dropping to 0.18M, and December at 0.16M rides.</p>
+            <div class="graph-card">
+                <h3 class="graph-title">Monthly Riding Trends</h3>
+                <div class="graph-description">
+                    <p>September has the highest ridership (0.48M rides). There is a steady decline through October (0.38M), November (0.18M), and December (0.16M) — reflecting seasonal weather impact.</p>
                 </div>
-                <img src="count_of_trips_by_month_according_to_customers.png" alt="Monthly riding trends chart">
+                <div class="graph-image">
+                    <img src="count_of_trips_by_month_according_to_customers.png" alt="Monthly riding trends">
+                </div>
             </div>
 
             <!-- Trip Duration Distribution -->
-            <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Trip Duration Distribution</div>
-                <div class="graph-explanation">
-                    <p>This graph shows the distribution of trip durations for casual riders. The highest number of casual rides occur around 300 seconds (5 minutes) with 5000 rides. As trip duration increases beyond 300 seconds, the number of rides gradually decreases. Another peak occurs around 150 seconds with 20,000 rides.</p>
+            <div class="graph-card">
+                <h3 class="graph-title">Trip Duration Distribution</h3>
+                <div class="graph-description">
+                    <p>For casual riders, the highest number of rides occur around 300 seconds (5 minutes) with 5,000 rides. A secondary peak appears around 150 seconds (20,000 rides). As duration increases beyond 300 seconds, ride frequency gradually decreases.</p>
                 </div>
-                <img src="count_of_trips_by_sec_according_to_customers.png" alt="Trip duration distribution chart">
+                <div class="graph-image">
+                    <img src="count_of_trips_by_sec_according_to_customers.png" alt="Trip duration distribution">
+                </div>
             </div>
 
             <!-- Rider Type Composition -->
-            <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Rider Type Composition</div>
-                <div class="graph-explanation">
-                    <p>This graph shows the breakdown of total rides between the two user types. Casual riders account for 0.62 million rides (22.92% of total). Members account for 2.09 million rides (77.08% of total). The data shows that members account for approximately 77% of total rides, while casual riders account for approximately 23% of total rides.</p>
+            <div class="graph-card">
+                <h3 class="graph-title">Rider Type Composition</h3>
+                <div class="graph-description">
+                    <p>Casual riders account for 0.62 million rides (22.92% of total). Members account for 2.09 million rides (77.08%). Members make up the majority of trips, but the casual segment (23%) represents a meaningful conversion opportunity.</p>
                 </div>
-                <img src="Percentage_of_ridelength_between_members_and_casuals.png" alt="Rider type composition chart">
+                <div class="graph-image">
+                    <img src="Percentage_of_ridelength_between_members_and_casuals.png" alt="Rider type composition">
+                </div>
             </div>
 
             <!-- Gender Distribution by Rider Type -->
-            <div class="image-card" style="margin-bottom: 2rem;">
-                <div class="graph-title">Gender Distribution by Rider Type</div>
-                <div class="graph-explanation">
-                    <p>This graph shows the percentage of rides attributed to gender within each rider category. For casual riders, 38% of rides are associated with a specific gender category. For members, 1% of rides are associated with a specific gender category. Male members are the peak at 45%.</p>
+            <div class="graph-card">
+                <h3 class="graph-title">Gender Distribution by Rider Type</h3>
+                <div class="graph-description">
+                    <p>Among casual riders, 38% of rides are associated with a specific gender category. Among members, 1% of rides are associated with a specific gender category. Male members represent the highest group at 45%.</p>
                 </div>
-                <img src="Percentage_of_trip_by_gender_according_to_members_and_casuals.png" alt="Gender distribution chart">
+                <div class="graph-image">
+                    <img src="Percentage_of_trip_by_gender_according_to_members_and_casuals.png" alt="Gender distribution">
+                </div>
             </div>
-        </section>
+        </div>
 
-        <section id="act">
-            <h2>5. Act</h2>
-            <div class="insight-card">
+        <!-- 5. Act -->
+        <div class="section" id="act">
+            <div class="section-header">
+                <span class="section-number">5.</span>
+                <h2 class="section-title">Act</h2>
+            </div>
+            <div class="insight-block">
                 <p><strong>Recommendations based on 2019 insights:</strong></p>
                 <ul>
-                    <li>Weekend marketing campaign targeting casual riders highlighting membership savings (since 60% of casual rides are on weekends).</li>
-                    <li>Introduce "weekend-only" or off-peak annual pass for casual users who primarily ride on weekends.</li>
-                    <li>App feature comparing trip costs vs. membership - show casual riders how much they could save with an annual membership.</li>
-                    <li>Targeted emails to casual riders who take frequent long weekend trips during summer months.</li>
+                    <li>Launch weekend marketing campaigns targeting casual riders, highlighting membership savings (since casuals ride most on weekends).</li>
+                    <li>Introduce a “weekend‑only” or off‑peak annual pass for casual users who primarily ride on weekends.</li>
+                    <li>Add an in‑app feature that compares per‑trip costs versus a membership — show casual riders potential savings.</li>
+                    <li>Send targeted emails to casual riders who take frequent long weekend trips during warmer months.</li>
                 </ul>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="social-links">
-            <a href="https://wa.me/96103880340" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://linkedin.com/in/nibal-sharrouf" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:nebal.sharrouf@gmail.com"><i class="far fa-envelope"></i></a>
-            <a href="https://github.com/nebalsharrouf" target="_blank"><i class="fab fa-github"></i></a>
         </div>
-        <div class="copyright">
-            <p>© 2026 Nibal Sharrouf · Google Data Analytics Capstone · 2019 Cyclistic Data Analysis</p>
+
+        <!-- Footer -->
+        <div class="report-footer">
+            <p>© 2026 Nibal Sharrouf · Google Data Analytics capstone · Data: Cyclistic 2019 (public)</p>
         </div>
-    </footer>
-
-    <script>
-        (function() {
-            const nav = document.getElementById('mainNav');
-            const toggleBtn = document.getElementById('menuToggle');
-            const overlay = document.getElementById('navOverlay');
-            const navLinks = document.querySelectorAll('.nav-menu a');
-            const sections = document.querySelectorAll('section');
-
-            function openMenu() {
-                nav.classList.add('open');
-                overlay.classList.add('open');
-                toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
-            }
-            
-            function closeMenu() {
-                nav.classList.remove('open');
-                overlay.classList.remove('open');
-                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-
-            toggleBtn.addEventListener('click', () => {
-                nav.classList.contains('open') ? closeMenu() : openMenu();
-            });
-
-            overlay.addEventListener('click', closeMenu);
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 700) closeMenu();
-                });
-            });
-
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 700) closeMenu();
-            });
-
-            function setActive(id) {
-                navLinks.forEach(l => l.classList.remove('active'));
-                const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
-                if (activeLink) activeLink.classList.add('active');
-            }
-
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= 150 && rect.bottom > 150) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                if (current) setActive(current);
-                else if (window.scrollY < 200) setActive('overview');
-            });
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (link.getAttribute('href') === 'index.html') return;
-                    
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href').substring(1);
-                    const targetEl = document.getElementById(targetId);
-                    if (targetEl) {
-                        targetEl.scrollIntoView({ behavior: 'smooth' });
-                        setActive(targetId);
-                    }
-                });
-            });
-
-            setActive(window.location.hash ? window.location.hash.substring(1) : 'overview');
-        })();
-    </script>
+    </div>
 </body>
 </html>
