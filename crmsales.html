@@ -1,1 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>CRM Sales Analysis · Nibal Sharrouf</title>
+    <meta name="description" content="CRM Sales Pipeline Analysis by Nibal Sharrouf — Google Sheets dashboard project. B2B sales performance tracking with interactive visualizations.">
+    <meta name="author" content="Nibal Sharrouf">
+    
+    <meta property="og:title" content="CRM Sales Pipeline Dashboard · Nibal Sharrouf">
+    <meta property="og:description" content="Sales analysis project exploring B2B sales opportunities, agent performance, and quarterly trends for a computer hardware company.">
+    <meta property="og:type" content="website">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Pacifico&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #ffffff;
+            --color-text: #1e293b;
+            --color-text-light: #334155;
+            --color-primary-dark: #0f172a;
+            --color-secondary-dark: #1e293b;
+            --color-border: #e2e8f0;
+            --color-footer-bg: #f1f5f9;
+            --font-base: 'Inter', system-ui, sans-serif;
+            --font-signature: 'Pacifico', cursive;
+            --max-width: 1000px;
+            --header-height: 70px;
+        }
+
+        body {
+            font-family: var(--font-base);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .main-header {
+            background: var(--color-primary-dark);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .header-logo {
+            font-family: var(--font-signature);
+            font-size: 1.7rem;
+            color: white;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: opacity 0.2s;
+        }
+        .header-logo:hover { opacity: 0.85; }
+
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: white;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        .header-spacer { width: 75px; }
+
+        .nav-toggle {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            display: none;
+            line-height: 1;
+        }
+
+        .main-nav {
+            background: var(--color-secondary-dark);
+            transition: transform 0.3s ease, opacity 0.2s;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 0.75rem 1.5rem;
+            gap: 0.5rem 1.8rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.3rem;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .nav-menu a:hover { border-bottom-color: #94a3b8; }
+        .nav-menu a.active { border-bottom-color: white; font-weight: 600; }
+
+        @media (max-width: 700px) {
+            .nav-toggle { display: block; }
+            
+            .main-nav {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 260px;
+                height: 100vh;
+                background: var(--color-secondary-dark);
+                transform: translateX(-100%);
+                opacity: 0;
+                box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+                z-index: 1050;
+                overflow-y: auto;
+            }
+            
+            .main-nav.open { transform: translateX(0); opacity: 1; }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem 1.5rem;
+                gap: 1rem;
+            }
+            
+            .nav-menu a {
+                font-size: 1.15rem;
+                padding: 0.5rem 0;
+                width: 100%;
+            }
+            
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(15, 23, 42, 0.5);
+                backdrop-filter: blur(2px);
+                z-index: 1040;
+            }
+            .nav-overlay.open { display: block; }
+            
+            .header-title {
+                font-size: 1rem;
+                max-width: 140px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .header-logo { font-size: 1.4rem; }
+        }
+
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        section {
+            scroll-margin-top: calc(var(--header-height) + 20px);
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        section:last-of-type { border-bottom: none; }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 4px solid #dbeafe;
+            color: #0f172a;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: #1e293b;
+        }
+
+        p, li {
+            color: var(--color-text-light);
+            max-width: 75ch;
+            margin-bottom: 1rem;
+        }
+
+        .soft-highlight {
+            background: #dbeafe;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        .brief-block {
+            margin: 2rem 0;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .image-card {
+            padding: 1.5rem;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto 0.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--color-border);
+            max-height: 280px;
+            object-fit: contain;
+            background: white;
+        }
+
+        .stats-box {
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            padding: 0.5rem 0;
+        }
+
+        .graph-explanation {
+            margin: 1rem 0 0.8rem;
+            font-size: 0.95rem;
+        }
+        .graph-explanation p { margin-bottom: 0.3rem; }
+        .graph-title { 
+            font-weight: 700; 
+            color: #0f172a; 
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            background: #f1f5f9;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .data-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .dashboard-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #0f172a;
+        }
+
+        .feature-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+        }
+
+        footer {
+            background: var(--color-footer-bg);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.8rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: #334155;
+            font-size: 2.2rem;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .social-links a:hover {
+            color: #0f172a;
+            transform: scale(1.1);
+        }
+        .copyright { color: #475569; font-size: 0.9rem; }
+
+        @media (max-width: 500px) {
+            h2 { font-size: 1.9rem; }
+            .image-card img { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <a href="index.html" class="header-logo">Nibal</a>
+        <div class="header-title">CRM SALES DASHBOARD</div>
+        <div style="display: flex; align-items: center;">
+            <button class="nav-toggle" id="menuToggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <span class="header-spacer"></span>
+        </div>
+    </header>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <nav class="main-nav" id="mainNav">
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#ask">Business Task</a></li>
+            <li><a href="#prepare">Data Source</a></li>
+            <li><a href="#process">Preparation</a></li>
+            <li><a href="#analyze">Analysis</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#act">Conclusion</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="overview">
+            <h2>Project Overview</h2>
+            <div>
+                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;"><span class="soft-highlight">Authorship</span></p>
+                <p><strong>Nibal Sharrouf</strong> performed this analysis in <strong>March 2026</strong> as a guided project from <strong>Maven Analytics</strong>. The analysis used <strong>Google Sheets</strong> to explore B2B sales pipeline data from a fictitious computer hardware company. The goal is to help sales managers track quarterly performance and understand how sales opportunities progress through the pipeline.</p>
+            </div>
+
+            <div class="brief-block">
+                <p style="font-weight: 600; margin-bottom: 1.2rem;">Project Scope</p>
+                <p>Using Google Sheets, the data was cleaned, joined, and analyzed using pivot tables before building an interactive dashboard that allows managers to monitor sales performance and compare results across quarters, sales agents, and regional offices.</p>
+            </div>
+        </section>
+
+        <section id="ask">
+            <h2>1. Business Task</h2>
+            <div style="margin-bottom: 2rem;">
+                <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.5rem;">Objective</p>
+                <p>The objective of this project is to build a dashboard that helps sales managers answer key questions such as:</p>
+                <ul style="margin-top: 1rem; padding-left: 2rem;">
+                    <li>How many sales opportunities were won each quarter?</li>
+                    <li>What percentage of opportunities were won versus lost?</li>
+                    <li>Which sales agents are performing the best?</li>
+                    <li>How does performance vary across managers and regional offices?</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">By answering these questions, managers can identify high-performing agents, monitor sales trends, and improve overall team performance.</p>
+            </div>
+        </section>
+
+        <section id="prepare">
+            <h2>2. Data Source</h2>
+            <div>
+                <p>The dataset comes from <strong>Maven Analytics Guided Project — CRM Sales Opportunities</strong>.</p>
+                <p>It contains two tables with approximately <strong>8,800 sales opportunities</strong>:</p>
+                
+                <h3>Sales Pipeline Table</h3>
+                <table class="data-table">
+                    <tr><th>Field</th><th>Description</th></tr>
+                    <tr><td>opportunity_id</td><td>Unique identifier for each sales opportunity</td></tr>
+                    <tr><td>sales_agent</td><td>Name of the sales agent</td></tr>
+                    <tr><td>product</td><td>Product being sold</td></tr>
+                    <tr><td>account</td><td>Customer account name</td></tr>
+                    <tr><td>deal_stage</td><td>Won, Lost, or Engaging</td></tr>
+                    <tr><td>engage_date</td><td>Date of initial engagement</td></tr>
+                    <tr><td>close_date</td><td>Date deal was closed</td></tr>
+                    <tr><td>close_value</td><td>Value of the closed deal</td></tr>
+                </table>
+
+                <h3 style="margin-top: 2rem;">Sales Teams Table</h3>
+                <table class="data-table">
+                    <tr><th>Field</th><th>Description</th></tr>
+                    <tr><td>sales_agent</td><td>Name of the sales agent</td></tr>
+                    <tr><td>manager</td><td>Agent's manager</td></tr>
+                    <tr><td>regional_office</td><td>Regional office location</td></tr>
+                </table>
+                
+                <div class="image-card" style="margin-top: 2rem;">
+                    <div class="graph-title">Sales Teams Table Structure</div>
+                    <img src="Sales_Team_Table.png" alt="Sales teams table structure">
+                </div>
+            </div>
+        </section>
+
+        <section id="process">
+            <h2>3. Data Preparation</h2>
+            <p>Before building the dashboard, the data was prepared and validated.</p>
+            
+            <div style="margin: 2rem 0;">
+                <h3>Preparation Steps:</h3>
+                <ul style="padding-left: 2rem; margin-top: 1rem;">
+                    <li>Inspecting the dataset to understand structure and fields</li>
+                    <li>Checking for missing or inconsistent values</li>
+                    <li>Converting text dates into proper date format</li>
+                    <li>Creating a <strong>Year-Quarter field</strong> for time analysis</li>
+                    <li>Joining the sales pipeline table with the sales team table using <strong>XLOOKUP</strong> to add regional_office and manager</li>
+                </ul>
+            </div>
+
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="graph-title">Regional Office XLOOKUP</div>
+                    <p style="font-size: 0.95rem; color: #475569;">Adding regional office information using XLOOKUP to join tables.</p>
+                    <img src="Regional_office_XLookUp.png" alt="Regional office XLOOKUP">
+                </div>
+                
+                <div class="image-card">
+                    <div class="graph-title">Manager XLOOKUP</div>
+                    <p style="font-size: 0.95rem; color: #475569;">Adding manager information to the sales pipeline data.</p>
+                    <img src="Mnager_XLookUp.png" alt="Manager XLOOKUP">
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem;">This preparation ensured the dataset was ready for analysis and visualization.</p>
+        </section>
+
+        <section id="analyze">
+            <h2>4. Data Analysis</h2>
+            <p style="margin-bottom: 2rem;">Pivot tables were created to explore the sales pipeline and identify key trends.</p>
+            
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="graph-title">Opportunities Won by Quarter</div>
+                    <div class="graph-explanation">
+                        <p>Analysis of won opportunities broken down by quarter to track performance over time.</p>
+                    </div>
+                    <img src="Opportunities_Won_by_Quarter.png" alt="Opportunities won by quarter">
+                </div>
+                
+                <div class="image-card">
+                    <div class="graph-title">Win vs Loss Percentage</div>
+                    <div class="graph-explanation">
+                        <p>Percentage breakdown of deals won versus lost in the most recent quarter.</p>
+                    </div>
+                    <img src="Win_Vs_Loss.png" alt="Win vs loss percentage">
+                </div>
+                
+                <div class="image-card">
+                    <div class="graph-title">Sales Agent Performance</div>
+                    <div class="graph-explanation">
+                        <p>Top-performing sales agents ranked by opportunities won.</p>
+                    </div>
+                    <img src="Sales_Agent_Performance.png" alt="Sales agent performance">
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard">
+            <h2>5. Interactive Dashboard</h2>
+            <p>A dynamic dashboard was created in Google Sheets to visualize the key insights.</p>
+
+            <div class="dashboard-features">
+                <div class="feature-card">
+                    <h4><i class="fas fa-chart-line" style="margin-right: 0.5rem;"></i> Scorecard</h4>
+                    <p>Displays the number of opportunities won in the most recent quarter and compares it with the previous quarter.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><i class="fas fa-chart-pie" style="margin-right: 0.5rem;"></i> Pie Chart</h4>
+                    <p>Shows the percentage of deals won vs lost in the most recent quarter.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><i class="fas fa-chart-bar" style="margin-right: 0.5rem;"></i> Bar Chart</h4>
+                    <p>Shows the top-performing sales agents based on opportunities won.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><i class="fas fa-filter" style="margin-right: 0.5rem;"></i> Interactive Filters</h4>
+                    <p>Slicers allow managers to filter the dashboard by Manager and Regional Office.</p>
+                </div>
+            </div>
+
+            <div class="image-card" style="margin-top: 2rem;">
+                <div class="graph-title">Complete Sales Dashboard</div>
+                <div class="graph-explanation">
+                    <p>The final interactive dashboard includes all visualizations with slicers for dynamic filtering by manager and regional office.</p>
+                </div>
+                <img src="Final_Dashboard.png" alt="Complete sales dashboard">
+            </div>
+        </section>
+
+        <section id="act">
+            <h2>6. Conclusion</h2>
+            
+            <div>
+                <p>The analysis of the CRM sales pipeline provided valuable insights into the sales team's quarterly performance. By cleaning and preparing the dataset and using pivot tables and visualizations in Google Sheets, it became easier to track how opportunities move through the pipeline and identify trends in sales outcomes.</p>
+                
+                <p>The dashboard highlights key performance indicators such as:</p>
+                <ul style="padding-left: 2rem; margin: 1rem 0;">
+                    <li><strong>Opportunities won</strong> — tracking quarterly performance</li>
+                    <li><strong>Win versus loss percentages</strong> — understanding conversion rates</li>
+                    <li><strong>Top-performing sales agents</strong> — identifying best performers</li>
+                </ul>
+                
+                <p>With the use of interactive filters for managers and regional offices, sales managers can quickly explore performance across different teams and time periods, helping them make more informed decisions and improve overall sales effectiveness.</p>
+                
+                <p style="margin-top: 2rem; font-style: italic; color: #475569;">This dashboard enables data-driven sales management, allowing teams to focus on what works best and optimize their sales pipeline for better results.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://wa.me/96103880340" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://linkedin.com/in/nibal-sharrouf" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:nebal.sharrouf@gmail.com"><i class="far fa-envelope"></i></a>
+            <a href="https://github.com/nebalsharrouf" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+        <div class="copyright">
+            <p>© 2026 Nibal Sharrouf · Maven Analytics Guided Project · CRM Sales Pipeline Analysis</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            const nav = document.getElementById('mainNav');
+            const toggleBtn = document.getElementById('menuToggle');
+            const overlay = document.getElementById('navOverlay');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const sections = document.querySelectorAll('section');
+
+            function openMenu() {
+                nav.classList.add('open');
+                overlay.classList.add('open');
+                toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+            }
+            
+            function closeMenu() {
+                nav.classList.remove('open');
+                overlay.classList.remove('open');
+                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                nav.classList.contains('open') ? closeMenu() : openMenu();
+            });
+
+            overlay.addEventListener('click', closeMenu);
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 700) closeMenu();
+                });
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 700) closeMenu();
+            });
+
+            function setActive(id) {
+                navLinks.forEach(l => l.classList.remove('active'));
+                const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 150 && rect.bottom > 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                if (current) setActive(current);
+                else if (window.scrollY < 200) setActive('overview');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.getAttribute('href') === 'index.html') return;
+                    
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                        setActive(targetId);
+                    }
+                });
+            });
+
+            setActive(window.location.hash ? window.location.hash.substring(1) : 'overview');
+        })();
+    </script>
+</body>
+</html>
