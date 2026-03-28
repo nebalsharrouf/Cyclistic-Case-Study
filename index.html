@@ -368,6 +368,39 @@
             h2 { font-size: 1.8rem; }
             .profile-name { font-size: 1.5rem; }
         }
+
+        /* Simple name block - no background */
+        .name-simple {
+            margin: 1rem 0 0.5rem 0;
+            padding: 0;
+            background: transparent;
+        }
+        .name-simple p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 0.25rem;
+        }
+        .name-simple .name-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+        hr {
+            margin: 1rem 0;
+            border-color: var(--border-light);
+        }
+        .new-badge {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            margin-left: 0.8rem;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -406,7 +439,7 @@
                 <div class="profile-desc">
                     <div class="profile-name">Nibal Sharrouf</div>
                     <p style="color: #2563eb; font-weight: 500; margin-bottom: 1rem;">junior data analyst · Power BI · Excel · SQL · Python · Google certified</p>
-                    <p>Motivated and detail-oriented, I transform data into meaningful business insights. This portfolio showcases my capstone project (Cyclistic bike‑share), along with the BMW sales dashboard. Based on the human side of data — always curious, always learning.</p>
+                    <p>Freelance Data Analyst with a Bachelor's in Computer Science and Google Data Analytics certification. Skilled in transforming complex datasets of up to 100,000+ records into actionable business insights using SQL, Python, Excel, and Power BI. Experienced in building interactive dashboards, automating data workflows, and delivering data-driven recommendations to support strategic decision-making.</p>
                 </div>
             </div>
             <div style="margin-top: 2rem; padding: 1rem 0;">
@@ -414,94 +447,111 @@
             </div>
         </section>
 
-        <!-- RESUME SECTION -->
+        <!-- RESUME SECTION - EXACT CONTENT FROM CV (NO BACKGROUND, SIMPLE STYLE) -->
         <section id="resume">
             <h2>Resume</h2>
             
-            <!-- name & contact -->
-            <p style="font-size: 1.8rem; font-weight: 600; margin-bottom: 0.5rem;">Nibal Sharrouf</p>
-            <div class="contact-line">
-                <span><i class="fas fa-map-marker-alt"></i> Lebanon</span>
-                <span><i class="far fa-envelope"></i> nebal.sharrouf@gmail.com</span>
-                <span><i class="fas fa-phone-alt"></i> +961 03 880 340</span>
-                <span><i class="fab fa-linkedin"></i> linkedin.com/in/nibal-sharrouf</span>
-                <span><i class="fab fa-github"></i> github.com/nebalsharrouf</span>
+            <!-- SIMPLE NAME BLOCK - NO YELLOW BACKGROUND -->
+            <div class="name-simple">
+                <div class="name-title">Nibal Sharrouf | Junior Data Analyst | Business Intelligence Specialist</div>
+                <p>Lebanon | Phone: +961 03 880 340 | Email: nebal.sharrouf@gmail.com | LinkedIn: linkedin.com/in/nibal-sharrouf</p>
+                <p>GitHub: github.com/nebalsharrouf | Portfolio: nebalsharrouf.github.io/MyPortfolioNibalSharrouf</p>
             </div>
 
-            <!-- professional summary -->
-            <div style="margin: 2rem 0 1.8rem;">
-                <p style="font-weight: 600; margin-bottom: 0.5rem;">Professional Summary</p>
-                <p>Motivated and detail-oriented Junior Data Analyst with strong interest in transforming data into meaningful business insights. I recently completed the Google Data Analytics Professional Certificate and worked on real-world data analysis projects using tools such as Power BI, Excel, SQL, and Python. Passionate about continuous learning and building practical data analytics solutions.</p>
+            <p style="font-weight: 600; margin: 1.5rem 0 0.5rem;">PROFESSIONAL SUMMARY</p>
+            <p>Freelance Data Analyst with a Bachelor's in Computer Science and Google Data Analytics certification. Skilled in transforming complex datasets of up to <strong>100,000+ records</strong> into actionable business insights using SQL, Python, Excel, and Power BI. Experienced in building interactive dashboards, automating data workflows, and delivering data-driven recommendations to support strategic decision-making.</p>
+
+            <p style="font-weight: 600; margin: 1.8rem 0 0.5rem;">PROFESSIONAL EXPERIENCE</p>
+            <p><strong>Freelance Data Analyst</strong> | Remote | 3 March 2026 -- Present</p>
+            <ul style="margin-left: 1.8rem; margin-bottom: 1rem; color: var(--text-secondary);">
+                <li>Collected, cleaned, and transformed datasets from multiple sources.</li>
+                <li>Built <strong>5+ interactive Power BI dashboards</strong> tracking <strong>15+ KPIs</strong>, adopted by clients to monitor sales, customer trends, and operational performance</li>
+                <li>Analyzed customer behavior and sales data, identifying trends that contributed to a <strong>12% increase in client-reported sales growth</strong></li>
+                <li>Delivered clear, insight-driven reports with visual storytelling to support strategic business decisions</li>
+            </ul>
+
+            <p style="font-weight: 600; margin: 1rem 0 0.5rem;">PROJECTS</p>
+            <div class="project-item">
+                <strong>Sales & Returns Analysis -- Google BigQuery + Power BI</strong> <span class="project-date">28 March 2026</span>
+                <p style="margin-top: 0.3rem; color: var(--text-secondary);">Built a scalable data model using Google BigQuery, and returns data into a unified analytical table. Cleaned and transformed 100,000+ records using SQL to ensure data accuracy and consistency. Developed an interactive Power BI dashboard to visualize trends, and enabling data-driven decision-making.</p>
+            </div>
+            <div class="project-item">
+                <strong>Cyclistic Bike-Share Case Study</strong> <span class="project-date">14 March 2026</span>
+                <p style="margin-top: 0.3rem; color: var(--text-secondary);">Analyzed <strong>3,000,000+ trip records</strong> using Python and SQL to identify the differences between casual and annual riders. Built an interactive Power BI dashboard to visualize insights and support marketing strategy recommendations. Delivered actionable insights that informed targeted campaigns, projected to <strong>increase annual memberships by 12%</strong>.</p>
+            </div>
+            <div class="project-item">
+                <strong>CRM Sales Pipeline Analysis -- Google Sheets</strong> <span class="project-date">3 March 2026</span>
+                <p style="margin-top: 0.3rem; color: var(--text-secondary);">Analyzed <strong>8,800+ B2B sales pipeline records</strong> to evaluate performance metrics and conversion rates. Cleaned and structured raw data using formulas (VLOOKUP, IF, QUERY) and data validation techniques. Built pivot table dashboards with dynamic slicers to track KPIs including <strong>win rate (24%)</strong>, and average deal size.</p>
+            </div>
+            <div class="project-item">
+                <strong>BMW Sales Dashboard -- Power BI</strong> <span class="project-date">20 Feb 2026</span>
+                <p style="margin-top: 0.3rem; color: var(--text-secondary);">Developed an interactive dashboard analyzing yearly sales performance and revenue trends across <strong>10+ regions</strong>. Visualized key metrics including product performance, regional growth, and year-over-year revenue comparisons. Applied data modeling and DAX calculations to enable dynamic filtering and deeper analysis. Enhanced business understanding through clear visual storytelling, enabling faster regional strategy adjustments.</p>
             </div>
 
-            <!-- skills -->
-            <div style="margin-bottom: 2rem;">
-                <p style="font-weight: 600; margin-bottom: 1rem;">Skills</p>
-                <div class="skill-tags">
-                    <span class="skill-tag">Data Cleaning</span>
-                    <span class="skill-tag">Data Visualization</span>
-                    <span class="skill-tag">Data Interpretation</span>
-                    <span class="skill-tag">Business Insights</span>
-                    <span class="skill-tag">Power BI</span>
-                    <span class="skill-tag">Excel</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Tableau</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">E‑commerce</span>
-                    <span class="skill-tag">Data Transformation</span>
-                    <span class="skill-tag">Dashboard Design</span>
-                    <span class="skill-tag">Data Modeling</span>
-                    <span class="skill-tag">Basic DAX</span>
-                </div>
+            <p style="font-weight: 600; margin: 1.5rem 0 0.5rem;">SKILLS</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Data Cleaning</span>
+                <span class="skill-tag">Data Wrangling</span>
+                <span class="skill-tag">EDA</span>
+                <span class="skill-tag">Statistical Analysis</span>
+                <span class="skill-tag">KPI Analysis</span>
+                <span class="skill-tag">Data Interpretation</span>
+                <span class="skill-tag">Power BI</span>
+                <span class="skill-tag">SQL (PostgreSQL, MySQL)</span>
+                <span class="skill-tag">Python (Pandas, NumPy)</span>
+                <span class="skill-tag">Excel</span>
+                <span class="skill-tag">Google Sheets</span>
+                <span class="skill-tag">Tableau</span>
+                <span class="skill-tag">Dashboard Design</span>
+                <span class="skill-tag">Data Visualization</span>
+                <span class="skill-tag">Reporting</span>
+                <span class="skill-tag">Data Modeling</span>
+                <span class="skill-tag">Data Storytelling</span>
+                <span class="skill-tag">DAX (Basic)</span>
+                <span class="skill-tag">ETL</span>
+                <span class="skill-tag">Data Transformation</span>
+                <span class="skill-tag">Query Optimization</span>
+                <span class="skill-tag">Data Preparation Pipelines</span>
+                <span class="skill-tag">E-commerce Analytics</span>
+                <span class="skill-tag">Sales Analytics</span>
+                <span class="skill-tag">CRM Analysis</span>
+                <span class="skill-tag">Customer Segmentation</span>
             </div>
 
-            <!-- projects -->
-            <div style="margin-bottom: 2rem;">
-                <p style="font-weight: 600; margin-bottom: 0.8rem;">Projects</p>
-                <div class="project-item">
-                    <strong>Cyclistic Bike-Share Case Study</strong> <span class="project-date">March 2026</span>
-                    <p style="margin-top: 0.3rem; color: var(--text-secondary);">Analyzed the differences between casual and annual members to support marketing decisions. Cleaned and prepared large datasets using Python. Created visualizations to identify user behavior and usage trends using Powerbi.</p>
-                </div>
-                <div class="project-item">
-                    <strong>BMW Sales Dashboard – Power BI</strong> <span class="project-date">March 2026</span>
-                    <p style="margin-top: 0.3rem; color: var(--text-secondary);">Designed an interactive Power BI dashboard to analyze annual BMW sales. Built visualizations to highlight sales performance and revenue trends. Developed following the data analysis framework.</p>
-                </div>
-                <div class="project-item">
-                    <strong>CRM Sales Pipeline Analysis – Google Sheets</strong> <span class="project-date">March 2026</span>
-                    <p style="margin-top: 0.3rem; color: var(--text-secondary);">Analyzed B2B sales pipeline data using Google Sheets. Created pivot tables and an interactive dashboard to track quarterly performance, win rates, and top sales agents. Added slicers for filtering by manager and regional office.</p>
-                </div>
-            </div>
+            <p style="font-weight: 600; margin: 1.5rem 0 0.5rem;">CERTIFICATIONS</p>
+            <p><strong>Google Data Analytics Professional Certificate</strong> | Google | Completed -- March 2026</p>
+            <p><strong>Microsoft Power BI Data Analyst (PL-300)</strong> | Microsoft | In Progress -- Expected May 2026</p>
 
-            <!-- license & education -->
-            <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem;">
-                <div style="min-width: 200px;">
-                    <p style="font-weight: 600;">Licenses</p>
-                    <p>Google Data Analytics Professional Certificate <br> <span style="color: #475569;">March 2026</span></p>
-                    <p style="margin-top: 0.8rem;">Microsoft Power BI Data Analyst <br> <span style="color: #475569;">(pending)</span></p>
-                </div>
-                <div>
-                    <p style="font-weight: 600;">Education</p>
-                    <p>Bachelor of Computer Science <br> <span style="color: #475569;">Lebanese International University (LIU) · June 2025</span></p>
-                </div>
-            </div>
+            <p style="font-weight: 600; margin: 1.5rem 0 0.5rem;">EDUCATION</p>
+            <p><strong>Bachelor of Computer Science</strong><br>Lebanese International University (LIU) | Beirut, Lebanon <em>Graduated: June 2025</em></p>
 
-            <!-- languages -->
-            <p style="font-weight: 600;">Languages</p>
-            <p>Arabic — Native &nbsp;&nbsp; English — Fluent</p>
+            <p style="font-weight: 600; margin: 1.5rem 0 0.5rem;">LANGUAGES</p>
+            <p><strong>Arabic</strong> -- Native</p>
+            <p><strong>English</strong> -- Fluent (Professional Working Proficiency)</p>
 
-            <!-- download button -->
             <div style="margin-top: 2.5rem;">
-                <a href="Resume.docx" class="resume-download" download>
-                    <i class="fas fa-file-word"></i> Download resume (DOCX)
+                <a href="Nibal_Sharrouf_Resume.docx" class="resume-download" download>
+                    <i class="fas fa-file-word"></i> Download original CV (DOCX)
                 </a>
-                <span style="margin-left: 1rem; color: #64748b; font-size: 0.9rem;">(your updated CV)</span>
+                <span style="margin-left: 1rem; color: #64748b; font-size: 0.9rem;">(exact content from customer document)</span>
             </div>
         </section>
 
-        <!-- PROJECTS SECTION -->
+        <!-- PROJECTS SECTION - NEWEST PROJECT (All Companies Data) AT THE TOP -->
         <section id="projects">
-            <h2>Featured projects</h2>
+            <h2>Featured projects <span style="font-size: 0.9rem; font-weight: normal; color: #64748b;">(latest first)</span></h2>
             <div class="portfolio-grid">
+                <!-- NEW: Sales & Returns Analysis - NEWEST, placed first -->
+                <div class="project-card">
+                    <div class="card-icon"><i class="fas fa-database"></i></div>
+                    <h3>All Companies Data <span class="new-badge">NEWEST</span></h3>
+                    <p>End-to-end SQL pipeline consolidating multi-source company data. Cleaned 100k+ records, built enriched fact table with product/customer dimensions. Complete BigQuery workflow with data quality checks.</p>
+                    <div class="project-tags">
+                        <span class="tag">BigQuery</span><span class="tag">SQL</span><span class="tag">Data Modeling</span><span class="tag">ETL</span><span class="tag">PowerBi</span>
+                    </div>
+                    <a href="Customerproject.html" class="btn-ghost">explore workflow <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
                 <!-- Cyclistic case study -->
                 <div class="project-card">
                     <div class="card-icon"><i class="fas fa-bicycle"></i></div>
@@ -512,6 +562,7 @@
                     </div>
                     <a href="project1.html" class="btn-ghost">view case study <i class="fas fa-arrow-right"></i></a>
                 </div>
+                
                 <!-- BMW dashboard -->
                 <div class="project-card">
                     <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
@@ -522,6 +573,7 @@
                     </div>
                     <a href="https://www.linkedin.com/posts/nibal-sharrouf_powerbi-dataanalytics-dashboarddesign-activity-7434686730332684288-fMXp?utm_medium=ios_app&rcm=ACoAAFZNVTsBtLDpP4G3SW3KiOITYZdx_OTVOoQ&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener noreferrer" class="btn-ghost">watch demo <i class="fas fa-arrow-right"></i></a>
                 </div>
+                
                 <!-- CRM Sales Analysis -->
                 <div class="project-card">
                     <div class="card-icon"><i class="fas fa-chart-line"></i></div>
@@ -535,7 +587,7 @@
             </div>
         </section>
 
-                <!-- LICENSES SECTION -->
+        <!-- LICENSES SECTION -->
         <section id="licenses">
             <h2>Licenses & certificates</h2>
             <div style="padding: 1rem 0;">
@@ -551,11 +603,13 @@
             <p style="margin-top: 1.5rem; color: #475569;">focused on core credentials — always learning.</p>
         </section>
 
+    </main>
+
     <footer>
         <div class="social-links">
             <a href="https://wa.me/96103880340?text=Hi%20Nibal" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             <a href="https://linkedin.com/in/nibal-sharrouf" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="nebal.sharrouf@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
+            <a href="mailto:nebal.sharrouf@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
             <a href="https://github.com/nebalsharrouf" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
         </div>
         <div class="copyright">
