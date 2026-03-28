@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>All Companies Data · Nibal Sharrouf</title>
-    <meta name="description" content="All Companies Data project by Nibal Sharrouf — Customer data integration and SQL workflow for consolidating multi-source company data.">
+    <title>Sales & Returns Analysis · Nibal Sharrouf</title>
+    <meta name="description" content="Sales and Returns Analysis project by Nibal Sharrouf — Customer data integration and SQL workflow for consolidating multi-source company data.">
     <meta name="author" content="Nibal Sharrouf">
     
-    <meta property="og:title" content="All Companies Data · Nibal Sharrouf">
+    <meta property="og:title" content="Sales & Returns Analysis · Nibal Sharrouf">
     <meta property="og:description" content="Data pipeline for cleaning, combining and enriching company sales data from multiple sources.">
     <meta property="og:type" content="website">
 
@@ -229,44 +229,15 @@
         }
 
         .image-card {
-            background: #fafcff;
-            border-radius: 24px;
             padding: 1.8rem;
-            border: 1px solid var(--color-border);
-            transition: box-shadow 0.2s ease;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .image-card:hover {
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--color-border);
         }
 
-        .image-header {
-            display: flex;
-            align-items: baseline;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 0.75rem;
-        }
-        .image-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #0f172a;
-            letter-spacing: -0.2px;
-        }
-        .image-order {
-            font-size: 0.85rem;
-            background: #eef2ff;
-            padding: 0.2rem 0.8rem;
-            border-radius: 40px;
-            color: #1e40af;
-            font-weight: 500;
-        }
         .image-desc {
             font-size: 1rem;
             color: #334155;
             margin-bottom: 1.5rem;
             line-height: 1.5;
-            border-left: 3px solid #cbd5e1;
             padding-left: 1rem;
         }
         .image-card img {
@@ -275,20 +246,18 @@
             height: auto;
             display: block;
             margin: 0 auto;
-            border-radius: 16px;
+            border-radius: 8px;
             border: 1px solid #e2e8f0;
             background: #ffffff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .stats-note {
-            background: #f8fafc;
+            background: transparent;
             padding: 1rem;
-            border-radius: 16px;
             margin-top: 1rem;
             font-family: monospace;
             font-size: 0.9rem;
-            border-left: 4px solid #2563eb;
+            border-left: 3px solid #64748b;
         }
 
         footer {
@@ -320,24 +289,67 @@
         @media (max-width: 700px) {
             h2 { font-size: 1.9rem; }
             .image-card { padding: 1.2rem; }
-            .image-title { font-size: 1.3rem; }
         }
-        .project-badge {
+
+        .workflow-list {
+            margin-left: 1.5rem;
+            color: #1e293b;
+        }
+        .workflow-list li {
+            margin-bottom: 0.5rem;
+        }
+        .quality-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: space-between;
+        }
+        .quality-card {
+            flex: 1;
+            min-width: 220px;
+            padding: 1.5rem;
+            border: 1px solid var(--color-border);
+        }
+        .quality-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.3rem;
+        }
+        .quality-card p {
+            font-size: 0.95rem;
+        }
+        .final-note {
+            margin-top: 1.8rem;
+            padding: 1rem;
+            border-left: 3px solid #64748b;
+        }
+        .next-steps-grid {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .next-step-card {
+            flex: 1;
+            border: 1px dashed #cbd5e1;
+            padding: 2rem;
+            text-align: center;
+        }
+        .next-step-card i {
+            font-size: 2.5rem;
+            color: #64748b;
+            margin-bottom: 1rem;
             display: inline-block;
-            background: #0f172a;
-            color: white;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-right: 0.8rem;
+        }
+        .next-step-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
 <body>
     <header class="main-header">
         <a href="index.html" class="header-logo">Nibal</a>
-        <div class="header-title">ALL COMPANIES DATA</div>
+        <div class="header-title">SALES & RETURNS ANALYSIS</div>
         <div style="display: flex; align-items: center;">
             <button class="nav-toggle" id="menuToggle" aria-label="Menu">
                 <i class="fas fa-bars"></i>
@@ -362,102 +374,83 @@
     <main>
         <!-- Overview Section -->
         <section id="overview">
-            <h2>📊 All Companies Data · Project Overview</h2>
+            <h2>Sales & Returns Analysis · Project Overview</h2>
             <div>
                 <p style="font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem;"><span class="soft-highlight">Customer-provided dataset</span></p>
                 <p><strong>Nibal Sharrouf</strong> executed this data integration project in <strong>March 2026</strong> on behalf of a client requiring unified sales data from multiple subsidiaries. The goal was to ingest, clean, and enrich company-wide sales records to enable cross-company analytics and visualization.</p>
                 <p>The workflow involved consolidating annual sales tables (2015–2017), performing rigorous data quality checks, cleaning missing keys, and finally building an enriched master table that joins customer, product, territory, and returns information. All transformations were implemented in <strong>BigQuery SQL</strong> and documented step by step.</p>
             </div>
             <div class="brief-block">
-                <p style="font-weight: 600; margin-bottom: 1rem;">🎯 Business Objective</p>
+                <p style="font-weight: 600; margin-bottom: 1rem;">Business Objective</p>
                 <p>Create a single source of truth named <code>final_sales</code> that includes complete customer names, product details, regional territories, category hierarchy, and return quantities. This table serves as the foundation for executive dashboards and cross-company performance analysis.</p>
                 <ul style="margin-top: 1rem; padding-left: 1.5rem;">
-                    <li>Consolidate fragmented sales tables (2015,2016,2017) → unified <code>sales</code> table</li>
+                    <li>Consolidate fragmented sales tables (2015, 2016, 2017) → unified <code>sales</code> table</li>
                     <li>Identify and remove incomplete records (null customer/product keys)</li>
                     <li>Enrich with dimensional data: customers, products, categories, territories, returns</li>
-                    <li>Ensure data completeness & integrity for reporting</li>
+                    <li>Ensure data completeness and integrity for reporting</li>
                 </ul>
             </div>
         </section>
 
         <!-- Data Pipeline: step-by-step images with descriptions -->
         <section id="data-pipeline">
-            <h2>🔁 Data Pipeline · Step by Step</h2>
+            <h2>Data Pipeline · Step by Step</h2>
             <p style="margin-bottom: 2rem;">The following images document the SQL transformation journey — from raw yearly tables to the final enriched dataset, exactly as executed in BigQuery.</p>
             <div class="image-grid">
                 
                 <!-- Step 1: Combine yearly tables -->
                 <div class="image-card">
-                    <div class="image-header">
-                        <span class="image-title">1. Union of yearly sales tables</span>
-                        <span class="image-order">Combine_sales_tables.png</span>
-                    </div>
                     <div class="image-desc">
-                        <strong>📁 Description:</strong> This script creates the base <code>Sales_Data.sales</code> table by stacking data from three yearly tables (Sales_2015, Sales_2016, Sales_2017) and adds a <code>year</code> column to preserve origin. This is the foundational consolidation step, ensuring all historical transactions are available in one place.
+                        <strong>1. Union of yearly sales tables</strong><br>
+                        This script creates the base <code>Sales_Data.sales</code> table by stacking data from three yearly tables (Sales_2015, Sales_2016, Sales_2017) and adds a <code>year</code> column to preserve origin. This is the foundational consolidation step, ensuring all historical transactions are available in one place.
                     </div>
-                    <img src="Combine_sales_tables.png" alt="Combining yearly sales tables using UNION ALL in BigQuery" onerror="this.style.display='none'; this.nextSibling.style.display='block';">
-                    <div style="display:none; color:#aaa; text-align:center; padding:1rem;">⚠️ Image placeholder: Combine_sales_tables.png</div>
+                    <img src="Combine_sales_tables.png" alt="Combining yearly sales tables using UNION ALL in BigQuery">
                 </div>
 
                 <!-- Step 2: Duplicate check -->
                 <div class="image-card">
-                    <div class="image-header">
-                        <span class="image-title">2. Detecting duplicate records</span>
-                        <span class="image-order">Screenshot (353).png</span>
-                    </div>
                     <div class="image-desc">
-                        <strong>🔍 Description:</strong> Data quality check that groups sales by <code>ProductKey</code> and <code>OrderDate</code> to flag any duplicate transactions. This query ensures no accidental duplication from the union step; duplicates would indicate ingestion errors that need to be resolved before cleaning.
+                        <strong>2. Detecting duplicate records</strong><br>
+                        Data quality check that groups sales by <code>ProductKey</code> and <code>OrderDate</code> to flag any duplicate transactions. This query ensures no accidental duplication from the union step; duplicates would indicate ingestion errors that need to be resolved before cleaning.
                     </div>
                     <img src="Screenshot (353).png" alt="SQL query detecting duplicates by ProductKey and OrderDate">
                 </div>
 
                 <!-- Step 3: Threshold filter exploration -->
                 <div class="image-card">
-                    <div class="image-header">
-                        <span class="image-title">3. Threshold-based filtering (exploratory)</span>
-                        <span class="image-order">Screenshot (354).png</span>
-                    </div>
                     <div class="image-desc">
-                        <strong>⚙️ Description:</strong> Exploratory query filtering sales where <code>OrderQuantity ≤ θ</code>. This was used to understand order size distributions before final cleaning. The parameterized approach helped define business rules for excluding unrealistic order volumes in later stages.
+                        <strong>3. Threshold-based filtering (exploratory)</strong><br>
+                        Exploratory query filtering sales where <code>OrderQuantity ≤ θ</code>. This was used to understand order size distributions before final cleaning. The parameterized approach helped define business rules for excluding unrealistic order volumes in later stages.
                     </div>
                     <img src="Screenshot (354).png" alt="Filtering sales with order quantity threshold">
                 </div>
 
                 <!-- Step 4: Cleaning nulls & invalid quantities -->
                 <div class="image-card">
-                    <div class="image-header">
-                        <span class="image-title">4. Creating cleaned sales table</span>
-                        <span class="image-order">Screenshot (355).png</span>
-                    </div>
                     <div class="image-desc">
-                        <strong>🧹 Description:</strong> Builds <code>Sales_Data.sales_clean</code> by removing rows where <code>CustomerKey</code> or <code>ProductKey</code> is NULL, and ensures <code>OrderQuantity > 0</code>. This eliminates incomplete and invalid records, improving data reliability for downstream joins.
+                        <strong>4. Creating cleaned sales table</strong><br>
+                        Builds <code>Sales_Data.sales_clean</code> by removing rows where <code>CustomerKey</code> or <code>ProductKey</code> is NULL, and ensures <code>OrderQuantity > 0</code>. This eliminates incomplete and invalid records, improving data reliability for downstream joins.
                     </div>
                     <img src="Screenshot (355).png" alt="SQL cleaning: removing null keys and zero/negative quantity">
                 </div>
 
                 <!-- Step 5: Missing key summary -->
                 <div class="image-card">
-                    <div class="image-header">
-                        <span class="image-title">5. Validation: Missing keys summary</span>
-                        <span class="image-order">ifthereisnulltable.png</span>
-                    </div>
                     <div class="image-desc">
-                        <strong>✅ Description:</strong> After cleaning, a summary table confirms that out of 56,046 total rows, there are <strong>zero missing customers</strong> and <strong>zero missing products</strong>. This guarantees referential integrity before the final enrichment step.
+                        <strong>5. Validation: Missing keys summary</strong><br>
+                        After cleaning, a summary table confirms that out of 56,046 total rows, there are <strong>zero missing customers</strong> and <strong>zero missing products</strong>. This guarantees referential integrity before the final enrichment step.
                     </div>
                     <img src="ifthereisnulltable.png" alt="Summary table showing zero missing customers and products">
                     <div class="stats-note">
-                        📌 <strong>Integrity check passed</strong> – Total rows: 56,046 | Missing customers: 0 | Missing products: 0
+                        <strong>Integrity check passed</strong> – Total rows: 56,046 | Missing customers: 0 | Missing products: 0
                     </div>
                 </div>
 
                 <!-- Step 6: Final enriched table -->
                 <div class="image-card">
-                    <div class="image-header">
-                        <span class="image-title">6. Building final enriched sales table</span>
-                        <span class="image-order">Screenshot (360).png</span>
-                    </div>
                     <div class="image-desc">
-                        <strong>🏆 Description:</strong> Final transformation that creates <code>Sales_Data.final_sales</code>. It joins cleaned sales with Customers, Products, Subcategories, Categories, Territories, and Returns. The query also constructs <code>CustomerName</code> (concatenated first/last) and handles missing returns with <code>IFNULL(ReturnQuantity,0)</code>. This table is ready for visualization and business intelligence.
+                        <strong>6. Building final enriched sales table</strong><br>
+                        Final transformation that creates <code>Sales_Data.final_sales</code>. It joins cleaned sales with Customers, Products, Subcategories, Categories, Territories, and Returns. The query also constructs <code>CustomerName</code> (concatenated first/last) and handles missing returns with <code>IFNULL(ReturnQuantity,0)</code>. This table is ready for visualization and business intelligence.
                     </div>
                     <img src="Screenshot (360).png" alt="Final SQL join: sales enriched with customer, product, territory and returns">
                 </div>
@@ -466,10 +459,10 @@
 
         <!-- SQL Workflow summary -->
         <section id="sql-workflow">
-            <h2>📐 SQL Workflow Architecture</h2>
-            <div style="background: #f8fafc; border-radius: 28px; padding: 1.8rem; margin-top: 1rem;">
-                <p style="font-weight: 600; margin-bottom: 0.8rem;">📌 Transformation stages executed in BigQuery:</p>
-                <ol style="margin-left: 1.5rem; color: #1e293b;">
+            <h2>SQL Workflow Architecture</h2>
+            <div style="padding: 1.8rem; margin-top: 1rem; border: 1px solid var(--color-border);">
+                <p style="font-weight: 600; margin-bottom: 0.8rem;">Transformation stages executed in BigQuery:</p>
+                <ol class="workflow-list">
                     <li><strong>Stage 0 – Raw sources:</strong> Sales_2015, Sales_2016, Sales_2017 (external tables or CSVs)</li>
                     <li><strong>Stage 1 – Union:</strong> <code>CREATE TABLE sales AS (UNION ALL + year column)</code></li>
                     <li><strong>Stage 2 – Validate duplicates:</strong> GROUP BY ProductKey, OrderDate → HAVING COUNT(*) > 1</li>
@@ -479,58 +472,57 @@
                     <li><strong>Output:</strong> <code>final_sales</code> with 16+ columns ready for Power BI / Tableau</li>
                 </ol>
                 <div class="stats-note" style="margin-top: 1.2rem;">
-                    💡 <strong>Performance note:</strong> All joins leveraged indexed keys (CustomerKey, ProductKey, TerritoryKey) ensuring sub-second query execution on the final dataset.
+                    <strong>Performance note:</strong> All joins leveraged indexed keys (CustomerKey, ProductKey, TerritoryKey) ensuring sub-second query execution on the final dataset.
                 </div>
             </div>
         </section>
 
         <!-- Quality checks & Insights -->
         <section id="quality-checks">
-            <h2>🔎 Data Quality & Governance</h2>
-            <div class="image-grid" style="gap: 1.8rem;">
-                <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between;">
-                    <div style="flex: 1; min-width: 220px; background:#f1f5f9; border-radius: 24px; padding: 1.5rem;">
-                        <i class="fas fa-check-circle" style="color:#2563eb; font-size: 2rem; margin-bottom: 0.8rem; display: inline-block;"></i>
-                        <h3 style="margin:0 0 0.5rem 0; font-size:1.3rem;">Completeness</h3>
-                        <p style="font-size:0.95rem;">After cleaning, CustomerKey & ProductKey null rate = 0%. All orders linked to valid dimensions.</p>
-                    </div>
-                    <div style="flex: 1; min-width: 220px; background:#f1f5f9; border-radius: 24px; padding: 1.5rem;">
-                        <i class="fas fa-chart-line" style="color:#2563eb; font-size: 2rem; margin-bottom: 0.8rem; display: inline-block;"></i>
-                        <h3 style="margin:0 0 0.5rem 0; font-size:1.3rem;">Consistency</h3>
-                        <p style="font-size:0.95rem;">Standardized column naming, date formats, and region codes across all source years.</p>
-                    </div>
-                    <div style="flex: 1; min-width: 220px; background:#f1f5f9; border-radius: 24px; padding: 1.5rem;">
-                        <i class="fas fa-database" style="color:#2563eb; font-size: 2rem; margin-bottom: 0.8rem; display: inline-block;"></i>
-                        <h3 style="margin:0 0 0.5rem 0; font-size:1.3rem;">Integrity</h3>
-                        <p style="font-size:0.95rem;">Foreign key relationships preserved: TerritoryKey → Territories, ProductKey → Products.</p>
-                    </div>
+            <h2>Data Quality & Governance</h2>
+            <div class="quality-grid">
+                <div class="quality-card">
+                    <i class="fas fa-check-circle" style="color:#64748b; font-size: 2rem; margin-bottom: 0.8rem; display: inline-block;"></i>
+                    <h3>Completeness</h3>
+                    <p>After cleaning, CustomerKey & ProductKey null rate = 0%. All orders linked to valid dimensions.</p>
+                </div>
+                <div class="quality-card">
+                    <i class="fas fa-chart-line" style="color:#64748b; font-size: 2rem; margin-bottom: 0.8rem; display: inline-block;"></i>
+                    <h3>Consistency</h3>
+                    <p>Standardized column naming, date formats, and region codes across all source years.</p>
+                </div>
+                <div class="quality-card">
+                    <i class="fas fa-database" style="color:#64748b; font-size: 2rem; margin-bottom: 0.8rem; display: inline-block;"></i>
+                    <h3>Integrity</h3>
+                    <p>Foreign key relationships preserved: TerritoryKey → Territories, ProductKey → Products.</p>
                 </div>
             </div>
-            <p style="margin-top: 1.8rem; background:#eef2ff; padding: 1rem; border-radius: 20px;">✅ The final table <code>final_sales</code> includes OrderDate, OrderQuantity, CustomerName, Region, ProductName, ProductPrice, ProductCost, CategoryName, SubcategoryName, ReturnQuantity — a complete analytical dataset ready for dashboards.</p>
+            <div class="final-note">
+                The final table <code>final_sales</code> includes OrderDate, OrderQuantity, CustomerName, Region, ProductName, ProductPrice, ProductCost, CategoryName, SubcategoryName, ReturnQuantity — a complete analytical dataset ready for dashboards.
+            </div>
         </section>
 
         <!-- Next steps & visualization placeholder -->
         <section id="next-steps">
-            <h2>📈 Next Steps: Visualizations (coming soon)</h2>
-            <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem;">
-                <div style="background: #ffffff; border: 1px dashed #94a3b8; border-radius: 28px; padding: 2rem; text-align: center; flex:1;">
-                    <i class="fas fa-chart-pie" style="font-size: 3rem; color: #334155; margin-bottom: 1rem;"></i>
-                    <h3 style="font-size: 1.3rem;">Executive Dashboard</h3>
+            <h2>Next Steps: Visualizations</h2>
+            <div class="next-steps-grid">
+                <div class="next-step-card">
+                    <i class="fas fa-chart-pie"></i>
+                    <h3>Executive Dashboard</h3>
                     <p>KPI cards: total sales, return rate, top products by region, year-over-year trend. Interactive filters for customer segments.</p>
                 </div>
-                <div style="background: #ffffff; border: 1px dashed #94a3b8; border-radius: 28px; padding: 2rem; text-align: center; flex:1;">
-                    <i class="fas fa-chart-bar" style="font-size: 3rem; color: #334155; margin-bottom: 1rem;"></i>
-                    <h3 style="font-size: 1.3rem;">Geospatial Analysis</h3>
+                <div class="next-step-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Geospatial Analysis</h3>
                     <p>Map of sales volume by territory, highlighting top-performing regions. Integration with territory hierarchy.</p>
                 </div>
-                <div style="background: #ffffff; border: 1px dashed #94a3b8; border-radius: 28px; padding: 2rem; text-align: center; flex:1;">
-                    <i class="fas fa-chart-line" style="font-size: 3rem; color: #334155; margin-bottom: 1rem;"></i>
+                <div class="next-step-card">
                     <i class="fas fa-chart-line"></i>
-                    <h3 style="font-size: 1.3rem;">Return Rate Trends</h3>
+                    <h3>Return Rate Trends</h3>
                     <p>Monthly return quantity vs. order quantity, drill-down by product category and subcategory.</p>
                 </div>
             </div>
-            <p style="margin-top: 2rem; text-align: center; color: #2563eb; font-weight: 500;">✨ Interactive dashboards will be added here once the visualization layer is finalized ✨</p>
+            <p style="margin-top: 2rem; text-align: center; color: #64748b;">Interactive dashboards will be added here once the visualization layer is finalized.</p>
         </section>
     </main>
 
@@ -542,7 +534,7 @@
             <a href="https://github.com/nebalsharrouf" target="_blank"><i class="fab fa-github"></i></a>
         </div>
         <div class="copyright">
-            <p>© 2026 Nibal Sharrouf · All Companies Data Project · Customer data integration & SQL pipeline</p>
+            <p>© 2026 Nibal Sharrouf · Sales & Returns Analysis · Customer data integration & SQL pipeline</p>
         </div>
     </footer>
 
