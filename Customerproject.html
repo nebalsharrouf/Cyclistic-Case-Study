@@ -298,51 +298,64 @@
         .workflow-list li {
             margin-bottom: 0.5rem;
         }
-        .quality-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: space-between;
+
+        /* Sales report styling - clean numbered and dotted */
+        .sales-report-content {
+            font-family: var(--font-base);
+            line-height: 1.7;
         }
-        .quality-card {
-            flex: 1;
-            min-width: 220px;
-            padding: 1.5rem;
-            border: 1px solid var(--color-border);
+        .sales-report-content p, .sales-report-content li {
+            max-width: 100%;
         }
-        .quality-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.3rem;
+        .report-image-card {
+            margin: 2rem 0 2rem 0;
         }
-        .quality-card p {
-            font-size: 0.95rem;
+        .report-image-card img {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            display: block;
+            margin: 1rem 0;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: #fafcff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
-        .final-note {
-            margin-top: 1.8rem;
-            padding: 1rem;
-            border-left: 3px solid #64748b;
+        
+        /* Clean organization for report */
+        .report-section-block {
+            margin-bottom: 2.5rem;
         }
-        .next-steps-grid {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
+        .report-section-block h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            color: #0f172a;
+            border-left: 4px solid #64748b;
+            padding-left: 1rem;
         }
-        .next-step-card {
-            flex: 1;
-            border: 1px dashed #cbd5e1;
-            padding: 2rem;
-            text-align: center;
+        .insight-list {
+            margin: 1rem 0 1rem 1.8rem;
+            list-style-type: disc;
         }
-        .next-step-card i {
-            font-size: 2.5rem;
-            color: #64748b;
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-        .next-step-card h3 {
-            font-size: 1.3rem;
+        .insight-list li {
             margin-bottom: 0.5rem;
+        }
+        .subcategory-list {
+            margin: 0.5rem 0 1rem 2rem;
+            list-style-type: circle;
+        }
+        .strategy-list {
+            margin: 0.5rem 0 1rem 2rem;
+            list-style-type: decimal;
+        }
+        .strategy-list li {
+            margin-bottom: 0.5rem;
+        }
+        .bold-text {
+            font-weight: 700;
+            color: #0f172a;
         }
     </style>
 </head>
@@ -365,9 +378,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="#overview">Overview</a></li>
             <li><a href="#data-pipeline">Data Pipeline</a></li>
-            <li><a href="#sql-workflow">SQL Workflow</a></li>
-            <li><a href="#quality-checks">Quality Checks</a></li>
-            <li><a href="#next-steps">Next Steps</a></li>
+            <li><a href="#visualizations-report">Visualizations</a></li>
         </ul>
     </nav>
 
@@ -457,72 +468,107 @@
             </div>
         </section>
 
-        <!-- SQL Workflow summary -->
-        <section id="sql-workflow">
-            <h2>SQL Workflow Architecture</h2>
-            <div style="padding: 1.8rem; margin-top: 1rem; border: 1px solid var(--color-border);">
-                <p style="font-weight: 600; margin-bottom: 0.8rem;">Transformation stages executed in BigQuery:</p>
-                <ol class="workflow-list">
-                    <li><strong>Stage 0 – Raw sources:</strong> Sales_2015, Sales_2016, Sales_2017 (external tables or CSVs)</li>
-                    <li><strong>Stage 1 – Union:</strong> <code>CREATE TABLE sales AS (UNION ALL + year column)</code></li>
-                    <li><strong>Stage 2 – Validate duplicates:</strong> GROUP BY ProductKey, OrderDate → HAVING COUNT(*) > 1</li>
-                    <li><strong>Stage 3 – Cleanse:</strong> filter out NULL CustomerKey/ProductKey, OrderQuantity ≤ 0</li>
-                    <li><strong>Stage 4 – QA:</strong> summary aggregation to confirm missing keys eliminated</li>
-                    <li><strong>Stage 5 – Enrichment (star schema):</strong> LEFT JOIN customers, products, subcategories, categories, territories, returns</li>
-                    <li><strong>Output:</strong> <code>final_sales</code> with 16+ columns ready for Power BI / Tableau</li>
-                </ol>
-                <div class="stats-note" style="margin-top: 1.2rem;">
-                    <strong>Performance note:</strong> All joins leveraged indexed keys (CustomerKey, ProductKey, TerritoryKey) ensuring sub-second query execution on the final dataset.
+        <!-- Visualizations & Business Report Section - Clean organized with numbered/dotted lists, no emojis, no PNG labels -->
+        <section id="visualizations-report">
+            <h2>Visualizations & Business Report</h2>
+            <div class="sales-report-content">
+                
+                <!-- 1. Executive Overview -->
+                <div class="report-section-block">
+                    <h3>1. Executive Overview</h3>
+                    <div class="report-image-card">
+                        <img src="Executive_Overview.png" alt="Executive Overview Dashboard">
+                    </div>
+                    <p>This page provides a high-level summary of the business performance across all categories, regions, and time.</p>
+                    <p>The dashboard shows that the company generated a total <strong>Revenue of 24.96M</strong> and achieved a <strong>Profit of 10.48M</strong>, resulting in a strong <strong>Profit Margin of 42%</strong>. The total number of orders reached <strong>86K</strong>, while the <strong>Return Rate stands at 11%</strong>, indicating a moderate level of product returns.</p>
+                    <p>From the category distribution, it is clear that <strong>Bikes dominate the revenue</strong>, contributing the vast majority of total sales, while Accessories and Clothing contribute only a very small portion.</p>
+                    <p>Regionally, <strong>Australia is the top-performing market</strong>, followed by other regions with gradually lower contributions. This suggests that revenue is concentrated in a few key regions.</p>
+                    <p>Looking at the revenue trend over time, the business experienced <strong>strong growth from 2015 to 2016</strong>, followed by a slight stabilization in 2017. This indicates that the company reached a peak and maintained performance afterward.</p>
+                    <p>The top products are primarily from the <strong>Bike category</strong>, confirming that high-value items are the main revenue drivers.</p>
+                    <p>Overall, this page shows that the business is <strong>highly dependent on a single category (Bikes)</strong> and a few strong regions.</p>
                 </div>
-            </div>
-        </section>
 
-        <!-- Quality checks & Insights -->
-        <section id="quality-checks">
-            <h2>Data Quality & Governance</h2>
-            <div class="quality-grid">
-                <div class="quality-card">
-                    <i class="fas fa-check-circle" style="color:#64748b; font-size: 2rem; margin-bottom: 0.8rem; display: inline-block;"></i>
-                    <h3>Completeness</h3>
-                    <p>After cleaning, CustomerKey & ProductKey null rate = 0%. All orders linked to valid dimensions.</p>
+                <!-- 2. Category Performance -->
+                <div class="report-section-block">
+                    <h3>2. Category Performance</h3>
+                    <div class="report-image-card">
+                        <img src="Category_Performance.png" alt="Category Performance Dashboard">
+                    </div>
+                    <p>This page focuses on understanding how each product category behaves in terms of revenue, orders, and pricing.</p>
+                    
+                    <p><strong class="bold-text">Accessories</strong></p>
+                    <p>Accessories have <strong>very high order volume</strong>, making them the most frequently purchased products. However, their contribution to revenue is very low.<br>
+                    This is explained by their <strong>low average price of 19.10</strong>.</p>
+                    <p>This indicates a <strong>high-volume, low-revenue model</strong>, where customers buy frequently but spend little per order.</p>
+                    
+                    <p><strong class="bold-text">Bikes</strong></p>
+                    <p>Bikes generate <strong>very high revenue</strong>, despite having <strong>relatively low order volume</strong>.<br>
+                    This is due to their <strong>very high average price (~2000$ per unit)</strong>.</p>
+                    <p>This makes Bikes the <strong>main revenue driver</strong>, representing a <strong>low-volume, high-value model</strong>.</p>
+                    
+                    <p><strong class="bold-text">Clothing</strong></p>
+                    <p>Clothing performs <strong>very poorly</strong> compared to other categories, with <strong>very low revenue and very low order volume</strong>.</p>
+                    <p>This indicates that Clothing is <strong>underperforming in both demand and pricing</strong>, making it the weakest category in the business.</p>
+                    
+                    <p><strong class="bold-text">Subcategory Analysis</strong></p>
+                    <p>Within Bikes, subcategories such as <strong>Road Bikes and Mountain Bikes</strong> dominate revenue, while other subcategories contribute minimally.</p>
+                    
+                    <p><strong class="bold-text">Orders vs Revenue Insight</strong></p>
+                    <p>A key insight from this page is the imbalance between order volume and revenue:</p>
+                    <ul class="insight-list">
+                        <li>Accessories → High orders, low revenue</li>
+                        <li>Bikes → Low orders, high revenue</li>
+                        <li>Clothing → Low orders, low revenue</li>
+                    </ul>
+                    <p>This highlights different business models across categories.</p>
                 </div>
-                <div class="quality-card">
-                    <i class="fas fa-chart-line" style="color:#64748b; font-size: 2rem; margin-bottom: 0.8rem; display: inline-block;"></i>
-                    <h3>Consistency</h3>
-                    <p>Standardized column naming, date formats, and region codes across all source years.</p>
-                </div>
-                <div class="quality-card">
-                    <i class="fas fa-database" style="color:#64748b; font-size: 2rem; margin-bottom: 0.8rem; display: inline-block;"></i>
-                    <h3>Integrity</h3>
-                    <p>Foreign key relationships preserved: TerritoryKey → Territories, ProductKey → Products.</p>
-                </div>
-            </div>
-            <div class="final-note">
-                The final table <code>final_sales</code> includes OrderDate, OrderQuantity, CustomerName, Region, ProductName, ProductPrice, ProductCost, CategoryName, SubcategoryName, ReturnQuantity — a complete analytical dataset ready for dashboards.
-            </div>
-        </section>
 
-        <!-- Next steps & visualization placeholder -->
-        <section id="next-steps">
-            <h2>Next Steps: Visualizations</h2>
-            <div class="next-steps-grid">
-                <div class="next-step-card">
-                    <i class="fas fa-chart-pie"></i>
-                    <h3>Executive Dashboard</h3>
-                    <p>KPI cards: total sales, return rate, top products by region, year-over-year trend. Interactive filters for customer segments.</p>
-                </div>
-                <div class="next-step-card">
-                    <i class="fas fa-chart-bar"></i>
-                    <h3>Geospatial Analysis</h3>
-                    <p>Map of sales volume by territory, highlighting top-performing regions. Integration with territory hierarchy.</p>
-                </div>
-                <div class="next-step-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Return Rate Trends</h3>
-                    <p>Monthly return quantity vs. order quantity, drill-down by product category and subcategory.</p>
+                <!-- 3. Business Recommendations -->
+                <div class="report-section-block">
+                    <h3>3. Business Recommendations</h3>
+                    <p>Based on the analysis:</p>
+                    
+                    <p><strong class="bold-text">Accessories Strategy</strong></p>
+                    <p>Since Accessories already have strong demand, the company should:</p>
+                    <ul class="insight-list">
+                        <li><strong>Slightly increase prices</strong></li>
+                        <li>Introduce <strong>bundling with Bikes</strong></li>
+                    </ul>
+                    <p>This can increase revenue without losing customers.</p>
+                    
+                    <p><strong class="bold-text">Bikes Strategy</strong></p>
+                    <p>Bikes should focus on increasing order volume:</p>
+                    <ul class="insight-list">
+                        <li>Launch <strong>marketing campaigns</strong></li>
+                        <li>Offer <strong>discounts or financing options</strong></li>
+                        <li>Promote bundles (Bike + Accessories)</li>
+                    </ul>
+                    <p>Goal: Increase quantity while maintaining high revenue per unit.</p>
+                    
+                    <p><strong class="bold-text">Clothing Strategy</strong></p>
+                    <p>Clothing needs improvement in both areas:</p>
+                    <ul class="insight-list">
+                        <li>Increase <strong>marketing visibility</strong></li>
+                        <li>Adjust <strong>pricing strategy</strong></li>
+                    </ul>
+                    <p>This category requires a <strong>complete performance boost</strong>, both in demand and value.</p>
+                    
+                    <h2>Final Conclusion</h2>
+                    <p>The business operates under three different models:</p>
+                    <ul class="insight-list">
+                        <li>Accessories → High volume, low value</li>
+                        <li>Bikes → Low volume, high value</li>
+                        <li>Clothing → Low volume, low value</li>
+                    </ul>
+                    <p>The strongest opportunity lies in:</p>
+                    <ul class="insight-list">
+                        <li>Increasing <strong>Accessory pricing</strong></li>
+                        <li>Increasing <strong>Bike sales volume</strong></li>
+                        <li>Improving <strong>Clothing performance overall</strong></li>
+                    </ul>
+                    <p>By applying these strategies, the company can significantly improve total revenue and balance its category performance.</p>
                 </div>
             </div>
-            <p style="margin-top: 2rem; text-align: center; color: #64748b;">Interactive dashboards will be added here once the visualization layer is finalized.</p>
         </section>
     </main>
 
